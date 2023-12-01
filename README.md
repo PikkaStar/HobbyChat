@@ -16,8 +16,7 @@
 - 趣味についての経験を話し合ったり、同じ趣味をもつ人を探したいときに使います。
 ​
 ## 設計書
-![ER図 drawio (1)](https://github.com/PikkaStar/HobbyChat/assets/143864403/330baaff-0d71-4d91-ae1c-dea7fcc97e64)
-​
+![ER図 drawio (2)](https://github.com/PikkaStar/HobbyChat/assets/143864403/068a0e37-fc4d-4221-ad89-eee54af7eb4a)
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
