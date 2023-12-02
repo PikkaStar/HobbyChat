@@ -21,8 +21,7 @@
 - 何か趣味を見つけたい時
 ​
 ## 設計書
-<!--テーマを設定・提出する時点では不要です-->
-​
+![ER図 drawio (2)](https://github.com/PikkaStar/HobbyChat/assets/143864403/068a0e37-fc4d-4221-ad89-eee54af7eb4a)
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
