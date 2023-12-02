@@ -21,7 +21,8 @@
 - 何か趣味を見つけたい時
 ​
 ## 設計書
-<!--テーマを設定・提出する時点では不要です-->
+https://docs.google.com/spreadsheets/d/1z63cXJqKXyDRIroGPEmIEB2NpaG6ozQk/edit#gid=986568156
+https://docs.google.com/spreadsheets/d/1juDiYsI3MwgVvAGRwq2YMh7HGf1odBU2NC2Q_mWywhs/edit#gid=549108681
 ​
 ## 開発環境
 - OS：Linux(CentOS)
