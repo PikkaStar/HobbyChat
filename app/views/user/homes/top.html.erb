@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4"></div>
+
+    <div class="col-4 mx-auto text-center">
+      <div class="title">HobbyChat</div>
+      <div class="text-center">
+      <p>あなたの趣味や出来事を共有しませんか？</p>
+      <p>見ることが楽しいという方も是非!</p>
+      </div>
+      <p>↓新規登録はこちら↓
+      <%= link_to "新規登録",new_user_registration_path,class: "btn btn-primary form-control" %>
+      </p>
+      <p>↓ログインはこちら↓
+      <%= link_to "ログイン",new_user_session_path,class: "btn btn-success form-control" %>
+      </p>
+      <p>↓ゲストログインはこちら↓<br>
+      (一部機能が制限されます)
+      <%= link_to "ゲストログイン",new_user_session_path,class: "btn btn-secondary form-control" %>
+      </p>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>
