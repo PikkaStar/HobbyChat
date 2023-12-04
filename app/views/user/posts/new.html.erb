@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row mx-auto">
+    <div class="col-4 mx-auto">
+
+      <div class="title">新規投稿</div>
+      <%= form_with model: @post do |f| %>
+      <p>プロフィール画像</p>
+      <%= f.file_field :image %><br>
+
+      <%= f.label :title,"タイトル" %>
+      <%= f.text_field :title,class: "form-control" %>
+
+      <%= f.label :body,"本文" %>
+      <%= f.text_area :body,row: "5",class: "form-control" %>
+
+      <%= f.submit "投稿",class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

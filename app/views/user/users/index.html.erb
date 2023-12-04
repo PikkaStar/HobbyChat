@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <%= render "info",user: @user %>
     </div>
-    <div class="col-8 offset-1">
+    <div class="col-7 offset-1">
       <h2 class="title">ユーザー一覧</h2>
       <table class="table">
         <tr>
@@ -14,7 +14,7 @@
       <% @users.each do |user| %>
       <tr>
         <td><%= image_tag user.get_profile_image(100,100) %></td>
-        <td><%= user.name %></td>
+        <td><%= link_to user.name,user_path(user.id) %></td>
         <td></td>
       </tr>
       <% end %>
