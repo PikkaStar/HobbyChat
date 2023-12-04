@@ -1,6 +1,11 @@
 <div class="navbar">
   <% if user_signed_in? %>
-
+    <div class="ml-auto">
+      <%= link_to "マイページ",user_path(current_user),class: "btn btn-secondary mr-3" %>
+      <%= link_to "投稿一覧",posts_path,class: "btn btn-secondary mr-3" %>
+      <%= link_to "ユーザー一覧",users_path,class: "btn btn-secondary mr-3" %>
+      <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
+    </div>
       <% else %>
     <div class="ml-auto">
       <%= link_to "トップへ",root_path,class: "btn btn-secondary mr-3" %>

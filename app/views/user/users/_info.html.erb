@@ -1,0 +1,27 @@
+<h2>ユーザー情報</h2>
+
+<table class="table">
+  <tr>
+    <td><%= image_tag user.get_profile_image(100,100) %></td>
+    <td><%= user.name %></td>
+  </tr>
+  <tr>
+    <td>投稿数</td>
+    <td>〇件</td>
+  </tr>
+  <tr>
+    <td>フォロー</td>
+    <td>〇人</td>
+  </tr>
+  <tr>
+    <td>フォロワー</td>
+    <td>〇人</td>
+  </tr>
+  <tr>
+    <td>いいね</td>
+    <td>〇件</td>
+  </tr>
+</table>
+<div class="bg-white">
+  <%= user.introduction %>
+</div>
