@@ -6,12 +6,12 @@
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
-          <%= f.label :name,"名前" %><br />
+          <%= f.label :name,"名前(2～10文字)" %><br />
           <%= f.text_field :name, autofocus: true,class: "form-control" %>
         </div>
 
         <div class="field">
-          <%= f.label :password,"パスワード" %><br />
+          <%= f.label :password,"パスワード(英数字6桁以上)" %><br />
           <%= f.password_field :password, autocomplete: "current-password",class: "form-control" %>
         </div>
 
