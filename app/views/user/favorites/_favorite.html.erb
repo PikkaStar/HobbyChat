@@ -1,0 +1,11 @@
+<% unless post.user_id == current_user.id %>
+  <% if post.favorited_by?(current_user) %>
+  <%= link_to post_favorite_path(post.id),method: :delete,remote: true, class: "list-group-item button01 favorited form-control d-flex align-items-center" do %>♥<%= post.favorites.count %>いいね<% end %>
+  <% else %>
+  <%= link_to post_favorite_path(post.id),method: :post,remote: true, class: "list-group-item button01 unfavorited form-control d-flex align-items-center" do %>♡<%= post.favorites.count %>いいね<% end %>
+  <% end %>
+<% else %>
+<div class="list-group-item button01 form-control d-flex align-items-center">
+♥<%= post.favorites.count %>いいね
+</div>
+<% end %>

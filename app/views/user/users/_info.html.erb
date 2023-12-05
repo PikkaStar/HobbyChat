@@ -23,7 +23,9 @@
   </tr>
   <tr>
     <td>いいね</td>
-    <td><%= link_to favorites_user_path(user) do %><%= user.favorites.count %>いいね<% end %></td>
+    <td id="favorite_count">
+      <%= render "user/favorites/favorite_count",user: user %>
+    </td>
   </tr>
   <tr>
     <td>フォロー</td>
