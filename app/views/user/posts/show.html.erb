@@ -1,7 +1,32 @@
 <div class="container">
+  <div class="flash-notice">
+    <%= flash[:notice] %>
+  </div>
   <div class="row">
     <div class="col-4">
-      <%= render "info",user: @user %>
+      <%= render "user/users/info",user: @user %>
+    </div>
+
+    <div class="col-7 offset-1">
+      <h3 class="text-center mt-3">
+        <%= @post.title %>
+          <% if @post.user_id == current_user.id %>
+            <%= link_to "編集",edit_post_path(@post),class: "btn btn-success" %>
+            <%= link_to "削除",post_path(@post),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+          <% end %>
+      </h3>
+
+      <table class="table">
+        <tr>
+          <td>フォローする</td>
+          <td>♡いいね</td>
+          <td>コメント数</td>
+        </tr>
+        <tr>
+          <td><%= image_tag @post.get_image(200,100) %></td>
+          <td colspan="2"><%= @post.body %></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

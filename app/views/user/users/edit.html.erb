@@ -3,6 +3,16 @@
     <div class="col-4 mx-auto">
 
       <div class="title">編集画面</div>
+
+      <% if @user.errors.any? %>
+      <%= @user.errors.count %>件のエラーが発生しました
+      <% @user.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+       <% end %>
+      <% end %>
+
       <%= form_with model: @user do |f| %>
       <p>プロフィール画像</p>
       <%= f.file_field :profile_image %><br>
