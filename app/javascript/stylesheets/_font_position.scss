@@ -19,6 +19,25 @@
   color: #fff;
 }
 
+.list-group-item.button01.favorited {
+  color: red;
+}
+
+.list-group-item.button01.favorited:hover{
+  background-position: -100% 0;
+  color: #fff;
+}
+
+.list-group-item.button01.unfavorited {
+  color: blue;
+}
+
+.list-group-item.button01.unfavorited:hover{
+  background-position: -100% 0;
+  color: #fff;
+}
+
+
 .button02{
   display: inline-block;
   color:#ee2d7b;

@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_many :favorites,dependent: :destroy
 
   has_one_attached :image
 
@@ -13,4 +14,9 @@ class Post < ApplicationRecord
       "no_image"
     end
   end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
 end
