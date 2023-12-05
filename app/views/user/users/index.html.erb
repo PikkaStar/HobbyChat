@@ -1,31 +1,30 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
-      <%= render "info",user: @user %>
-    </div>
-    <div class="col-7 offset-1">
-      <h2 class="title">ユーザー一覧</h2>
-      <table class="table">
-        <tr>
-          <th>画像</th>
-          <th>名前</th>
-          <th></th>
-        </tr>
-      <% @users.each do |user| %>
-      <tr>
-        <td><%= image_tag user.get_profile_image(100,100) %></td>
-        <td><%= link_to user.name,user_path(user.id) %></td>
-        <td></td>
-      </tr>
-      <% end %>
-      </table>
+    <div class="col-12">
+      <h2 class="text-center">ユーザー一覧</h2>
 
-      <div class="row mx-auto justify-content-center">
-     <%= paginate @users %>
-    </div>
-
+      <div class="d-flex flex-wrap">
+       <% @users.each do |user| %>
+        <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
+          <div class="mx-auto">
+           <%= link_to user_path(user.id),class: "button01" do  %>
+            <%= image_tag user.get_profile_image(200,200), style: "width: 150px; height: 120px;" %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= truncate(user.name,length: 5, omission: '') %></h5>
+            <p class="card-text"><%= truncate(user.introduction, length: 9, omission: '...') %></p>
+          </div>
+           <% end %>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">フォロー数</li>
+            <li class="list-group-item">フォロワー数</li>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+      <div class="d-flex justify-content-center">
+      <%= paginate @users %>
+      </div>
     </div>
   </div>
 </div>
-
-

@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-hover">
   <tr>
     <td><%= image_tag user.get_profile_image(100,100) %></td>
     <td>
@@ -13,7 +13,13 @@
   </tr>
   <tr>
     <td>投稿数</td>
-    <td>〇件</td>
+    <td>
+      <div class="button02">
+      <%= link_to every_path(user.id) do %>
+      <%= user.posts.count %>件
+      <% end %>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>フォロー</td>
