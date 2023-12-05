@@ -17,8 +17,14 @@ Rails.application.routes.draw do
   scope module: :user do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    resources :posts
-    resources :users,only: [:index,:show,:edit,:update]
+    resources :posts do
+      resource :favorite,only: [:create,:destroy]
+    end
+    resources :users,only: [:index,:show,:edit,:update] do
+      member do
+        get :favorites
+      end
+    end
     get "every/:id"=>"users#every",as: "every"
   end
 

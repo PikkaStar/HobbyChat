@@ -30,6 +30,14 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    @user = User.find(params[:id])
+    # Favoriteテーブルから特定のユーザーがいいねした投稿データを全て取得
+    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
+    # Post.find(favorites)で取得するデータは配列のためページネーションが使えない
+    @posts = Post.where(id: favorites).page(params[:page]).per(15)
+  end
+
   private
 
   def user_params
