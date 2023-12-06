@@ -29,7 +29,11 @@ Rails.application.routes.draw do
       member do
         get :favorites
       end
+      collection do
+        patch :cancellation
+      end
     end
+    get "check"=>"users#check",as: "check"
     get "every/:id"=>"users#every",as: "every"
   end
 

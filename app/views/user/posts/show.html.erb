@@ -1,12 +1,12 @@
+<div class="flash-notice text-center">
+  <%= flash[:notice] %>
+</div>
+
+<div id="flash-message" class="text-center" style="background-color: #ffffab">
+  <%= render 'user/comments/flash' %>
+</div>
+
 <div class="container">
-  <div class="flash-notice">
-    <%= flash[:notice] %>
-  </div>
-
-  <div id="flash-message" style="background-color: #ffffab">
-    <%= render 'user/comments/flash' %>
-  </div>
-
   <div class="row">
     <div class="col-4">
       <%= render "user/users/info",user: @user %>

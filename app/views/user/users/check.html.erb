@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+
+      <h2 class="title text-center bg-warning">本当に退会しますか？</h2>
+
+      <div class="text-center">
+        <p>退会すると一部機能が使えなくなります。</p>
+        <p>本当によろしいですか？</p>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "マイページ",user_path(current_user),class: "btn btn-success" %>
+        <%= link_to "退会する",cancellation_users_path,method: :patch,class: "btn btn-danger" %>
+      </div>
+
+    </div>
+  </div>
+</div>
