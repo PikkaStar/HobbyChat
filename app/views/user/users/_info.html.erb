@@ -2,9 +2,11 @@
   <tr>
     <td><%= image_tag user.get_profile_image(100,100) %></td>
     <td>
-      <% if user == current_user %>
-      <%= link_to "編集",edit_user_path(current_user),class: "btn btn-primary" %>
-      <% end %>
+       <% unless user.email == "guest@example.com" %>
+        <% if user == current_user %>
+        <%= link_to "編集",edit_user_path(current_user),class: "btn btn-primary" %>
+        <% end %>
+       <% end %>
     </td>
   </tr>
   <tr>
@@ -15,15 +17,21 @@
     <td>投稿数</td>
     <td>
       <div class="button02">
-      <%= link_to every_path(user.id) do %>
-      <%= user.posts.count %>件
-      <% end %>
+        <%= link_to every_path(user.id) do %>
+          <%= user.posts.count %>件
+        <% end %>
       </div>
     </td>
   </tr>
   <tr>
     <td>いいね</td>
-    <td><%= link_to favorites_user_path(user) do %><%= user.favorites.count %>いいね<% end %></td>
+    <td>
+      <div class="button02">
+        <%= link_to favorites_user_path(user.id) do %>
+          <%= user.favorites.count %>いいね
+        <% end %>
+      </div>
+    </td>
   </tr>
   <tr>
     <td>フォロー</td>

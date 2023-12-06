@@ -1,6 +1,7 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update]
+  before_action :guest_user,only: [:edit,:update]
 
   def index
     @user = current_user
@@ -48,6 +49,14 @@ class User::UsersController < ApplicationController
     user = User.find(params[:id])
     unless user == current_user
       redirect_to user_path(current_user)
+    end
+  end
+
+  def guest_user
+    user = current_user
+    if user.email == "guest@example.com"
+      flash[:alert] = "ゲストの方は行えません"
+      redirect_to posts_path
     end
   end
 

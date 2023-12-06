@@ -1,4 +1,9 @@
 <div class="container">
+
+  <div class="flash-alert">
+    <%= flash[:alert] %>
+  </div>
+
   <div class="row">
     <div class="col-4"></div>
 
@@ -16,7 +21,7 @@
       </p>
       <p>↓ゲストログインはこちら↓<br>
       (一部機能が制限されます)
-      <%= link_to "ゲストログイン",new_user_session_path,class: "btn btn-secondary form-control" %>
+      <%= link_to "ゲストログイン",users_guest_sign_in_path,method: :post,class: "btn btn-secondary form-control" %>
       </p>
     </div>
     <div class="col-4"></div>
