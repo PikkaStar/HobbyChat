@@ -39,6 +39,14 @@ class User::UsersController < ApplicationController
     @posts = Post.where(id: favorites).page(params[:page]).per(15)
   end
 
+  def cancellation
+    @user = current_user
+    @user.update(is_active: false)
+    reset_session
+    flash[:alert] = "退会しました"
+    redirect_to root_path
+  end
+
   private
 
   def user_params

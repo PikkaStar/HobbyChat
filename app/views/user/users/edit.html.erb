@@ -2,7 +2,7 @@
   <div class="row mx-auto">
     <div class="col-4 mx-auto">
 
-      <div class="title">編集画面</div>
+      <div class="title">編集画面<%= link_to "退会",check_path,class: "btn btn-danger float-right" %></div>
 
       <% if @user.errors.any? %>
       <%= @user.errors.count %>件のエラーが発生しました
@@ -23,7 +23,9 @@
       <%= f.label :introduction,"自己紹介" %>
       <%= f.text_area :introduction,row: "5",class: "form-control" %>
 
-      <%= f.submit "更新",class: "btn btn-success" %>
+      <div class="text-center">
+      <%= f.submit "更新",class: "btn btn-success mt-3 form-control" %>
+      </div>
       <% end %>
     </div>
   </div>
