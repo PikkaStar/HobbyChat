@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update]
+  before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
 
   def new
     @post = Post.new
@@ -25,6 +26,7 @@ class User::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @user = @post.user
+    @comment = Comment.new
   end
 
   def edit
@@ -59,6 +61,14 @@ class User::PostsController < ApplicationController
     post = Post.find(params[:id])
     unless post.user_id == current_user.id
       redirect_to user_path(current_user)
+    end
+  end
+
+  def guest_user
+    user = current_user
+    if user.email == "guest@example.com"
+      flash[:alert] = "ゲストの方は行えません"
+      redirect_to posts_path
     end
   end
 

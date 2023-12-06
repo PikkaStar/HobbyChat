@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     sessions: "user/sessions"
   }
 
+  devise_scope :user do
+    post "users/guest_sign_in",to: "user/sessions#guest_sign_in"
+  end
+
   namespace :admin do
     root to: "homes#top"
     resources :users, only: [:index, :show, :edit, :update]
@@ -19,6 +23,7 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about'
     resources :posts do
       resource :favorite,only: [:create,:destroy]
+      resources :comments,only: [:create,:destroy]
     end
     resources :users,only: [:index,:show,:edit,:update] do
       member do

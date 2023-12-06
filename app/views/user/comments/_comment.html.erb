@@ -1,0 +1,14 @@
+<% if post.comments.present? %>
+  <table class="table table-hover">
+    <% post.comments.each do |comment| %>
+    <tr>
+      <td><%= image_tag comment.user.get_profile_image(100,100) %></td>
+      <td><%= link_to comment.user.name,user_path(comment.user_id) %></td>
+      <td><%= comment.comment %></td>
+      <td><%= link_to "削除",post_comment_path(@post,comment),method: :delete,remote: true,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %></td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  <h3>コメントはありません</h3>
+<% end %>

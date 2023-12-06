@@ -2,6 +2,11 @@
   <div class="flash-notice">
     <%= flash[:notice] %>
   </div>
+
+  <div id="flash-message" style="background-color: #ffffab">
+    <%= render 'user/comments/flash' %>
+  </div>
+
   <div class="row">
     <div class="col-4">
       <%= render "user/users/info",user: @user %>
@@ -19,16 +24,27 @@
       <table class="table">
         <tr>
           <td>フォローする</td>
-          <td id="favorite_btn<%= @post.id %>">
-              <%= render "user/favorites/favorite",post: @post %>
+          <td id="favorite_btn2<%= @post.id %>">
+              <%= render "user/favorites/favorite2",post: @post %>
           </td>
-          <td>コメント数</td>
+          <td id= "comment_counter">
+            <%= render "user/comments/comment_count",post: @post %>
+          </td>
         </tr>
         <tr>
           <td><%= image_tag @post.get_image(200,100) %></td>
           <td colspan="2"><%= @post.body %></td>
         </tr>
       </table>
+
+      <div id="comment">
+        <%= render "user/comments/comment",post: @post %>
+      </div>
+
+      <%= form_with model: [@post,@comment], url: post_comments_path(@post),local: false do |f| %>
+        <%= f.text_area :comment,row: "5",placeholder: "コメントはこちら",class: "form-control",id: "textarea" %>
+        <%= f.submit "送信",class: "btn btn-success float-right" %>
+      <% end %>
     </div>
   </div>
 </div>

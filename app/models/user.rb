@@ -4,13 +4,24 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+     GUEST_USER_EMAIL = "guest@example.com"
+
      validates :name,presence: true,length: {in: 2..10}
      validates :introduction,length: {maximum: 200}
 
      has_many :posts,dependent: :destroy
      has_many :favorites,dependent: :destroy
+     has_many :comments,dependent: :destroy
 
      has_one_attached :profile_image
+
+     def self.guest
+       find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+        # ランダムなパスワードを生成
+         user.password = SecureRandom.urlsafe_base64
+         user.name = "ゲスト"
+       end
+     end
 
      def get_profile_image(width,height)
        if profile_image.attached?
