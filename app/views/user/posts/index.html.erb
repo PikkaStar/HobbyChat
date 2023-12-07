@@ -16,11 +16,10 @@
        <% @posts.each do |post| %>
         <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
           <div class="mx-auto">
-
-           <%= link_to post_path(post.id),class: "button01" do  %>
             <%= image_tag post.get_image(200,200), style: "width: 150px; height: 120px;" %>
           </div>
 
+          <%= link_to post_path(post.id),class: "button01" do  %>
           <div class="card-body">
             <h5 class="card-title"><%= post.title %></h5>
           </div>

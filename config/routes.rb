@@ -23,12 +23,14 @@ Rails.application.routes.draw do
     get 'about' => 'homes#about'
     resources :posts do
       resource :favorite,only: [:create,:destroy]
-      resources :comments,only: [:create,:destroy]
+      resources :comments,only: [:create,:index,:destroy]
     end
     resources :users,only: [:index,:show,:edit,:update] do
       member do
+        get :follows, :followers
         get :favorites
       end
+      resource :relationships, only: [:create, :destroy]
       collection do
         patch :cancellation
       end
