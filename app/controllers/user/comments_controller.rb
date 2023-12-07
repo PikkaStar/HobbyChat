@@ -9,8 +9,13 @@ class User::CommentsController < ApplicationController
     if @comment.save
     else
     @user = @post.user
-    flash.now[:alert] = "コメントは1文字以上50文字以下で入力してください"
+    flash.now[:alert] = "コメントは1文字以上100文字以下で入力してください"
     end
+  end
+
+  def index
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments.page(params[:page]).per(5)
   end
 
   def destroy

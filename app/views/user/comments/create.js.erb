@@ -1,4 +1,3 @@
-$('#comment').html("<%= j(render 'user/comments/comment',post: @post)%>");
-$('#comment_counter').html("コメント<%= @post.comments.count %>件");
+$('#comment_counter').html("コメントを見る(<%= @post.comments.count %>)");
 $("textarea").val('');
 $('#flash-message').html("<%= j(render 'user/comments/flash') %>");
