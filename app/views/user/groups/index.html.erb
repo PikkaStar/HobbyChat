@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center">グループ一覧</h2>
+
+      <div class="d-flex flex-wrap">
+       <% @groups.each do |group| %>
+        <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
+          <div class="mx-auto">
+            <%= image_tag group.get_group_image(200,200), style: "width: 150px; height: 120px;" %>
+          </div>
+
+          <%= link_to group_path(group.id),class: "button01" do  %>
+          <div class="card-body">
+            <h5 class="card-title"><%= group.name %></h5>
+          </div>
+           <% end %>
+
+          <ul class="list-group list-group-flush">
+            <%= link_to user_path(group.owner_id), class: "list-group-item button01" do %>
+              <%= group.user.name %>
+            <% end %>
+            <div class="list-group-item button01 d-flex align-items-center">
+              メンバー<%= group.users.count+1 %>人
+            </div>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+
+      <div class="d-flex justify-content-center">
+      <%= paginate @groups %>
+      </div>
+
+    </div>
+  </div>
+</div>

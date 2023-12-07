@@ -3,6 +3,7 @@
 
     <div class="ml-auto">
       <%= link_to "新規投稿",new_post_path,class: "btn btn-secondary mr-3" %>
+      <%= link_to "グループ作成",new_group_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "マイページ",user_path(current_user),class: "btn btn-secondary mr-3" %>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -11,6 +12,7 @@
         <div class="dropdown-menu">
           <%= link_to "投稿一覧", posts_path, class: "dropdown-item" %>
           <%= link_to "ユーザー一覧", users_path, class: "dropdown-item" %>
+          <%= link_to "グループ一覧",groups_path,class: "dropdown-item" %>
         </div>
       </div>
       <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class: "btn btn-secondary mr-3" %>

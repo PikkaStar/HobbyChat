@@ -1,7 +1,7 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update]
-  before_action :guest_user,only: [:edit,:update]
+  before_action :guest_user,only: [:edit,:update,:cancellation]
 
   def index
     @user = current_user
