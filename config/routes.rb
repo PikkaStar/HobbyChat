@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
     get "check"=>"users#check",as: "check"
     get "every/:id"=>"users#every",as: "every"
+    resources :groups
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

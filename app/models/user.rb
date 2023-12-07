@@ -13,6 +13,8 @@ class User < ApplicationRecord
      has_many :favorites,dependent: :destroy
      has_many :comments,dependent: :destroy
 
+     has_many :group_users,dependent: :destroy
+
      has_many :followers,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
      has_many :followeds,class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
      has_many :following_users,through: :followers,source: :followed

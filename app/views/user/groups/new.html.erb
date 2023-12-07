@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row mx-auto">
+    <div class="col-4 mx-auto">
+
+      <div class="title">グループ作成</div>
+
+      <% if @group.errors.any? %>
+      <%= @group.errors.count %>件のエラーが発生しました
+      <% @group.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+       <% end %>
+      <% end %>
+
+      <%= form_with model: @group do |f| %>
+      <p>グループ画像</p>
+      <%= f.file_field :group_image %><br>
+
+      <%= f.label :name,"名前" %>
+      <%= f.text_field :name,class: "form-control" %>
+
+      <%= f.label :introduction,"自己紹介" %>
+      <%= f.text_area :introduction,row: "5",class: "form-control" %>
+
+      <div class="text-center">
+      <%= f.submit "作成",class: "btn btn-success mt-3 form-control" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
