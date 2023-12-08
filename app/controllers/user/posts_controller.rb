@@ -68,7 +68,7 @@ class User::PostsController < ApplicationController
     user = current_user
     if user.email == "guest@example.com"
       flash[:alert] = "ゲストの方は行えません"
-      redirect_to posts_path
+      redirect_to user_path(current_user)
     end
   end
 

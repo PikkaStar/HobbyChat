@@ -37,7 +37,12 @@ Rails.application.routes.draw do
     end
     get "check"=>"users#check",as: "check"
     get "every/:id"=>"users#every",as: "every"
-    resources :groups
+    resources :groups do
+      resources :group_users,only: [:create,:destroy]
+      resources :permits,only: [:create,:destroy]
+    end
+    get "groups/:id/permits"=>"groups#permits",as: "permits"
+    get "members/:id"=>"groups#members",as: "members"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

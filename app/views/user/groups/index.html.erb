@@ -20,9 +20,13 @@
             <%= link_to user_path(group.owner_id), class: "list-group-item button01" do %>
               <%= group.user.name %>
             <% end %>
+
+            <%= link_to members_path(group.id) do %>
             <div class="list-group-item button01 d-flex align-items-center">
               メンバー<%= group.users.count+1 %>人
             </div>
+            <% end %>
+
           </ul>
         </div>
         <% end %>
