@@ -5,7 +5,13 @@ class User::UsersController < ApplicationController
 
   def index
     @user = current_user
-    @users = User.page(params[:page]).per(5)
+    if params[:follows_count]
+      @users = User.follows_count.page(params[:page]).per(10)
+    elsif params[:follower_count]
+      @users = User.follower_count.page(params[:page]).per(10)
+    else
+      @users = User.page(params[:page]).per(10)
+    end
   end
 
   def every
@@ -16,6 +22,7 @@ class User::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(10)
+    @groups = @user.groups
   end
 
   def edit

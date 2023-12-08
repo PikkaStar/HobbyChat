@@ -3,6 +3,11 @@
     <div class="col-12">
       <h2 class="text-center">ユーザー一覧</h2>
 
+      <p class="text-center">
+        <%= link_to "フォロー多い順",users_path(follows_count: true) %>
+       |<%= link_to "フォロワー多い順",users_path(follower_count: true) %>
+      </p>
+
       <div class="d-flex flex-wrap">
        <% @users.each do |user| %>
          <% unless user.email == "guest@example.com" %>

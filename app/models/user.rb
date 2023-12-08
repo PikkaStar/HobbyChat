@@ -9,6 +9,9 @@ class User < ApplicationRecord
      validates :name,presence: true,length: {in: 2..10}
      validates :introduction,length: {maximum: 200}
 
+     scope :follows_count, -> {User.includes(:following_users).sort {|a,b| b.following_users.size <=> a.following_users.size}}
+     scope :follower_count, -> {User.includes(:follower_users).sort {|a,b| b.follower_users.size <=> a.follower_users.size}}
+
      has_many :posts,dependent: :destroy
      has_many :favorites,dependent: :destroy
      has_many :comments,dependent: :destroy
