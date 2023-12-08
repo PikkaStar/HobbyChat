@@ -1,6 +1,10 @@
 <div class="navbar">
-  <% if user_signed_in? %>
-
+  <% if admin_signed_in? %>
+    <div class="ml-auto">
+      <%= link_to "会員一覧",admin_users_path,class: "btn btn-secondary mr-3" %>
+      <%= link_to "投稿一覧",
+    </div>
+  <% elsif user_signed_in? %>
     <div class="ml-auto">
       <%= link_to "新規投稿",new_post_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "グループ作成",new_group_path,class: "btn btn-secondary mr-3" %>
@@ -17,12 +21,12 @@
       </div>
       <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
     </div>
-      <% else %>
+  <% else %>
     <div class="ml-auto">
       <%= link_to "トップへ",root_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "　紹介　",about_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "新規登録",new_user_registration_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "ログイン",new_user_session_path,class: "btn btn-secondary mr-3" %>
     </div>
-      <% end %>
+  <% end %>
 </div>

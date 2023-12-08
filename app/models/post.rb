@@ -4,6 +4,14 @@ class Post < ApplicationRecord
   validates :title,presence: true
   validates :body,presence: true,length: {maximum: 300}
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :favorite_count, -> {Post.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}}
+  scope :comment_count, -> {Post.includes(:comments).sort {|a,b| b.comments.size <=> a.comments.size}}
+  # そのあとに試したもの
+  # scope :favorite_count, -> { Post.includes(:favorites).order(favorite_count: :desc) }
+  # scope :comment_count, -> { Post.includes(:comments).order(comment_count: :desc)}
+
   belongs_to :user
   has_many :favorites,dependent: :destroy
   has_many :comments,dependent: :destroy

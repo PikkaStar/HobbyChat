@@ -6,11 +6,16 @@
   <%= flash[:alert] %>
 </div>
 
-
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h2 class="text-center">みんなの投稿</h2>
+      <p class="text-center">
+        <%= link_to '新しい順', posts_path(latest: "true") %>
+       |<%= link_to '古い順', posts_path(old: "true") %>
+       |<%= link_to 'いいね多い順', posts_path(favorite_count: true) %>
+       |<%= link_to 'コメント多い順', posts_path(comment_count: true) %>
+      </p>
 
       <div class="d-flex flex-wrap">
        <% @posts.each do |post| %>
@@ -34,7 +39,14 @@
               <%= render "user/favorites/favorite",post: post %>
               </span>
 
-            <div class="list-group-item button01 d-flex align-items-center">コメント<%= post.comments.count %>件</div>
+            <div class="list-group-item button01 d-flex align-items-center">
+              コメント<%= post.comments.count %>件
+            </div>
+
+            <div class="list-group-item button01 d-flex align-items-center">
+              <%= post.created_at.strftime("%Y/%m/%d") %>
+            </div>
+
           </ul>
         </div>
         <% end %>
