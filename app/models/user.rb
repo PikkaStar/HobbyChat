@@ -14,6 +14,8 @@ class User < ApplicationRecord
      has_many :comments,dependent: :destroy
 
      has_many :group_users,dependent: :destroy
+     has_many :permits,dependent: :destroy
+     has_many :groups,through: :group_users
 
      has_many :followers,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
      has_many :followeds,class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
@@ -49,7 +51,5 @@ class User < ApplicationRecord
        def following?(user)
          following_users.include?(user)
        end
-
-
 
 end

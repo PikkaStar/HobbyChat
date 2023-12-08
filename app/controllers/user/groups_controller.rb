@@ -2,6 +2,7 @@ class User::GroupsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :permits]
 
   def new
     @group = Group.new
@@ -42,6 +43,16 @@ class User::GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def members
+    @group = Group.find(params[:id])
+    @members = @group.users.page(params[:page]).per(15)
+  end
+
+  def permits
+    @group = Group.find(params[:id])
+    @permits = @group.permits.page(params[:page])
+  end
+
   private
 
   def group_params
@@ -52,7 +63,15 @@ class User::GroupsController < ApplicationController
     user = current_user
     if user.email == "guest@example.com"
       flash[:alert] = "ゲストの方は行えません"
-      redirect_to groups_path
+      redirect_to user_path(current_user)
+    end
+  end
+
+  def ensure_correct_user
+    group = Group.find(params[:id])
+    unless group.owner_id == current_user.id
+      flash[:alert] = "グループマスターのみ編集できます"
+      redirect_to group_path(group)
     end
   end
 
