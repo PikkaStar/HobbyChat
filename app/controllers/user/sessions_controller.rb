@@ -5,7 +5,7 @@ class User::SessionsController < Devise::SessionsController
    before_action :user_status,only: [:create]
 
    def after_sign_in_path_for(resource)
-       user_path(current_user)
+       user_path(resource)
    end
 
    def after_sign_out_path_for(resource)

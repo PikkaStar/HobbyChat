@@ -4,7 +4,8 @@
       <h2 class="text-center">ユーザー一覧</h2>
 
       <p class="text-center">
-        <%= link_to "フォロー多い順",users_path(follows_count: true) %>
+        <%= link_to "投稿数順",users_path(posts: true) %>
+       |<%= link_to "フォロー多い順",users_path(follows_count: true) %>
        |<%= link_to "フォロワー多い順",users_path(follower_count: true) %>
       </p>
 

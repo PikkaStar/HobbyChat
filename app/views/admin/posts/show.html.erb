@@ -1,2 +1,50 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="flash-notice text-center">
+  <%= flash[:notice] %>
+</div>
+
+<div id="flash-message" class="text-center" style="background-color: #ffffab">
+  <%= render 'user/comments/flash' %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <%= render "user/users/info",user: @user %>
+    </div>
+
+    <div class="col-7 offset-1">
+      <h3 class="text-center mt-3">
+        <%= @post.title %>
+          <% if @post.user_id == current_user.id %>
+            <%= link_to "編集",edit_post_path(@post),class: "btn btn-success" %>
+            <%= link_to "削除",post_path(@post),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+          <% end %>
+      </h3>
+
+      <table class="table">
+        <tr>
+          <td>フォローする</td>
+          <td id="favorite_btn2<%= @post.id %>">
+              <%= render "user/favorites/favorite2",post: @post %>
+          </td>
+          <td id= "comment_counter">
+            <%= link_to post_comments_path(@post) do %>
+            <%= render "user/comments/comment_count",post: @post %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td><%= image_tag @post.get_image(200,100) %></td>
+          <td colspan="2"><%= @post.body %></td>
+        </tr>
+      </table>
+
+        <div class="d-flex flex-column align-items-end">
+         <%= form_with model: [@post,@comment], url: post_comments_path(@post),local: false do |f| %>
+          <%= f.text_area :comment,placeholder: "コメントはこちら",id: "textarea", size: "50%" %>
+          <%= f.submit "送信",class: "btn btn-success" %>
+         <% end %>
+        </div>
+    </div>
+  </div>
+</div>

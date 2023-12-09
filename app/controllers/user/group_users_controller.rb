@@ -12,6 +12,7 @@ def create
 end
 
 def destroy
+  @group = Group.find(params[:group_id])
   @permit = Permit.find(params[:permit_id])
   @permit.destroy
   redirect_to request.referer

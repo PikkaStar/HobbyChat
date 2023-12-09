@@ -5,8 +5,15 @@
         <%= @post.title %>のコメント一覧
       </div>
 
+      <div class="d-flex flex-column align-items-end">
+         <%= form_with model: [@post,@comment], url: post_comments_path(@post),local: false do |f| %>
+          <%= f.text_area :comment,placeholder: "コメントはこちら",id: "textarea", size: "50%" %>
+          <%= f.submit "送信",class: "btn btn-success" %>
+         <% end %>
+      </div>
+
       <div id="comment">
-        <%= render "user/comments/comment",post: @post %>
+        <%= render "user/comments/comment", post: @post, comments: @comments %>
       </div>
 
     </div>

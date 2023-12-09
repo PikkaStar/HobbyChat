@@ -15,11 +15,17 @@ class User::CommentsController < ApplicationController
 
   def index
     @post = Post.find(params[:post_id])
-    @comments = @post.comments.page(params[:page]).per(5)
+    @comment = Comment.new
+    @comments = @post.comments.page(params[:page]).per(10)
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    # end
   end
 
   def destroy
     @post = Post.find(params[:post_id])
+    @comments = @post.comments.page(params[:page]).per(5)
     @comment = @post.comments.find(params[:id])
     @comment.destroy
   end

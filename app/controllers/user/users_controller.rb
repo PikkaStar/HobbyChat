@@ -6,9 +6,11 @@ class User::UsersController < ApplicationController
   def index
     @user = current_user
     if params[:follows_count]
-      @users = User.follows_count.page(params[:page]).per(10)
+      @users = Kaminari.paginate_array(User.follows_count).page(params[:page]).per(10)
     elsif params[:follower_count]
-      @users = User.follower_count.page(params[:page]).per(10)
+      @users = Kaminari.paginate_array(User.follower_count).page(params[:page]).per(10)
+    elsif params[:posts]
+      @users = Kaminari.paginate_array(User.posts).page(params[:page]).per(10)
     else
       @users = User.page(params[:page]).per(10)
     end

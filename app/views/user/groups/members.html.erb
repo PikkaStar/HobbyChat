@@ -33,32 +33,34 @@
       <h3 class="text-center"><%= @group.name %>のメンバー</h3>
       <div class="d-flex flex-wrap">
        <% @members.each do |member| %>
-          <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
-            <div class="mx-auto">
-              <%= image_tag member.get_profile_image(100,100), style: "width: 150px; height: 120px;" %>
+         <% unless @group.owner_id == member.id %>
+            <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
+              <div class="mx-auto">
+                <%= image_tag member.get_profile_image(100,100), style: "width: 150px; height: 120px;" %>
+              </div>
+
+              <%= link_to user_path(member.id),class: "button01" do  %>
+              <div class="card-body">
+                <h5 class="card-title"><%= truncate(member.name,length: 5, omission: '') %></h5>
+                <p class="card-text"><%= truncate(member.introduction, length: 9, omission: '...') %></p>
+              </div>
+               <% end %>
+              <ul class="list-group list-group-flush">
+                <%= link_to follows_user_path(member.id) do %>
+                  <li class="list-group-item button01" style="width: 158.4px;">
+                    フォロー<%= member.followers.count %>人
+                  </li>
+                <% end %>
+
+                <%= link_to followers_user_path(member.id) do %>
+                  <li class="list-group-item button01" style="width: 158.4px;">
+                    フォロワー<%= member.followeds.count %>人
+                  </li>
+                <% end %>
+
+              </ul>
             </div>
-
-            <%= link_to user_path(member.id),class: "button01" do  %>
-            <div class="card-body">
-              <h5 class="card-title"><%= truncate(member.name,length: 5, omission: '') %></h5>
-              <p class="card-text"><%= truncate(member.introduction, length: 9, omission: '...') %></p>
-            </div>
-             <% end %>
-            <ul class="list-group list-group-flush">
-              <%= link_to follows_user_path(member.id) do %>
-                <li class="list-group-item button01" style="width: 158.4px;">
-                  フォロー<%= member.followers.count %>人
-                </li>
-              <% end %>
-
-              <%= link_to followers_user_path(member.id) do %>
-                <li class="list-group-item button01" style="width: 158.4px;">
-                  フォロワー<%= member.followeds.count %>人
-                </li>
-              <% end %>
-
-            </ul>
-          </div>
+          <% end %>
        <% end %>
       </div>
       <div class="d-flex justify-content-center">

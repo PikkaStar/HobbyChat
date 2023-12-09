@@ -1,8 +1,17 @@
+<div class="flash-notice text-center">
+  <%= flash[:notice] %>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h2 class="text-center">グループ一覧</h2>
 
+      <p class="text-center">
+        <%= link_to '新しい順', groups_path(latest: "true") %>
+       |<%= link_to '古い順', groups_path(old: "true") %>
+       |<%= link_to "メンバー数順",groups_path(members: true) %>
+      </p>
       <div class="d-flex flex-wrap">
        <% @groups.each do |group| %>
         <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
@@ -23,9 +32,13 @@
 
             <%= link_to members_path(group.id) do %>
             <div class="list-group-item button01 d-flex align-items-center">
-              メンバー<%= group.users.count+1 %>人
+              メンバー<%= group.users.count %>人
             </div>
             <% end %>
+
+            <div class="list-group-item button01 d-flex align-items-center">
+              作成日<%= group.created_at.strftime("%Y/%m/%d") %>
+            </div>
 
           </ul>
         </div>

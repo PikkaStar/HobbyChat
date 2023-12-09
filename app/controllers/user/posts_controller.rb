@@ -25,9 +25,9 @@ class User::PostsController < ApplicationController
     elsif params[:old]
       @posts = Post.old.page(params[:page]).per(10)
     elsif params[:favorite_count]
-      @posts = Post.favorite_count.page(params[:page]).per(10)
+      @posts = Kaminari.paginate_array(Post.favorite_count).page(params[:page]).per(10) #Post.favorite_count
     elsif params[:comment_count]
-      @posts = Post.comment_count.page(params[:page]).per(10)
+      @posts = Kaminari.paginate_array(Post.comment_count).page(params[:page]).per(10)
     else
       @posts = Post.page(params[:page]).per(10)
     end
@@ -38,6 +38,7 @@ class User::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
     @comment = Comment.new
+    @comments = @post.comments.page(params[:page]).per(1)
   end
 
   def edit

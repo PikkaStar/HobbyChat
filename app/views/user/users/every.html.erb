@@ -12,21 +12,15 @@
             </div>
             <div class="card-body">
               <h5 class="card-title"><%= post.title %></h5>
-              <p class="card-text"><%= post.body %></p>
+              <p class="card-text"><%= truncate(post.body, length: 9, omission: '...') %></p>
             </div>
             <% end %>
           <ul class="list-group list-group-flush">
-              <% unless post.user_id == current_user.id %>
-                <% if post.favorited_by?(current_user) %>
-                <%= link_to post_favorite_path(post.id),method: :delete, class: "list-group-item button01 favorited" do %>♥<%= post.favorites.count %>いいね<% end %>
-                <% else %>
-                <%= link_to post_favorite_path(post.id),method: :post, class: "list-group-item button01 unfavorited" do %>♡<%= post.favorites.count %>いいね<% end %>
-                <% end %>
-              <% else %>
-              <div class="list-group-item button01">
-              ♥<%= post.favorites.count %>いいね
-              </div>
-              <% end %>
+
+              <span id="favorite_btn<%= post.id %>">
+              <%= render "user/favorites/favorite",post: post %>
+              </span>
+
             <li class="list-group-item">コメント数</li>
           </ul>
         </div>
