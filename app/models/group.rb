@@ -6,6 +6,10 @@ class Group < ApplicationRecord
 
   has_one_attached :group_image
 
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :members, -> {Group.includes(:users).sort {|a,b| b.users.size <=> a.users.size}}
+
   validates :name,presence: true,length: {maximum: 15}
   validates :introduction,presence: true,length: {maximum: 100}
 

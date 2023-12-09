@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_admin!
   before_action :admin_user
 
   def index
@@ -28,10 +28,9 @@ class Admin::UsersController < ApplicationController
   private
 
   def admin_user
-    @user = current_user
-    unless @user.email == "admin@admin.com"
+    @admin = current_admin
+    unless @admin.email == "admin@admin.com"
       flash[:alert] = "権限がありません"
-      redirect_to user_path(current_user)
     end
   end
 

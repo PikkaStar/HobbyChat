@@ -12,15 +12,26 @@ class User::GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     @group.user_id = current_user.id
+    @group.users << current_user
     if @group.save
+      flash[:notice] = "グループを作成しました"
       redirect_to group_path(@group)
     else
+      flash[:alert] = "新規登録に失敗しました"
       render :new
     end
   end
 
   def index
-    @groups = Group.page(params[:page]).per(15)
+    if params[:latest]
+      @groups = Group.latest.page(params[:page]).per(15)
+    elsif params[:old]
+      @groups = Group.old.page(params[:page]).per(15)
+    elsif params[:members]
+      @groups = Kaminari.paginate_array(Group.members).page(params[:page]).per(15)
+    else
+      @groups = Group.page(params[:page]).per(15)
+    end
   end
 
   def show
@@ -40,6 +51,7 @@ class User::GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
+    flash[:notice] = "グループを削除しました"
     redirect_to groups_path
   end
 

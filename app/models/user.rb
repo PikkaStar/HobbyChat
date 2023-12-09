@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
      scope :follows_count, -> {User.includes(:following_users).sort {|a,b| b.following_users.size <=> a.following_users.size}}
      scope :follower_count, -> {User.includes(:follower_users).sort {|a,b| b.follower_users.size <=> a.follower_users.size}}
+     scope :posts, -> {User.includes(:posts).sort {|a,b| b.posts.size <=> a.posts.size}}
 
      has_many :posts,dependent: :destroy
      has_many :favorites,dependent: :destroy

@@ -27,11 +27,11 @@
           <td id="favorite_btn2<%= @post.id %>">
               <%= render "user/favorites/favorite2",post: @post %>
           </td>
+
           <td id= "comment_counter">
-            <%= link_to post_comments_path(@post) do %>
             <%= render "user/comments/comment_count",post: @post %>
-            <% end %>
           </td>
+
         </tr>
         <tr>
           <td><%= image_tag @post.get_image(200,100) %></td>

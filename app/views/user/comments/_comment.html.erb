@@ -1,6 +1,6 @@
-<% if post.comments.present? %>
+<% if comments.present? %>
   <table class="table table-hover">
-    <% post.comments.each do |comment| %>
+    <% comments.order(created_at: :desc).each do |comment| %>
     <tr>
       <td class="custom-width">
         <%= link_to user_path(comment.user_id) do %>
@@ -11,9 +11,12 @@
       <td class="custom-width2">
         <%= comment.comment %>
       </td>
+      <td>
+        <%= comment.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+      </td>
       <% if comment.user_id == current_user.id %>
         <td>
-          <%= link_to "削除",post_comment_path(@post,comment),method: :delete,remote: true,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+          <%= link_to "削除",post_comment_path(post,comment),method: :delete,remote: true,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
         </td>
       <% else %>
         <td></td>
@@ -21,6 +24,7 @@
     </tr>
     <% end %>
   </table>
+  <%= paginate comments %>
 <% else %>
   <h3>コメントはありません</h3>
 <% end %>
