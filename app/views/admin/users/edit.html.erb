@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row mx-auto">
+    <div class="col-4 mx-auto">
+
+      <% if @user.errors.any? %>
+      <%= @user.errors.count %>件のエラーが発生しました
+      <% @user.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+       <% end %>
+      <% end %>
+
+      <%= form_with model: @user do |f| %>
+      <p>プロフィール画像</p>
+      <%= f.file_field :profile_image %><br>
+
+      <%= f.label :name,"名前" %>
+      <%= f.text_field :name,class: "form-control" %>
+
+      <%= f.label :introduction,"自己紹介" %>
+      <%= f.text_area :introduction,row: "5",class: "form-control" %>
+
+      <%= f.radio_button :is_active, true,style: 'transform: scale(1.5);' %>
+      <%= f.label :is_active,"有効" %>
+
+      <%= f.radio_button :is_active,false,style: 'transform: scale(1.5);',class: "ml-4" %>
+      <%= f.label :is_active,"退会" %>
+
+      <div class="text-center">
+      <%= f.submit "更新",class: "btn btn-success mt-3 form-control" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

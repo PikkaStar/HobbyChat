@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
      GUEST_USER_EMAIL = "guest@example.com"
 
-     validates :name,presence: true,length: {in: 2..10}
+     validates :name,presence: true,uniqueness: true,length: {in: 2..10}
      validates :introduction,length: {maximum: 200}
 
      scope :follows_count, -> {User.includes(:following_users).sort {|a,b| b.following_users.size <=> a.following_users.size}}
