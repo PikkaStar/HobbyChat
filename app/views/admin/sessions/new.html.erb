@@ -1,20 +1,31 @@
-<h2>Log in</h2>
+<div>
+  <%= flash[:alert] %>
+</div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<div class="container">
+  <div class="row">
+    <div class="col-4 mx-auto">
+
+      <h2>Log in</h2>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email,"メールアドレス" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :password,"パスワード" %><br />
+          <%= f.password_field :password, autocomplete: "current-password",class: "form-control" %>
+        </div>
+
+
+        <div class="actions">
+          <%= f.submit "ログイン",class: "mt-4 btn btn-success form-control" %>
+        </div>
+      <% end %>
+
+      <%= render "admin/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "admin/shared/links" %>
+</div>

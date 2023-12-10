@@ -8,7 +8,7 @@
         <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
 
           <div class="mx-auto">
-           <%= link_to post_path(post.id),class: "button01" do  %>
+           <%= link_to admin_post_path(post.id),class: "button01" do  %>
             <%= image_tag post.get_image(200,200), style: "width: 150px; height: 120px;" %>
           </div>
 
@@ -18,15 +18,17 @@
            <% end %>
 
           <ul class="list-group list-group-flush">
-            <%= link_to user_path(post.user_id), class: "list-group-item button01" do %>
+            <%= link_to admin_user_path(post.user_id), class: "list-group-item button01" do %>
               <%= post.user.name %>
             <% end %>
 
-              <div id="favorite_btn<%= post.id %>">
-              <%= render "user/favorites/favorite",post: post %>
-              </div>
+              <li class="list-group-item button01">
+                ♥<%= post.favorites.count %>いいね
+              </li>
 
-            <li class="list-group-item button01">コメント<%= post.comments.count %>件</li>
+            <li class="list-group-item button01">
+              コメント<%= post.comments.count %>件
+            </li>
           </ul>
         </div>
         <% end %>

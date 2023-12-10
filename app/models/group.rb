@@ -25,4 +25,12 @@ class Group < ApplicationRecord
     group_users.exists?(user_id: user.id)
   end
 
+  def self.looks(search,word)
+    if search == "partial_match"
+     @group = Group.where("name LIKE?","%#{word}%")
+    else
+     @group = Group.all
+    end
+  end
+
 end

@@ -1,0 +1,63 @@
+<table class="table table-hover">
+  <tr>
+    <td><%= image_tag user.get_profile_image(100,100) %></td>
+    <td>
+       <% unless user.email == "guest@example.com" %>
+          <%= link_to "編集",edit_admin_user_path(user),class: "btn btn-primary" %><br>
+          <% if user.is_active == true %>
+            有効
+          <% else %>
+            退会
+          <% end %>
+        <% else %>
+       <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>名前</th>
+    <td><%= user.name %></td>
+  </tr>
+  <tr>
+    <td>投稿数</td>
+    <td>
+      <div class="button02">
+        <%= link_to every_path(user.id) do %>
+          <%= user.posts.count %>件
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>いいね</td>
+    <td>
+      <div class="button02">
+        <%= link_to favorites_admin_user_path(user.id) do %>
+          <%= user.favorites.count %>いいね
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>フォロー</td>
+    <td>
+      <div class="button02">
+        <%= link_to follows_admin_user_path(user) do %>
+          <%= user.followers.count %>人
+        <% end %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>フォロワー</td>
+    <td>
+      <div class="button02">
+        <%= link_to followers_admin_user_path(user) do %>
+          <%= user.followeds.count %>人
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
+<div class="bg-white">
+  <%= user.introduction %>
+</div>

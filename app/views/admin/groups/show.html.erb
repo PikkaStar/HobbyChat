@@ -1,2 +1,54 @@
-<h1>Admin::Groups#show</h1>
-<p>Find me in app/views/admin/groups/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-5 mx-auto title">
+      <%= image_tag @group.get_group_image(100,100) %>
+      <h3><%= @group.name %></h3>
+    </div>
+    <div class="col-5 mt-5">
+      <%= link_to "削除",admin_group_path(@group),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <table class="table table-hover">
+        <tr>
+          <th>マスター</th>
+          <td>
+            <%= image_tag @group.user.get_profile_image(100,100) %>
+          </td>
+          <td>
+            <div class="button02">
+              <%= link_to admin_user_path(@group.owner_id) do %>
+                <%= @group.user.name %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>メンバー</th>
+          <td></td>
+          <td>
+            <div class="button02">
+              <%= link_to members_path(@group) do %>
+                <%= @group.users.count %>人
+              <% end %>
+            </div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>作成日</th>
+          <td><%= @group.created_at.in_time_zone("Asia/Tokyo").strftime("%Y/%m/%d") %></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+   <h4 class="text-center">グループ紹介文</h4>
+  <div class="row">
+    <div class="col-10 mx-auto bg-white">
+      <%= @group.introduction %>
+    </div>
+  </div>
+</div>

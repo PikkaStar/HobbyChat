@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div class="title">
+        <%= @post.title %>のコメント一覧
+      </div>
+
+      <% if @comments.present? %>
+        <table class="table table-hover">
+          <% @comments.order(created_at: :desc).each do |comment| %>
+          <tr>
+            <td class="custom-width">
+              <%= link_to user_path(comment.user_id) do %>
+              <%= image_tag comment.user.get_profile_image(100,100) %><br>
+              <%= comment.user.name %>
+              <% end %>
+            </td>
+            <td class="custom-width2">
+              <%= comment.comment %>
+            </td>
+            <td>
+              <%= comment.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+            </td>
+              <td>
+                <%= link_to "削除",admin_post_comment_path(@post,comment),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+              </td>
+              <td></td>
+          </tr>
+          <% end %>
+        </table>
+        <%= paginate @comments %>
+      <% else %>
+        <h3>コメントはありません</h3>
+      <% end %>
+
+    </div>
+  </div>
+</div>
