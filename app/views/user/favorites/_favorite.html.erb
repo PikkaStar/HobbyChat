@@ -5,7 +5,7 @@
   <%= link_to post_favorite_path(post.id),method: :post,remote: true, class: "list-group-item button01 unfavorited d-flex align-items-center" do %>♡<%= post.favorites.count %>いいね<% end %>
   <% end %>
 <% else %>
-<div class="list-group-item button01 d-flex align-items-center">
-♥<%= post.favorites.count %>いいね
-</div>
+  <div class="list-group-item button01 d-flex align-items-center">
+    ♥<%= post.favorites.count %>いいね
+  </div>
 <% end %>

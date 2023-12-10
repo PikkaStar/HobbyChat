@@ -3,6 +3,11 @@
     <div class="col-12">
       <h2 class="text-center">ユーザー一覧</h2>
 
+      <p class="text-center">
+        <%= link_to "投稿数順",admin_users_path(posts: true) %>
+       |<%= link_to "フォロー多い順",admin_users_path(follows_count: true) %>
+       |<%= link_to "フォロワー多い順",admin_users_path(follower_count: true) %>
+      </p>
 
       <div class="d-flex flex-wrap">
        <% @users.each do |user| %>
@@ -12,7 +17,7 @@
               <%= image_tag user.get_profile_image(200,200), style: "width: 150px; height: 120px;" %>
             </div>
 
-            <%= link_to user_path(user.id),class: "button01" do  %>
+            <%= link_to admin_user_path(user.id),class: "button01" do  %>
             <div class="card-body">
               <h5 class="card-title"><%= truncate(user.name,length: 5, omission: '') %></h5>
               <p class="card-text"><%= truncate(user.introduction, length: 9, omission: '...') %></p>
@@ -36,6 +41,15 @@
                   フォロワー<%= user.followeds.count %>人
                 </li>
               <% end %>
+
+              <% if user.is_active == true %>
+                <li class="list-group-item bg-info" style="width: 158.4px;">
+                    <span>有効</span>
+              <% else %>
+                <li class="list-group-item bg-danger" style="width: 158.4px; color:white;">
+                    <span>退会</span>
+              <% end %>
+                </li>
 
             </ul>
           </div>
