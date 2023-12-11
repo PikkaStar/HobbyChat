@@ -10,7 +10,9 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    tag_list = params[:post][:name].split(',')
     if @post.save
+       @post.save_tags(tag_list)
        flash[:notice] = "投稿しました"
        redirect_to post_path(@post)
     else
@@ -31,11 +33,14 @@ class User::PostsController < ApplicationController
     else
       @posts = Post.page(params[:page]).per(10)
     end
+      @tag_list = Tag.all
   end
 
 
   def show
     @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:name).join(',')
+    @post_tags = @post.tags
     @user = @post.user
     @comment = Comment.new
     @comments = @post.comments.page(params[:page]).per(1)
@@ -43,11 +48,14 @@ class User::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
     @post = Post.find(params[:id])
+    tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
+       @post.save_tags(tag_list)
        flash[:notice] = "更新しました"
        redirect_to post_path(@post)
     else
@@ -61,6 +69,12 @@ class User::PostsController < ApplicationController
     @post.destroy
     flash[:notice] = "削除しました"
     redirect_to user_path(current_user)
+  end
+
+  def search_tag
+    @tag_list = Tag.all
+    @tag = Tag.find(params[:tag_id])
+    @posts = @tag.posts
   end
 
   private
