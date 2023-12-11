@@ -66,6 +66,18 @@
           </td>
         </tr>
         <tr>
+          <th>ジャンル</th>
+          <td></td>
+          <td>
+            <div class="button02">
+              <% @group_genres.each do |genre| %>
+                <i class="fa-sharp fa-solid fa-tag"></i>
+                <%= link_to genre.genre_name,search_genre_path(genre_id: genre.id) %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <tr>
           <th>作成日</th>
           <td></td>
           <td><%= @group.created_at.in_time_zone("Asia/Tokyo").strftime("%Y/%m/%d") %></td>
