@@ -15,6 +15,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites,dependent: :destroy
   has_many :comments,dependent: :destroy
+  has_many :tag_maps,dependent: :destroy
+  has_many :tags,through: :tag_maps
 
   def get_image(width,height)
     if image.attached?
@@ -33,6 +35,27 @@ class Post < ApplicationRecord
      @post = Post.where("title LIKE?","%#{word}%")
     else
      @post = Post.all
+    end
+  end
+
+  def save_tags(tags)
+    # 投稿にタグがすでについているか判定
+    # Bookに関連するTagsを取得し、nameを配列として取得する。
+    current_tags = self.tags.pluck(:name) unless self.tags.nil?
+    # 元々紐づいていたタグと投稿されたタグの差分を抽出
+    old_tags = current_tags - tags
+    # 投稿されたタグと元々紐づいていたタグの差分を抽出
+    new_tags = tags - current_tags
+    # 更新対象にならなかったタグを取り出す
+    old_tags.each do |old_name|
+      # 該当するタグを削除
+      self.tags.delete Tag.find_by(name: old_name)
+    end
+      new_tags.each do |new_name|
+      # 条件のレコードをはじめの1件所得し、1件もなければ作成する
+        tag = Tag.find_or_create_by(name: new_name)
+      # 配列追加の要領で新規レコード作成
+        self.tags << tag
     end
   end
 
