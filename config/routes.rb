@@ -48,7 +48,11 @@ Rails.application.routes.draw do
       get "every/:id"=>"users#every",as: "every"
       resources :groups do
         resources :group_users,only: [:create,:destroy]
-        resources :permits,only: [:create,:destroy]
+        resources :permits,only: [:create,:destroy] do 
+          collection do
+            patch :rejected
+          end
+        end
       end
       get "groups/:id/permits"=>"groups#permits",as: "permits"
       get "members/:id"=>"groups#members",as: "members"

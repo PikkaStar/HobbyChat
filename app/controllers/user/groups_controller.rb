@@ -79,7 +79,8 @@ class User::GroupsController < ApplicationController
 
   def permits
     @group = Group.find(params[:id])
-    @permits = @group.permits.page(params[:page])
+    @users = @group.permited_users.includes(:permits).where(permits: {rejected: false}).page(params[:page])
+   # Post.includes(:user).where(users: {gender: "man"})
   end
 
   private

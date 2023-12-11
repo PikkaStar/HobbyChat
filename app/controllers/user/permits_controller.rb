@@ -1,6 +1,6 @@
 class User::PermitsController < ApplicationController
   before_action :authenticate_user!
-  before_action :guest_user,only: [:create,:destroy]
+  before_action :guest_user,only: [:create,:destroy,:rejected]
 
 def create
   @group = Group.find(params[:group_id])
@@ -14,6 +14,15 @@ def destroy
   group = Group.find(params[:group_id])
   permit = current_user.permits.find_by(group_id: group.id)
   permit.destroy
+  flash[:alert] = "参加申請を取り消しました"
+  redirect_to request.referer
+end
+
+def rejected
+  group = Group.find(params[:group_id])
+  user = User.find(params[:user_id])
+  permit = user.permits.find_by(group_id: group.id)
+  permit.update(rejected: true)
   flash[:alert] = "参加申請を取り消しました"
   redirect_to request.referer
 end
