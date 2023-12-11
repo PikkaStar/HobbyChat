@@ -13,7 +13,9 @@ class User::GroupsController < ApplicationController
     @group.owner_id = current_user.id
     @group.user_id = current_user.id
     @group.users << current_user
+    genre_list = params[:group][:genre_name].split(',')
     if @group.save
+      @group.save_genres(genre_list)
       flash[:notice] = "グループを作成しました"
       redirect_to group_path(@group)
     else
@@ -32,20 +34,35 @@ class User::GroupsController < ApplicationController
     else
       @groups = Group.page(params[:page]).per(15)
     end
+    @genre_list = Genre.all
   end
 
   def show
     @group = Group.find(params[:id])
+    @genre_list = @group.genres.pluck(:genre_name).join(',')
+    @group_genres = @group.genres
   end
 
   def edit
     @group = Group.find(params[:id])
+    @group_genre = @group.genres.pluck(:genre_name).join(',')
   end
 
   def update
     @group = Group.find(params[:id])
-    @group.update(group_params)
-    redirect_to group_path(@group)
+    group_list = params[:group][:genre_name].split(',')
+    if @group.update(group_params)
+       @group.save_genres(group_list)
+       redirect_to group_path(@group)
+    else
+      render :edit
+    end
+  end
+
+  def search_genre
+    @genre_list = Genre.all
+    @genre = Genre.find(params[:genre_id])
+    @groups = @genre.groups
   end
 
   def destroy

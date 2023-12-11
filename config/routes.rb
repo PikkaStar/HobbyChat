@@ -54,6 +54,7 @@ Rails.application.routes.draw do
       get "members/:id"=>"groups#members",as: "members"
       get "search"=>"searches#search",as: "search"
       get "search_tag"=>"posts#search_tag"
+      get "search_genre"=>"groups#search_genre"
     end
 
 
