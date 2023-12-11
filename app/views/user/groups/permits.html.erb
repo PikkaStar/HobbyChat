@@ -1,10 +1,18 @@
+<div class="flash-notice text-center">
+  <%= flash[:notice] %>
+</div>
+
+<div class="flash-alert text-center">
+  <%= flash[:alert] %>
+</div>
+
 <div class="container">
   <h2 class="title text-center"><%= @group.name %></h2>
   <h4 class="text-center">承認待ち一覧</h4>
 
   <div class="row">
     <div class="col-10 mx-auto">
-      <% if @permits.present? %>
+      <% if @users %>
         <div class="table-responsive">
           <table class="table table-hover text-nowrap bg-light">
             <thead class="thead-dark">
@@ -15,23 +23,22 @@
                 <th colspan="2"></th>
               </tr>
             </thead>
-
-            <% @permits.each do |permit| %>
+            <% @users.each do |user| %>
             <tr>
               <td>
-                <%= image_tag permit.user.get_profile_image(100,100) %>
+                <%= image_tag user.get_profile_image(100,100) %>
               </td>
               <td>
-                <%= link_to permit.user.name,user_path(permit.user_id) %>
+                <%= link_to user.name,user_path(user.id) %>
               </td>
               <td>
-                <%= permit.user.introduction %>
+                <%= user.introduction %>
               </td>
               <td class="text-right">
-                <%= link_to "加入許可",group_group_users_path(@group,permit_id: permit.id),method: :post,class: "btn btn-success" %>
+                <%= link_to "加入許可",group_group_users_path(@group),method: :post,class: "btn btn-success" %>
               </td>
               <td class="text-dark">
-                <%= link_to "加入拒否",group_group_user_path(permit.id),method: :delete,class: "btn btn-danger" %>
+                <%= link_to "加入拒否", rejected_group_permits_path(@group, user_id: user.id),method: :patch,class: "btn btn-danger" %>
               </td>
             </tr>
             <% end %>
@@ -41,7 +48,7 @@
         <h3 class="text-center">承認待ちユーザーはいません</h3>
       <% end %>
       <div class="mx-auto">
-        <%= paginate @permits %>
+        <%= paginate @users %>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ class User::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
     if @comment.save
+    @comments = @post.comments.page(params[:page]).per(10)
     else
     @user = @post.user
     flash.now[:alert] = "コメントは1文字以上100文字以下で入力してください"

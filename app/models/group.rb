@@ -1,7 +1,10 @@
 class Group < ApplicationRecord
   has_many :group_users,dependent: :destroy
-  has_many :permits,dependent: :destroy
   has_many :users,through: :group_users,source: :user
+  
+  has_many :permits,dependent: :destroy
+  has_many :permited_users, through: :permits, source: :user
+  
   has_many :group_genres,dependent: :destroy
   has_many :genres,through: :group_genres
   belongs_to :user
