@@ -26,19 +26,28 @@
           </td>
         </tr>
         <tr>
-          <th>メンバー</th>
-          <td></td>
+          <th colspan="2">メンバー</th>
           <td>
             <div class="button02">
-              <%= link_to members_path(@group) do %>
+              <%= link_to admin_members_path(@group) do %>
                 <%= @group.users.count %>人
               <% end %>
             </div>
           </td>
-          <td></td>
         </tr>
         <tr>
-          <th>作成日</th>
+          <th colspan="2">ジャンル</th>
+          <td>
+            <div class="button02">
+              <% @group_genres.each do |genre| %>
+                <i class="fa-sharp fa-solid fa-tag"></i>
+                <%= genre.genre_name %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th colspan="2">作成日</th>
           <td><%= @group.created_at.in_time_zone("Asia/Tokyo").strftime("%Y/%m/%d") %></td>
           <td></td>
         </tr>

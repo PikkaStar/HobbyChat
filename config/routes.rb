@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     end
     resources :groups,only: [:index,:show,:destroy]
     get "members/:id"=>"groups#members",as: "members"
+    get "every/:id"=>"users#every",as: "every"
+    get "search"=>"searches#search",as: "search"
   end
 
   scope module: :user do
@@ -48,7 +50,7 @@ Rails.application.routes.draw do
       get "every/:id"=>"users#every",as: "every"
       resources :groups do
         resources :group_users,only: [:create,:destroy]
-        resources :permits,only: [:create,:destroy] do 
+        resources :permits,only: [:create,:destroy] do
           collection do
             patch :rejected
           end
