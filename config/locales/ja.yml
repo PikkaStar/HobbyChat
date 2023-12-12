@@ -1,9 +1,13 @@
 ja:
   enums:
-    order:
-      payment_method:
-        credit_card: "クレジットカード"
-        transfer: "銀行振込"
+    report:
+      reason:
+        malicious_expression: 悪意のある表現
+        inappropriate_content: 不適切な表現
+        misinformation: 誤った情報
+        commercial_purposes: 商業目的
+        spam: スパム
+        other: その他
   activerecord:
     errors:
       messages:

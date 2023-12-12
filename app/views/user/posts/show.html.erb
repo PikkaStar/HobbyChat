@@ -45,6 +45,13 @@
         </tr>
       </table>
 
+      <h3>最新のコメント</h3>
+      <table class="table">
+        <td><%= image_tag @comments.user.get_profile_image(100,100) %></td>
+        <td><%= link_to @comments.user.name,user_path(@comments.user_id) %></td>
+        <td><%= @comments.comment %></td>
+      </table>
+
 
     </div>
   </div>

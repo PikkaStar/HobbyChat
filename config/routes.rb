@@ -61,6 +61,7 @@ Rails.application.routes.draw do
       get "search"=>"searches#search",as: "search"
       get "search_tag"=>"posts#search_tag"
       get "search_genre"=>"groups#search_genre"
+      resources :reports, only: [:new,:create]
     end
 
 

@@ -7,10 +7,12 @@ def create
   @group = Group.find(params[:group_id])
   # この記述は必要なのかなと思い追加しましたがエラー
   @user = User.find(params[:user_id])
+  Permit.find_by(user_id: @user.id,group_id: @group.id).destroy
   # この記述は不要ということなので消しました
   #@permit = Permit.find(params[:permit_id])
   # 元々(user_id: @permit.id)と記述していた
   @group_user = GroupUser.create(user_id: @user.id,group_id: @group.id)
+  flash[:notice] = "申請を許可しました"
   redirect_to request.referer
 end
 
