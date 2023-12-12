@@ -13,6 +13,8 @@ class Admin::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
+    @genre_list = @group.genres.pluck(:genre_name).join(',')
+    @group_genres = @group.genres
   end
 
   def destroy

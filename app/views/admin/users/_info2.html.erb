@@ -21,7 +21,7 @@
     <td>投稿数</td>
     <td>
       <div class="button02">
-        <%= link_to every_path(user.id) do %>
+        <%= link_to admin_every_path(user.id) do %>
           <%= user.posts.count %>件
         <% end %>
       </div>

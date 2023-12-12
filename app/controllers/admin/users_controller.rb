@@ -34,6 +34,11 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def every
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page]).per(10)
+  end
+
   def favorites
     @user = User.find(params[:id])
     # Favoriteテーブルから特定のユーザーがいいねした投稿データを全て取得
