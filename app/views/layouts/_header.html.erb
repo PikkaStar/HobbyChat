@@ -2,6 +2,7 @@
   <% if admin_signed_in? %>
     <div class="ml-auto">
       <%= link_to "検索",admin_search_path,class: "btn btn-secondary mr-3" %>
+          <%= link_to "通報一覧",admin_reports_path,class: "btn btn-secondary mr-3" %>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           一覧
