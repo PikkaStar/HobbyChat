@@ -1,3 +1,11 @@
+<div class="flash-notice text-center">
+  <%= flash[:notice] %>
+</div>
+
+<div class="flash-alert text-center">
+  <%= flash[:alert] %>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
@@ -8,7 +16,7 @@
       <%= form_with model: [@user,@report] do |f| %>
         <div class="form-group">
           <%= f.label :reason, "通報理由をご記入下さい" %>
-          <%= f.text_area :reason, rows: "3", class: "form-control" %>
+          <%= f.text_area :reason, value: @report.reason, rows: "3", class: "form-control" %>
           <%= f.label :url, "該当URLがありましたら貼付ください" %>
           <%= f.text_field :url, class: "form-control" %>
           <%= f.submit "通報する", class: "btn btn-danger" %>

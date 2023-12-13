@@ -1,2 +1,53 @@
-<h1>Admin::Reports#show</h1>
-<p>Find me in app/views/admin/reports/show.html.erb</p>
+<div class="container">
+  <div class="row mx-auto">
+    <div class="col-3">
+
+      <h3 class="page-title">
+        通報詳細
+      </h3>
+    </div>
+    <div class="col-5">
+      <%= form_with model: @report, url: admin_report_path(@report), method: :patch do |f| %>
+        <!--Reportテーブルのstatusカラムにenumで定義した記述が日本語になってセレクトボックスを作れる-->
+        <%= f.select :status, Report.statuses.keys.map { |k| [t("enums.report.status.#{k}"), k]} %>
+        <%= f.submit '更新' %>
+      <% end %>
+    </div>
+  </div>
+
+    <div class="row mt-5">
+      <div class="col-8 mx-auto">
+
+        <table class="table table-hover">
+          <tr>
+            <th>通報ID</th>
+            <td><%= @report.id %></td>
+          </tr>
+          <tr>
+            <th>会員名</th>
+            <td><%= link_to @report.reported.name,admin_user_path(@report.reported_id) %></td>
+          </tr>
+          <tr>
+            <th>URL等</th>
+            <td><%= @report.url %></td>
+          </tr>
+          <tr>
+            <th>通報者</th>
+            <td><%= link_to @report.reporter.name,admin_user_path(@report.reporter_id) %></td>
+          </tr>
+          <tr>
+            <th>対応ステータス</th>
+            <td>
+              <%= @report.status_i18n %>
+            </td>
+          </tr>
+        </table>
+
+            <h4 class="text-center">通報理由</h4>
+            <div class="bg-white">
+              <%= @report.reason %>
+            </div>
+
+    </div>
+  </div>
+</div>

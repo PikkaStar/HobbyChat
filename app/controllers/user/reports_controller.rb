@@ -13,8 +13,10 @@ class User::ReportsController < ApplicationController
     @report.reporter_id = current_user.id #通報する人
     @report.reported_id = @user.id #通報される人
     if @report.save
+      flash[:notice] = "通報しました。ご報告ありがとうございます。"
       redirect_to user_path(@user)
     else
+      flash[:alert] = "通報に失敗しました"
       render :new
     end
   end
@@ -22,7 +24,7 @@ class User::ReportsController < ApplicationController
   private
 
   def report_params
-    params.repuire(:report).permit(:reason,:url)
+    params.require(:report).permit(:reason,:url)
   end
 
 
