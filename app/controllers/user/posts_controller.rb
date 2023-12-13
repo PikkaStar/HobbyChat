@@ -43,7 +43,7 @@ class User::PostsController < ApplicationController
     @post_tags = @post.tags
     @user = @post.user
     @comment = Comment.new
-    @comments = @post.comments.page(params[:page]).per(1)
+    @comments = @post.comments.last
   end
 
   def edit

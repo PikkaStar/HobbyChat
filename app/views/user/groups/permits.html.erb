@@ -35,7 +35,7 @@
                 <%= user.introduction %>
               </td>
               <td class="text-right">
-                <%= link_to "加入許可",group_group_users_path(@group),method: :post,class: "btn btn-success" %>
+                <%= link_to "加入許可",group_group_users_path(@group,user_id: user.id),method: :post,class: "btn btn-success" %>
               </td>
               <td class="text-dark">
                 <%= link_to "加入拒否", rejected_group_permits_path(@group, user_id: user.id),method: :patch,class: "btn btn-danger" %>

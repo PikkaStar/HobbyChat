@@ -1,9 +1,10 @@
 ja:
   enums:
-    order:
-      payment_method:
-        credit_card: "クレジットカード"
-        transfer: "銀行振込"
+    report:
+      status:
+        waiting: "対応待ち"
+        keep: "保留"
+        finish: "対応済み"
   activerecord:
     errors:
       messages:
