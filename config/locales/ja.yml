@@ -1,13 +1,10 @@
 ja:
   enums:
     report:
-      reason:
-        malicious_expression: 悪意のある表現
-        inappropriate_content: 不適切な表現
-        misinformation: 誤った情報
-        commercial_purposes: 商業目的
-        spam: スパム
-        other: その他
+      status:
+        waiting: "対応待ち"
+        keep: "保留"
+        finish: "対応済み"
   activerecord:
     errors:
       messages:

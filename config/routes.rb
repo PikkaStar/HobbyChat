@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'reports/index'
+    get 'reports/show'
+  end
   devise_for :admins,skip: [:registrations,:passwords],controllers: {
     sessions: "admin/sessions"
   }
@@ -14,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
+    resources :reports,only: [:index,:show,:update]
     resources :users, only: [:index, :show, :edit, :update] do
      member do
         get :follows, :followers
@@ -42,6 +47,7 @@ Rails.application.routes.draw do
           get :favorites
         end
         resource :relationships, only: [:create, :destroy]
+        resources :reports, only: [:new,:create]
         collection do
           patch :cancellation
         end
@@ -61,7 +67,6 @@ Rails.application.routes.draw do
       get "search"=>"searches#search",as: "search"
       get "search_tag"=>"posts#search_tag"
       get "search_genre"=>"groups#search_genre"
-      resources :reports, only: [:new,:create]
     end
 
 

@@ -1,15 +1,20 @@
-<div class="error-message text-center"></div>
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
       <div class="report-title text-center">
-        <h3>コメントの報告</h3>
+        <h3>通報</h3>
       </div>
-      <div class="d-flex justify-content-center">
-        <div class="text-left">
-          <%= render "report_form", report: @report %>
+
+      <%= form_with model: [@user,@report] do |f| %>
+        <div class="form-group">
+          <%= f.label :reason, "通報理由をご記入下さい" %>
+          <%= f.text_area :reason, rows: "3", class: "form-control" %>
+          <%= f.label :url, "該当URLがありましたら貼付ください" %>
+          <%= f.text_field :url, class: "form-control" %>
+          <%= f.submit "通報する", class: "btn btn-danger" %>
         </div>
-      </div>
+      <% end %>
+
     </div>
   </div>
 </div>

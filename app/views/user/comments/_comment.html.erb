@@ -21,6 +21,11 @@
       <% else %>
         <td></td>
       <% end %>
+      <td>
+        <div class="report-btn text-right ml-2" id="report-btn-<%= comment.id %>">
+        　<%= render "user/reports/report_btn", comment: comment %>
+        </div>
+      </td>
     </tr>
     <% end %>
   </table>
