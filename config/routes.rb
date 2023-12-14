@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'reports/index'
-    get 'reports/show'
-  end
   devise_for :admins,skip: [:registrations,:passwords],controllers: {
     sessions: "admin/sessions"
   }
@@ -67,6 +63,7 @@ Rails.application.routes.draw do
       get "search"=>"searches#search",as: "search"
       get "search_tag"=>"posts#search_tag"
       get "search_genre"=>"groups#search_genre"
+      resources :notifications, only: [:index,:destroy]
     end
 
 

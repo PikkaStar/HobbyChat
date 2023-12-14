@@ -1,4 +1,7 @@
 class Admin::GroupsController < ApplicationController
+  
+  before_action :authenticate_admin!
+  
   def index
     if params[:latest]
       @groups = Group.latest.page(params[:page]).per(15)

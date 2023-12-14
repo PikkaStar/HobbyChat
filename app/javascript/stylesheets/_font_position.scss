@@ -23,6 +23,14 @@
   color: red;
 }
 
+.favorited {
+  color: red;
+}
+
+.unfavorited {
+  color: blue;
+}
+
 .list-group-item.button01.favorited:hover{
   background-position: -100% 0;
   color: #fff;
@@ -51,6 +59,8 @@
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
 
 h2 {
   position: relative;
@@ -97,3 +107,4 @@ h2 span i {
   z-index: 1;
   color: #fff100;
 }
+
