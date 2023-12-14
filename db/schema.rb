@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_12_054652) do
+ActiveRecord::Schema.define(version: 2023_12_13_233925) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,20 @@ ActiveRecord::Schema.define(version: 2023_12_12_054652) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "subject_type"
+    t.integer "subject_id"
+    t.integer "user_id"
+    t.integer "action_type", null: false
+    t.boolean "checked", default: false, null: false
+    t.integer "visitor_id"
+    t.integer "visited_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_type", "subject_id"], name: "index_notifications_on_subject"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "permits", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "group_id", null: false
@@ -170,6 +184,7 @@ ActiveRecord::Schema.define(version: 2023_12_12_054652) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "notifications", "users"
   add_foreign_key "permits", "groups"
   add_foreign_key "permits", "users"
   add_foreign_key "tag_maps", "posts"

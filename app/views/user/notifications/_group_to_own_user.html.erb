@@ -1,0 +1,9 @@
+<%= link_to transition_path(notification) do %>
+  <div>
+    <%= link_to notification.subject.user.name,user_path(notification.subject.user) %>
+    から
+    <%= link_to notification.subject.group.name,group_path(notification.subject.group) %>
+    への加入申請が届きました
+    <%= "(#{time_ago_in_words(notification.created_at)}前)" %>
+  </div>
+<% end %>

@@ -1,8 +1,8 @@
 <% unless post.user_id == current_user.id %>
   <% if post.favorited_by?(current_user) %>
-  <%= link_to post_favorite_path(post.id),method: :delete,remote: true do %>♥<%= post.favorites.count %>いいね<% end %>
+  <%= link_to post_favorite_path(post.id),method: :delete,remote: true,class: "favorited" do %>♥<%= post.favorites.count %>いいね<% end %>
   <% else %>
-  <%= link_to post_favorite_path(post.id),method: :post,remote: true do %>♡<%= post.favorites.count %>いいね<% end %>
+  <%= link_to post_favorite_path(post.id),method: :post,remote: true,class: "unfavorited" do %>♡<%= post.favorites.count %>いいね<% end %>
   <% end %>
 <% else %>
 <div>

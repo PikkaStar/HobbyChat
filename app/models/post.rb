@@ -17,6 +17,8 @@ class Post < ApplicationRecord
   has_many :comments,dependent: :destroy
   has_many :tag_maps,dependent: :destroy
   has_many :tags,through: :tag_maps
+  # subject(ポリモーフィック)と1対1の関係を示す
+  has_one :notification, as: :subject, dependent: :destroy
 
   def get_image(width,height)
     if image.attached?

@@ -1,0 +1,11 @@
+<!--transition_pathはヘルパーで定義-->
+<%= link_to transition_path(notification) do %>
+  <div>
+    <%= link_to notification.subject.user.name, user_path(notification.subject.user) %>
+      があなたの
+    <%= link_to "投稿", post_path(notification.subject.post) %>
+      にいいねしました
+      <!--time_ago_in_wordsとは「3分前」みたいな表示をする場合に使う-->
+    <%= "(#{time_ago_in_words(notification.created_at)}前)" %>
+  </div>
+<% end %>

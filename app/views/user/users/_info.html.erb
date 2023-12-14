@@ -13,6 +13,9 @@
           <% end %>
         <% end %>
        <% end %>
+       <% if user.is_active == false %>
+         <button type="button" class="btn btn-outline-danger mt-3" disabled>退会済みユーザー</button>
+       <% end %>
     </td>
   </tr>
   <tr>

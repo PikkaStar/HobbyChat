@@ -2,7 +2,7 @@
   <% if admin_signed_in? %>
     <div class="ml-auto">
       <%= link_to "検索",admin_search_path,class: "btn btn-secondary mr-3" %>
-          <%= link_to "通報一覧",admin_reports_path,class: "btn btn-secondary mr-3" %>
+      <%= link_to "通報一覧",admin_reports_path,class: "btn btn-secondary mr-3" %>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           一覧
@@ -19,6 +19,14 @@
     </div>
   <% elsif user_signed_in? %>
     <div class="ml-auto">
+      <%= link_to notifications_path,class: "btn btn-secondary mr-3" do %>
+        <% if current_user.notifications.where(checked: false).exists? %>
+          <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+        <% else %>
+          <i class="fa-sharp fa-solid fa-bell"></i>
+        <% end %>
+          通知
+      <% end %>
       <%= link_to "検索",search_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "新規投稿",new_post_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "グループ作成",new_group_path,class: "btn btn-secondary mr-3" %>
