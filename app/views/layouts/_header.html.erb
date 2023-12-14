@@ -19,7 +19,8 @@
     </div>
   <% elsif user_signed_in? %>
     <div class="ml-auto">
-      <%= link_to notifications_path,class: "btn btn-secondary mr-3" do %>
+      <span><%= current_user.name %>でログインしています</span>
+      <%= link_to notifications_path,class: "btn btn-secondary ml-5 mr-3" do %>
         <% if current_user.notifications.where(checked: false).exists? %>
           <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
         <% else %>
@@ -27,10 +28,27 @@
         <% end %>
           通知
       <% end %>
-      <%= link_to "検索",search_path,class: "btn btn-secondary mr-3" %>
-      <%= link_to "新規投稿",new_post_path,class: "btn btn-secondary mr-3" %>
-      <%= link_to "グループ作成",new_group_path,class: "btn btn-secondary mr-3" %>
-      <%= link_to "マイページ",user_path(current_user),class: "btn btn-secondary mr-3" %>
+
+      <%= link_to search_path,class: "btn btn-secondary mr-3" do %>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        検索
+      <% end %>
+
+      <%= link_to user_path(current_user),class: "btn btn-secondary mr-3" do %>
+        <i class="fa-solid fa-user"></i>
+        マイページ
+      <% end %>
+
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          作成
+        </button>
+        <div class="dropdown-menu">
+          <%= link_to "新規投稿",new_post_path, class: "dropdown-item" %>
+          <%= link_to "グループ作成",new_group_path, class: "dropdown-item" %>
+        </div>
+      </div>
+
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           一覧
@@ -41,7 +59,11 @@
           <%= link_to "グループ一覧",groups_path,class: "dropdown-item" %>
         </div>
       </div>
-      <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
+
+      <%= link_to destroy_user_session_path,method: :delete,class: "btn btn-secondary mr-3" do %>
+        <i class="fa-solid fa-right-from-bracket"></i>
+        ログアウト
+      <% end %>
     </div>
   <% else %>
     <div class="ml-auto">

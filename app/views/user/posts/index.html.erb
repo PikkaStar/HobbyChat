@@ -18,7 +18,12 @@
         <% end %>
       <% end %>
 
-      <h2 class="text-center">みんなの投稿</h2>
+      <h2 class="text-center">
+        <i class="fa-solid fa-book-open"></i>
+        みんなの投稿
+        <i class="fa-solid fa-book-open"></i>
+      </h2>
+
       <p class="text-center">
         <%= link_to '新しい順', posts_path(latest: "true") %>
        |<%= link_to '古い順', posts_path(old: "true") %>

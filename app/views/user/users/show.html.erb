@@ -33,12 +33,18 @@
             <th></th>
             <th>グループ名</th>
             <th>マスター</th>
+            <th>人数</th>
           </tr>
           <% @groups.each do |group| %>
           <tr>
             <td><%= image_tag group.get_group_image(100,100) %></td>
             <td><%= link_to group.name, group_path(group.id) %></td>
             <td><%= link_to group.user.name,user_path(group.owner_id) %></td>
+            <td>
+              <%= link_to members_path(group.id) do %>
+                <%= group.users.count %>人
+              <% end %>
+            </td>
           </tr>
           <% end %>
         </table>

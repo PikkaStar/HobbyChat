@@ -23,7 +23,9 @@
     <td><%= user.name %></td>
   </tr>
   <tr>
-    <td>投稿数</td>
+    <td>
+      <i class="fa-solid fa-book-open"></i>投稿数
+    </td>
     <td>
       <div class="button02">
         <%= link_to every_path(user.id) do %>
@@ -33,7 +35,9 @@
     </td>
   </tr>
   <tr>
-    <td>いいね</td>
+    <td>
+      <i class="fa-solid fa-heart"></i>いいね
+    </td>
     <td>
       <div class="button02">
         <%= link_to favorites_user_path(user.id) do %>
@@ -43,7 +47,9 @@
     </td>
   </tr>
   <tr>
-    <td>フォロー</td>
+    <td>
+      <i class="fa-regular fa-thumbs-up"></i>フォロー
+    </td>
     <td>
       <div class="button02">
         <%= link_to follows_user_path(user) do %>
@@ -53,7 +59,9 @@
     </td>
   </tr>
   <tr>
-    <td>フォロワー</td>
+    <td>
+      <i class="fa-solid fa-thumbs-up"></i>フォロワー
+    </td>
     <td>
       <div class="button02">
         <%= link_to followers_user_path(user) do %>
