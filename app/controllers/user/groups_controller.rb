@@ -41,6 +41,7 @@ class User::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @genre_list = @group.genres.pluck(:genre_name).join(',')
     @group_genres = @group.genres
+    @pending_permits_count = @group.permits.where(rejected: false).count
   end
 
   def edit

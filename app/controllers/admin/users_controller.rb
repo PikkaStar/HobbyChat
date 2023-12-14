@@ -17,6 +17,7 @@ class Admin::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @groups = @user.groups
+    @report_count = Report.where(reported_id: @user.id).count
   end
 
   def edit

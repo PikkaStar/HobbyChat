@@ -17,7 +17,7 @@ def destroy
   flash[:alert] = "参加申請を取り消しました"
   redirect_to request.referer
 end
-
+# 参加申請を拒否する
 def rejected
   group = Group.find(params[:group_id])
   user = User.find(params[:user_id])
