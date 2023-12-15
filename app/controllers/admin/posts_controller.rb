@@ -19,6 +19,7 @@ class Admin::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @user = @post.user
+    @report_count = Report.where(reported_id: @user.id).count
   end
 
   def destroy

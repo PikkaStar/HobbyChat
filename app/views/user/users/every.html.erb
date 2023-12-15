@@ -7,14 +7,16 @@
        <% @posts.each do |post| %>
         <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
           <div class="mx-auto">
+            <%= image_tag post.get_image(200,200), style: "width: 150px; height: 100px;" %>
+          </div>
+
             <%= link_to post_path(post.id),class: "button01" do  %>
-              <%= image_tag post.get_image(200,200), style: "width: 150px; height: 100px;" %>
-            </div>
             <div class="card-body">
-              <h5 class="card-title"><%= post.title %></h5>
+              <h5 class="card-title"><%= truncate(post.title, length: 5, omission: '..') %></h5>
               <p class="card-text"><%= truncate(post.body, length: 9, omission: '...') %></p>
             </div>
             <% end %>
+
           <ul class="list-group list-group-flush">
 
               <span id="favorite_btn<%= post.id %>">

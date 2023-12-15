@@ -4,16 +4,16 @@
       <div class="text-center">
           <%= form_with url: admin_search_path,method: :get do |f| %>
             <%= f.select :range,options_for_select([["ユーザー"],["投稿"],["グループ"]]) %>
-            <%= f.text_field :word,placeholder: "検索ワード" %>を含む
+            <%= f.text_field :word,placeholder: "検索ワード" %>
             <%= f.hidden_field :search,value: "partial_match" %>
             <%= button_tag type: :submit, class: "btn btn-outline-primary" do %>
               <i class="fa-solid fa-magnifying-glass"></i>
             <% end %>
           <% end %>
       </div>
-      <h3>検索ワード:<%= @word %></h3>
 
       <% if @range == "ユーザー" %>
+        <h3><%= @word %>を含むユーザー</h3>
         <div class="d-flex flex-wrap">
          <% @users.each do |user| %>
            <% unless user.email == "guest@example.com" %>
@@ -25,7 +25,7 @@
             <%= link_to admin_user_path(user.id),class: "button01" do  %>
             <div class="card-body">
               <h5 class="card-title"><%= truncate(user.name,length: 5, omission: '') %></h5>
-              <p class="card-text"><%= truncate(user.introduction, length: 9, omission: '...') %></p>
+              <p class="card-text"><%= truncate(user.introduction, length: 7, omission: '...') %></p>
             </div>
              <% end %>
             <ul class="list-group list-group-flush">
@@ -54,6 +54,7 @@
       </div>
 
       <% elsif @range == "投稿" %>
+        <h3><%= @word %>を含む投稿</h3>
         <div class="d-flex flex-wrap">
          <% @posts.each do |post| %>
           <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
@@ -89,6 +90,7 @@
           <% end %>
         </div>
         <% else %>
+          <h3><%= @word %>を含むグループ</h3>
           <div class="d-flex flex-wrap">
            <% @groups.each do |group| %>
             <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
