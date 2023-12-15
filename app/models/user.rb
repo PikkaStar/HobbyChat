@@ -49,24 +49,24 @@ class User < ApplicationRecord
        end
      end
 
-       def follow(user_id)
-         followers.create(followed_id: user_id)
-       end
+     def follow(user_id)
+       followers.create(followed_id: user_id)
+     end
 
-       def unfollow(user_id)
-         followers.find_by(followed_id: user_id).destroy
-       end
+     def unfollow(user_id)
+       followers.find_by(followed_id: user_id).destroy
+     end
 
-       def following?(user)
-         following_users.include?(user)
-       end
+     def following?(user)
+       following_users.include?(user)
+     end
 
-       def self.looks(search,word)
-         if search == "partial_match"
-          @user = User.where("name LIKE?","%#{word}%")
-         else
-          @user = User.all
-         end
+     def self.looks(search,word)
+       if search == "partial_match"
+        @user = User.where("name LIKE?","%#{word}%")
+       else
+        @user = User.all
        end
+     end
 
 end

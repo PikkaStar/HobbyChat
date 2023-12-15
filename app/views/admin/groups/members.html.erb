@@ -42,7 +42,7 @@
               <%= link_to admin_user_path(member.id),class: "button01" do  %>
               <div class="card-body">
                 <h5 class="card-title"><%= truncate(member.name,length: 5, omission: '') %></h5>
-                <p class="card-text"><%= truncate(member.introduction, length: 9, omission: '...') %></p>
+                <p class="card-text"><%= truncate(member.introduction, length: 7, omission: '...') %></p>
               </div>
                <% end %>
               <ul class="list-group list-group-flush">

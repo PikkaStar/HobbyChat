@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-6 mx-auto">
 
       <% @genre_list.each do |genre| %>
         <% if genre.group_genres.count > 0 %>
@@ -19,7 +19,11 @@
         グループ一覧
         <i class="fa-solid fa-users"></i>
       </h2>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-12">
       <p class="text-center">
         <%= link_to '新しい順', groups_path(latest: "true") %>
        |<%= link_to '古い順', groups_path(old: "true") %>

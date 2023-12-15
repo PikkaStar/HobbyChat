@@ -18,7 +18,7 @@
     </div>
     </div>
   <% elsif user_signed_in? %>
-    <div class="ml-auto">
+    <div class="ml-auto" style="position: relative; z-index: 1000;">
       <span><%= current_user.name %>でログインしています</span>
       <%= link_to notifications_path,class: "btn btn-secondary ml-5 mr-3" do %>
         <% if current_user.notifications.where(checked: false).exists? %>
@@ -43,7 +43,7 @@
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           作成
         </button>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu z-3 position-absolute">
           <%= link_to "新規投稿",new_post_path, class: "dropdown-item" %>
           <%= link_to "グループ作成",new_group_path, class: "dropdown-item" %>
         </div>
