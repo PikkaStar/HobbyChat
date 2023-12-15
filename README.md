@@ -23,6 +23,7 @@
 ## 設計書
 ![ER図 drawio (4)](https://github.com/PikkaStar/HobbyChat/assets/143864403/02dfb3ee-b6f0-4fc2-b506-b1d60a8e613d)
 テーブル定義書　(https://docs.google.com/spreadsheets/d/1z63cXJqKXyDRIroGPEmIEB2NpaG6ozQk/edit#gid=136342688)
+
 アプリケーション詳細設計　https://docs.google.com/spreadsheets/d/1juDiYsI3MwgVvAGRwq2YMh7HGf1odBU2NC2Q_mWywhs/edit#gid=549108681
 ​
 ## 開発環境
