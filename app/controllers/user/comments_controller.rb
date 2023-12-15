@@ -7,6 +7,7 @@ class User::CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
     if @comment.save
+      # コメント送信後、コメントが表示されなくなったので↓の記述を追加
     @comments = @post.comments.page(params[:page]).per(10)
     else
     @user = @post.user
@@ -14,6 +15,7 @@ class User::CommentsController < ApplicationController
     end
   end
 
+  # 投稿に紐づいたコメント一覧
   def index
     @post = Post.find(params[:post_id])
     @comment = Comment.new
@@ -26,7 +28,7 @@ class User::CommentsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
-    @comments = @post.comments.page(params[:page]).per(5)
+    @comments = @post.comments.page(params[:page]).per(10)
     @comment = @post.comments.find(params[:id])
     @comment.destroy
   end

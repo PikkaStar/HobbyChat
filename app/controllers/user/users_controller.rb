@@ -3,6 +3,7 @@ class User::UsersController < ApplicationController
   before_action :match_user,only: [:edit,:update]
   before_action :guest_user,only: [:edit,:update,:cancellation]
 
+  # ソートで表示するための処理
   def index
     @user = current_user
     if params[:follows_count]
@@ -16,6 +17,7 @@ class User::UsersController < ApplicationController
     end
   end
 
+  # ユーザーが投稿した一覧
   def every
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(10)
@@ -48,6 +50,7 @@ class User::UsersController < ApplicationController
     @posts = Post.where(id: favorites).page(params[:page]).per(15)
   end
 
+  # 退会処理
   def cancellation
     @user = current_user
     @user.update(is_active: false)
@@ -56,11 +59,13 @@ class User::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  # フォロー一覧
   def follows
     @user = User.find(params[:id])
     @users = @user.following_users.page(params[:page]).per(5)
   end
 
+  # フォロワー一覧
   def followers
     @user = User.find(params[:id])
     @users = @user.follower_users.page(params[:page]).per(5)

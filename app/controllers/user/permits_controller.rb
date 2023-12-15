@@ -2,6 +2,7 @@ class User::PermitsController < ApplicationController
   before_action :authenticate_user!
   before_action :guest_user,only: [:create,:destroy,:rejected]
 
+# グループ参加申請を送る処理
 def create
   @group = Group.find(params[:group_id])
   permit = current_user.permits.new(group_id: @group.id)
@@ -10,6 +11,7 @@ def create
   redirect_to request.referer
 end
 
+# グループ参加申請を取消す処理
 def destroy
   group = Group.find(params[:group_id])
   permit = current_user.permits.find_by(group_id: group.id)
@@ -17,7 +19,7 @@ def destroy
   flash[:alert] = "参加申請を取り消しました"
   redirect_to request.referer
 end
-# 参加申請を拒否する処理
+# 参加申請を(グループマスターが)拒否する処理
 def rejected
   group = Group.find(params[:group_id])
   user = User.find(params[:user_id])

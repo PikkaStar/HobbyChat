@@ -26,7 +26,8 @@ class Admin::GroupsController < ApplicationController
     flash[:notice] = "グループを削除しました"
     redirect_to admin_groups_path
   end
-
+  
+  # グループ加入者一覧表示
   def members
     @group = Group.find(params[:id])
     @members = @group.users.page(params[:page]).per(15)
