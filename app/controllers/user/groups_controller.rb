@@ -8,11 +8,15 @@ class User::GroupsController < ApplicationController
     @group = Group.new
   end
 
+  # グループを新規作成
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     @group.user_id = current_user.id
+    # グループ作成時、作成者をグループに加入させる処理を記述
+    # 配列の末尾に追加
     @group.users << current_user
+    # genre名登録
     genre_list = params[:group][:genre_name].split(',')
     if @group.save
       @group.save_genres(genre_list)
@@ -25,6 +29,7 @@ class User::GroupsController < ApplicationController
   end
 
   def index
+    # ソートで表示するための記述
     if params[:latest]
       @groups = Group.latest.page(params[:page]).per(15)
     elsif params[:old]
@@ -60,6 +65,7 @@ class User::GroupsController < ApplicationController
     end
   end
 
+  # 存在するジャンルを全表示し、クリックするとそのジャンルがついたグループ一覧が表示される
   def search_genre
     @genre_list = Genre.all
     @genre = Genre.find(params[:genre_id])
@@ -73,11 +79,13 @@ class User::GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  # グループに所属してるユーザー一覧
   def members
     @group = Group.find(params[:id])
     @members = @group.users.page(params[:page]).per(15)
   end
 
+  # 承認待ち画面でrefectedの値がfalse(承認待ち)のユーザーを一覧表示
   def permits
     @group = Group.find(params[:id])
     @users = @group.permited_users.includes(:permits).where(permits: {rejected: false}).page(params[:page])

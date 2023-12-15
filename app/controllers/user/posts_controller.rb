@@ -10,6 +10,7 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    # タグを新規登録
     tag_list = params[:post][:name].split(',')
     if @post.save
        @post.save_tags(tag_list)
@@ -21,6 +22,7 @@ class User::PostsController < ApplicationController
     end
   end
 
+  # ソートでの表示処理
   def index
     if params[:latest]
       @posts = Post.latest.page(params[:page]).per(10)
@@ -43,6 +45,7 @@ class User::PostsController < ApplicationController
     @post_tags = @post.tags
     @user = @post.user
     @comment = Comment.new
+    # 最後に登録されたコメントを取得
     @comments = @post.comments.last
   end
 
@@ -70,7 +73,8 @@ class User::PostsController < ApplicationController
     flash[:notice] = "削除しました"
     redirect_to user_path(current_user)
   end
-
+  
+  # 存在するタグを表示し、クリックするとそのタグが付いた投稿一覧が表示される
   def search_tag
     @tag_list = Tag.all
     @tag = Tag.find(params[:tag_id])

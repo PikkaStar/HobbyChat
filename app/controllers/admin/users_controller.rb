@@ -34,12 +34,14 @@ class Admin::UsersController < ApplicationController
       render :edit
     end
   end
-
+  
+  # ユーザーが投稿した一覧の表示
   def every
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(10)
   end
-
+  
+  # ユーザーがいいねした投稿表示
   def favorites
     @user = User.find(params[:id])
     # Favoriteテーブルから特定のユーザーがいいねした投稿データを全て取得
@@ -47,12 +49,14 @@ class Admin::UsersController < ApplicationController
     # Post.find(favorites)で取得するデータは配列のためページネーションが使えない
     @posts = Post.where(id: favorites).page(params[:page]).per(15)
   end
-
+  
+  # ユーザーがフォローしたユーザー一覧
   def follows
     @user = User.find(params[:id])
     @users = @user.following_users.page(params[:page]).per(5)
   end
-
+  
+  # ユーザーをフォローしてくれてる人一覧
   def followers
     @user = User.find(params[:id])
     @users = @user.follower_users.page(params[:page]).per(5)

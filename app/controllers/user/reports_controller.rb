@@ -1,7 +1,8 @@
 class User::ReportsController < ApplicationController
 
   before_action :authenticate_user!
-
+  
+  # 通報を新規作成
   def new
     @report = Report.new
     @user = User.find(params[:user_id])
