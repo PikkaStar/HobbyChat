@@ -24,6 +24,10 @@
         <% end %>
       <% end %>
 
+      <% if @group.users.include?(current_user) %>
+        <%= link_to "グループチャット",group_rooms_path(@group),class: "btn btn-info" %>
+      <% end %>
+
       <% if @group.owner_id == current_user.id %>
         <div class="dropdown">
           <button class="btn btn-sm btn-secondary dropdown-toggle"

@@ -5,6 +5,7 @@
       <h3><%= @group.name %></h3>
     </div>
     <div class="col-5 mt-5">
+      <%= link_to "グループチャット",admin_group_rooms_path(@group),class: "btn btn-info" %>
       <%= link_to "削除",admin_group_path(@group),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
     </div>
   </div>
