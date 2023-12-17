@@ -2,8 +2,8 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   validates :title,presence: true
-  validates :body,presence: true,length: {maximum: 300}
-
+  validates :body,presence: true,length: {maximum: 200}
+  # ソート
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
   scope :favorite_count, -> {Post.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}}
