@@ -24,7 +24,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :destroy] do
       resources :comments,only: [:index,:destroy]
     end
-    resources :groups,only: [:index,:show,:destroy]
+    resources :groups,only: [:index,:show,:destroy] do
+      resource :rooms,only: [:show]
+      resources :messages,only: [:destroy]
+    end
     get "members/:id"=>"groups#members",as: "members"
     get "every/:id"=>"users#every",as: "every"
     get "search"=>"searches#search",as: "search"
@@ -52,6 +55,8 @@ Rails.application.routes.draw do
     get "every/:id"=>"users#every",as: "every"
     resources :groups do
       resources :group_users,only: [:create,:destroy]
+      resource :rooms,only: [:show]
+      resources :messages,only: [:create,:destroy]
       resources :permits,only: [:create,:destroy] do
         collection do
           patch :rejected

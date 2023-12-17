@@ -7,6 +7,8 @@ class Group < ApplicationRecord
 
   has_many :group_genres,dependent: :destroy
   has_many :genres,through: :group_genres
+  has_many :messages,dependent: :destroy
+  has_one :room
   belongs_to :user
 
   has_one_attached :group_image
@@ -60,3 +62,40 @@ class Group < ApplicationRecord
   end
 
 end
+
+# create_table :messages do |t|
+#   t.text :message
+#   t.references :user, foreign_key: true
+#   t.references :group, foreign_key: true
+#   t.timestamps
+# end
+
+# messageをみればどのユーザーのメッセージか、どのグループのメッセージか
+# ルームはグループのidを持つ？
+# ルーム(チャット)テーブルを作る
+
+# create_table :rooms do |t|
+#   t.references :group, foreign_key: true
+#   t.timestamps
+# end
+
+# Room
+
+#belongs_to :group
+
+# Group
+#has_one :room
+
+# roomコントローラーでindexアクションを作って必要な情報
+# index.html.erbに記述
+
+# どのグループの会話なのかを判断するためroomsコントローラーのindexアクションに記述
+# messageのcreateはmessageコントローラー、
+
+# rooms_controller.rb
+
+# def index
+#   @messages = Message.where(gropu_id: params[:group_id])
+# end
+
+# link_to rooms_path(group_id: group.id)

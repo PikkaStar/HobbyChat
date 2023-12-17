@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_13_233925) do
+ActiveRecord::Schema.define(version: 2023_12_17_103839) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -102,6 +102,16 @@ ActiveRecord::Schema.define(version: 2023_12_13_233925) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "message", null: false
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_messages_on_group_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.string "subject_type"
     t.integer "subject_id"
@@ -152,6 +162,13 @@ ActiveRecord::Schema.define(version: 2023_12_13_233925) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_rooms_on_group_id"
+  end
+
   create_table "tag_maps", force: :cascade do |t|
     t.integer "post_id"
     t.integer "tag_id"
@@ -184,9 +201,12 @@ ActiveRecord::Schema.define(version: 2023_12_13_233925) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "messages", "groups"
+  add_foreign_key "messages", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "permits", "groups"
   add_foreign_key "permits", "users"
+  add_foreign_key "rooms", "groups"
   add_foreign_key "tag_maps", "posts"
   add_foreign_key "tag_maps", "tags"
 end

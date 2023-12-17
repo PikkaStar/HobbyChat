@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <h3><%= @group.name %>のチャットルーム</h3>
+
+        <%= form_with model: @message,url: group_messages_path(@group),method: :post do |f| %>
+          <%= f.text_area :message,placeholder: "メッセージを入力",class: "form-control" %>
+          <%= f.submit "送信",class: "btn btn-primary" %>
+        <% end %>
+
+    </div>
+  </div>
+  <div class="d-flex flex-column">
+    <div class="row justify-content-between position-relative">
+      <% @messages.reverse.each do |message| %>
+        <% if message.user_id == current_user.id %>
+          <div class="col-10 text-left mt-3" style="border-bottom: 1px solid #000000;">
+            <%= link_to message.user.name,user_path(message.user_id) %>
+            <%= image_tag message.user.get_profile_image(100,100) %>
+            <span class="message-container hukidashi1">
+                <%= message.message %>
+            </span>
+            <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+          </div>
+        <% else %>
+          <div class="col-10 text-right mt-3" style="border-bottom: 1px solid #000000;">
+            <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+            <span class="message-container hukidashi2">
+                <%= message.message %>
+            </span>
+            <%= image_tag message.user.get_profile_image(100,100) %>
+            <%= link_to message.user.name,user_path(message.user_id) %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= paginate @messages %>
+</div>
