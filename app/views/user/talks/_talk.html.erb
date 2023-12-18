@@ -1,0 +1,22 @@
+<% talks.reverse.each do |talk| %>
+  <% if talk.user_id == current_user.id %>
+    <div class="col-10 text-left mt-3" style="border-bottom: 1px solid #000000;">
+      <%= link_to talk.user.name,user_path(talk.user_id) %>
+      <%= image_tag talk.user.get_profile_image(100,100) %>
+      <span class="message-container hukidashi1">
+          <%= talk.message %>
+      </span>
+      <%= talk.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+    </div>
+  <% else %>
+    <div class="col-10 text-right mt-3" style="border-bottom: 1px solid #000000;">
+      <%= talk.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+      <span class="message-container hukidashi2">
+          <%= talk.message %>
+      </span>
+      <%= image_tag talk.user.get_profile_image(100,100) %>
+      <%= link_to talk.user.name,user_path(talk.user_id) %>
+    </div>
+  <% end %>
+<% end %>
+<%= paginate talks %>

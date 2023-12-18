@@ -11,9 +11,19 @@
    <% unless @user == current_user %>
       <div class="btn-group">
         <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          通報
+          機能
         </button>
         <div class="dropdown-menu">
+          <% if @isArea == true %>
+            <%= link_to "チャットする",area_path(@areaId), class: "dropdown-item" %>
+          <% else %>
+            <%= form_for @area do |f| %>
+              <%= fields_for @entry do |e| %>
+                <%= e.hidden_field :user_id, value: @user.id %>
+              <% end %>
+              <%= f.submit "チャットする",class: "dropdown-item" %>
+            <% end %>
+          <% end %>
           <%= link_to "通報する", new_user_report_path(@user),"data-confirm"=>"通報ページに飛びます", class: "dropdown-item" %>
         </div>
       </div>

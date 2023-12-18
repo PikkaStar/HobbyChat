@@ -25,6 +25,22 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @currentUserEntry.each do |cu|
+        @userEntry.each do |u|
+          if cu.area_id == u.area_id
+            @isArea = true
+            @areaId = cu.area_id
+          end
+        end
+      end
+      unless @isArea
+        @area = Area.new
+        @entry = Entry.new
+      end
+    end
     @posts = @user.posts.page(params[:page]).per(10)
     @groups = @user.groups
   end

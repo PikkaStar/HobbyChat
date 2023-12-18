@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <%= link_to "一覧に戻る",users_path,class: "btn btn-secondary" %>
+      <h3>チャットルーム</h3>
+
+        <%= form_for [@area,@talk],remote: true do |f| %>
+          <%= f.text_area :message,placeholder: "メッセージを入力",id: "textarea",class: "form-control" %>
+          <%= f.hidden_field :area_id, value: @area.id %>
+          <%= f.submit "送信",class: "btn btn-primary" %>
+        <% end %>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div id="message">
+        <%= render "user/talks/talk",talks: @talks %>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
