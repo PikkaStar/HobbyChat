@@ -69,6 +69,9 @@ Rails.application.routes.draw do
     get "search_tag"=>"posts#search_tag"
     get "search_genre"=>"groups#search_genre"
     resources :notifications, only: [:index,:destroy]
+    resources :areas,only: [:create,:show] do
+      resources :talks,only: [:create]
+    end
   end
 
 

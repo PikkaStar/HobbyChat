@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_17_103839) do
+ActiveRecord::Schema.define(version: 2023_12_18_022510) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,12 +52,28 @@ ActiveRecord::Schema.define(version: 2023_12_17_103839) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "areas", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_areas_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
     t.string "comment", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "area_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_entries_on_area_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -182,6 +198,16 @@ ActiveRecord::Schema.define(version: 2023_12_17_103839) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "talks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "area_id"
+    t.string "message", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_talks_on_area_id"
+    t.index ["user_id"], name: "index_talks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

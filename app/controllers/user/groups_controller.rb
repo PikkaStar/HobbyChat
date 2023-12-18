@@ -20,10 +20,10 @@ class User::GroupsController < ApplicationController
     genre_list = params[:group][:genre_name].split(',')
     if @group.save
       @group.save_genres(genre_list)
-      flash[:notice] = "グループを作成しました"
+      flash.now[:notice] = "グループを作成しました"
       redirect_to group_path(@group)
     else
-      flash[:alert] = "新規登録に失敗しました"
+      flash.now[:alert] = "新規登録に失敗しました"
       render :new
     end
   end
