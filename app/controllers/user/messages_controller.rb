@@ -7,11 +7,14 @@ class User::MessagesController < ApplicationController
      @group = Group.find(params[:group_id])
      @message.group_id = @group.id
      @message.save
-     redirect_to request.referer
+     @messages = @group.messages.page(params[:page]).per(20)
    end
 
    def destroy
-
+    @message = Message.find(params[:id])
+    @message.destroy
+    @group = Group.find(params[:group_id])
+    @messages = @group.messages.page(params[:page]).per(20)
    end
 
 

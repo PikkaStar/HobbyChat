@@ -1,0 +1,27 @@
+
+<div class="row justify-content-center">
+<% messages.reverse.each do |message| %>
+  <% if message.user_id == current_user.id %>
+    <div class="col-10 text-left mt-3" style="border-bottom: 1px solid #000000;">
+      <%= link_to message.user.name,user_path(message.user_id) %>
+      <%= image_tag message.user.get_profile_image(100,100) %>
+      <span class="message-container hukidashi1">
+          <%= message.message %>
+      </span>
+      <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+      <% if message.user_id == current_user.id %>
+        <%= link_to "削除",group_message_path(@group,message),remote: true,method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="col-10 text-right mt-3" style="border-bottom: 1px solid #000000;">
+      <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+      <span class="message-container hukidashi2">
+          <%= message.message %>
+      </span>
+      <%= image_tag message.user.get_profile_image(100,100) %>
+      <%= link_to message.user.name,user_path(message.user_id) %>
+    </div>
+  <% end %>
+<% end %>
+</div>
