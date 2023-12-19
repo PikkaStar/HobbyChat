@@ -60,6 +60,40 @@
     )
     end
   end
-
-
 end
+    # owner = User.find(rand(1..10))
+    # group = Group.create!(
+    # name: "テストグループ",
+    # introduction: "テスト",
+    # owner_id: owner.id,
+    # user: owner
+    # )
+    # # オーナーをグループに入れる
+    # GroupUser.create!(group: group,user: owner)
+    # # オーナー以外をランダムに入れる
+    # rand(1..3).times do |i|
+    #   GroupUser.create!(group: group,user: User.find(i + 1))
+    #   end
+    # グループ作成
+  3.times do
+    owner = User.find(rand(1..10))
+    group = Group.create!(
+      name: "テストグループ",
+      introduction: "テスト",
+      owner_id: owner.id,
+      user: owner
+    )
+
+    # グループに加入するユーザーの数をランダムに決定
+    num_users_to_join = rand(1..5)
+
+    # オーナーをグループに加入
+    GroupUser.create!(group: group, user: owner)
+
+    # オーナー以外のユーザーをランダムにグループに加入
+    (1..num_users_to_join).each do |i|
+      GroupUser.create!(group: group, user: User.find(i + 1))
+    end
+  end
+
+
