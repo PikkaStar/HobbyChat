@@ -1,7 +1,8 @@
 class User::ReportsController < ApplicationController
 
   before_action :authenticate_user!
-  
+  before_action :guest_user,only: [:create,:new]
+
   # 通報を新規作成
   def new
     @report = Report.new
@@ -26,6 +27,14 @@ class User::ReportsController < ApplicationController
 
   def report_params
     params.require(:report).permit(:reason,:url)
+  end
+
+  def guest_user
+    user = current_user
+    if user.email == "guest@example.com"
+      flash[:alert] = "ゲストの方は行えません"
+      redirect_to posts_path
+    end
   end
 
 

@@ -12,5 +12,4 @@ class User::TalksController < ApplicationController
     @talks = @area.talks.page(params[:page]).per(20)
   end
 
-
 end

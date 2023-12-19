@@ -10,3 +10,56 @@
     email: "admin@admin.com",
     password: "123456"
   )
+
+  10.times do |n|
+  user = User.create!(
+    name: "試験#{n + 1}",
+    email: "test#{n + 1}@test.com",
+    password: "100100",
+    introduction: "テストユーザー#{n + 1}です"
+  )
+
+  # ユーザーがランダムな件数のpostを作成し、その中からランダムな件数にfavoriteをつける
+  rand(1..3).times do
+    post = user.posts.create!(
+      title: "テストタイトル#{n + 1}",
+      body: "テスト内容#{n + 1}"
+    )
+  end
+
+  users = User.all
+  posts = Post.all
+
+  users.each do |user|
+  favorite_posts = posts.sample(rand(1..5))
+  favorite_posts.each do |post|
+    Favorite.find_or_create_by!(
+      user_id: user.id,
+      post_id: post.id
+    )
+    end
+  end
+
+  users.each do |user|
+    comment_posts = posts.sample(rand(1..5))
+    comment_posts.each do |post|
+      Comment.find_or_create_by!(
+        user_id: user.id,
+        post_id: post.id,
+        comment: "テストコメント#{n + 1}"
+        )
+    end
+  end
+
+  users.each do |user|
+  following_users = users - [user]
+  following_users.shuffle.take(rand(1..4)).each do |following_user|
+    Relationship.find_or_create_by!(
+      follower_id: user.id,
+      followed_id: following_user.id
+    )
+    end
+  end
+
+
+end
