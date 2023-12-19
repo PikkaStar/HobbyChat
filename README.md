@@ -21,7 +21,7 @@
 - 何か趣味を見つけたい時
 ​
 ## 設計書
-![ER図 drawio (5)](https://github.com/PikkaStar/HobbyChat/assets/143864403/e17c0483-600c-4c88-a7ad-3b1752d032f4)
+![ER図 drawio (6)](https://github.com/PikkaStar/HobbyChat/assets/143864403/e17dbbe5-167c-499c-8153-68c5ac591cc8)
 
 テーブル定義書　(https://docs.google.com/spreadsheets/d/1z63cXJqKXyDRIroGPEmIEB2NpaG6ozQk/edit#gid=136342688)
 
