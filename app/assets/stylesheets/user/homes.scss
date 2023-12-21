@@ -1,3 +1,206 @@
 // Place all the styles related to the user/homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.background{
+  background-color: gray;
+  width: 40vw;
+  height: auto;
+  margin: auto;
+}
+.images{
+  width: 30vw;
+  height: auto;
+  padding: 30px;
+  margin: auto;
+  background-color: lightblue;
+}
+.images img{
+  width: 50%;
+  height: auto;
+}
+
+
+// Zenn
+// .slideshow-container {
+//   overflow: hidden;
+//   position: relative;
+// }
+
+// .slide {
+// 　object-fit: contain;
+//   position: absolute;
+// }
+
+// .slide img {
+//   width: inherit;
+//   height: inherit;
+//   margin: 0;
+//   padding: 0;
+//   border: none;
+// }
+
+// .slide.fade:first-child {
+//   opacity: 1;
+// }
+
+// .backimage .text {
+//   position: absolute;
+//   top: 50%;
+//   left: 60%;
+//   transform: translate(-50%, -50%);
+//   text-align: center;
+// }
+
+// .backimage .text .guidance {
+//   font-size: 18px;
+//   color: #fff;
+//   background-color: rgba(255, 192, 203, 0.7);
+//   padding: 20px;
+//   border-radius: 10px;
+// }
+
+
+// Zennのサイト
+// .slideshow-container {
+//   width: 100%;
+//   height: 800px;
+//   overflow: hidden;
+//   position: relative;
+// }
+
+// .slide {
+//   width: 100%;
+//   height: 800px;
+// 　object-fit: contain;
+//   position: absolute;
+// }
+
+// .slide img {
+//   width: inherit;
+//   height: inherit;
+//   margin: 0;
+//   padding: 0;
+//   border: none;
+// }
+
+// .slide.fade:first-child {
+//   opacity: 1;
+// }
+
+// .backimage .text {
+//   position: absolute;
+//   top: 50%;
+//   left: 60%;
+//   transform: translate(-50%, -50%);
+//   text-align: center;
+// }
+
+// .backimage .text .guidance {
+//   font-size: 18px;
+//   color: #fff;
+//   background-color: rgba(255, 192, 203, 0.7);
+//   padding: 20px;
+//   border-radius: 10px;
+// }
+
+
+// AIの答え
+/* 新着商品スライドショー */
+// .slider {
+//   width: 94%;
+//   margin: 0 auto; /* スライドショーを水平方向に中央に配置 */
+// }
+
+// .slider img {
+//   width: 300px;
+//   height: 200px;
+// }
+
+// .slider .slick-slide {
+//   transform: scale(0.8); /* スライドを0.8倍に縮小 */
+//   transition: all 0.5s; /* スライドの切り替えアニメーション。0.5秒に指定。 */
+//   opacity: 0.5; /* スライドの透明度を0.5に設定 */
+// }
+
+// .slider .slick-slide.slick-center {
+//   transform: scale(1);　/* 中央にきたメインスライドが通常サイズに拡大 */
+//   opacity: 1; /* スライドの透明度を1に設定し透明じゃなくする */
+// }
+
+
+// /* 新着商品リスト装飾 */
+// /* 各スライドの背景色を設定し、余白と角丸を追加して装飾する */
+// .slider li {
+//   background-color: #FFE3E1;
+//   padding: 10px; /* スライドの内側の余白を追加 */
+//   border-radius: 10px; /* スライドの角を丸くします */
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* スライドに影を追加して立体感を出す */
+//   text-align: center; /* スライド内のテキストを中央揃えにします */
+// }
+
+// /* 各スライド内の段落要素（<p>タグ）の上下の余白を追加 */
+// .slider li p {
+//   margin: 5px 0;
+// }
+
+// /* スライド内の見出し（<p class="caption">タグ）のスタイルを設定 */
+// .slider li p.caption {
+//   font-family: 'Sawarabi Mincho', sans-serif;
+//   font-size: 16px;
+//   color: #FF1493;
+//   font-weight: bold;
+// }
+
+// /* 前へボタンと次へボタンのスタイルを設定 */
+// .slick-prev,
+// .slick-next {
+//   position: absolute; /* ボタンをスライド内に絶対位置で配置 */
+//   top: 42%; /* ボタンを垂直方向に中央に配置 */
+//   cursor: pointer; /* マウスカーソルをポインターに変更 */
+//   outline: none; /* ボタンにフォーカスしたときの枠を非表示にする */
+//   border-top: 2px solid #666;
+//   border-right: 2px solid #666;
+//   height: 15px;
+//   width: 15px;
+// }
+
+// /* 前へボタンのスタイルを設定 */
+// .slick-prev {
+//   left: -1.5%; /* ボタンを水平方向にスライドの外側に配置 */
+//   transform: rotate(-135deg); /* ボタンを反時計回りに45度回転させて矢印の形状にする */
+// }
+
+// /* 次へボタンのスタイルを設定 */
+// .slick-next {
+//   right: -1.5%; /* ボタンを水平方向にスライドの外側に配置 */
+//   transform: rotate(45deg); /* ボタンを時計回りに45度回転させて矢印の形状にする */
+// }
+
+// /* スライドの下部に表示されるドット（ページネーション）のスタイルを設定 */
+// .slick-dots {
+//   text-align: center;
+//   margin: 20px 0 0 0;
+// }
+
+// /* ドットのリスト項目のスタイルを設定 */
+// .slick-dots li {
+//   display: inline-block;
+//   margin: 0 5px;
+// }
+
+// /* ドット（ボタン）のスタイルを設定 */
+// .slick-dots button {
+//   color: transparent; /* ドットのテキストを透明にして非表示にする */
+//   width: 12px;
+//   height: 12px;
+//   display: block;
+//   border-radius: 50%;
+//   background: #FFC0CB; /* ドットの背景色を薄いピンクに設定 */
+//   border: none;
+// }
+
+// /* アクティブなドットのスタイルを設定 */
+// .slick-dots .slick-active button {
+//   background: #FF1493; /* アクティブなドットの背景色を濃いピンクに設定 */
+// }

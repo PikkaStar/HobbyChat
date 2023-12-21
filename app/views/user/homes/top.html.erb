@@ -2,27 +2,49 @@
   <%= flash[:alert] %>
 </div>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-4"></div>
 
-    <div class="col-4 mx-auto text-center">
-      <div class="title">HobbyChat</div>
-      <div class="text-center">
-      <p>あなたの趣味や出来事を共有しませんか？</p>
-      <p>見ることが楽しいという方も是非!</p>
+  <div class="col-4 mt-5 mx-auto text-center">
+    <div class="background">
+      <div class="images">
+        <%= image_tag "キャンプ.jpg" %>
+        <%= image_tag "ゲーム.jpg" %>
+        <%= image_tag "ゴルフ.jpg" %>
+        <%= image_tag "サッカー.jpg" %>
       </div>
-      <p>↓新規登録はこちら↓
-      <%= link_to "新規登録",new_user_registration_path,class: "btn btn-primary form-control" %>
-      </p>
-      <p>↓ログインはこちら↓
-      <%= link_to "ログイン",new_user_session_path,class: "btn btn-success form-control" %>
-      </p>
-      <p>↓ゲストログインはこちら↓<br>
-      (一部機能が制限されます)
-      <%= link_to "ゲストログイン",users_guest_sign_in_path,method: :post,class: "btn btn-secondary form-control" %>
-      </p>
     </div>
-    <div class="col-4"></div>
   </div>
-</div>
+
+  <div class="col-4 mt-5 mx-auto text-center">
+    <h5 class="text-center">
+      <p>
+        <i class="fa-solid fa-campground"></i>
+        趣味や出来事の共有サイト
+        <i class="fa-solid fa-campground"></i>
+      </p>
+      <p>見ることが楽しいという方も是非!</p>
+    </h5>
+    <p>↓新規登録はこちら↓
+    <%= link_to "新規登録",new_user_registration_path,class: "btn btn-primary form-control" %>
+    </p>
+    <p>↓ログインはこちら↓
+    <%= link_to "ログイン",new_user_session_path,class: "btn btn-success form-control" %>
+    </p>
+    <p>↓ゲストログインはこちら↓<br>
+    (一部機能が制限されます)
+    <%= link_to "ゲストログイン",users_guest_sign_in_path,method: :post,class: "btn btn-secondary form-control" %>
+    </p>
+  </div>
+
+  <div class="col-4 mt-5 mx-auto text-center">
+    <div class="background">
+      <div class="images">
+        <%= image_tag "動物園.jpg" %>
+        <%= image_tag "楽器たち.jpg" %>
+        <%= image_tag "読書.jpg" %>
+        <%= image_tag "釣り.jpg" %>
+      </div>
+    </div>
+  </div>
+

@@ -10,10 +10,13 @@
       </div>
 
       <div class="text-center">
-        <%= link_to "マイページ",user_path(current_user),class: "btn btn-success" %>
-        <%= link_to "退会する",cancellation_users_path,method: :patch,"data-confirm"=>"退会します。本当によろしいですか？",class: "btn btn-danger" %>
+        <span id="check"><%= link_to "マイページ",user_path(current_user),class: "btn btn-success" %></span>
+        <span id="confirmationButtons" style="display: none;">
+          <%= link_to "退会する",cancellation_users_path,method: :patch,"data-confirm"=>"退会します。本当によろしいですか？",class: "btn btn-danger mt-5" %>
+        </span>
       </div>
 
     </div>
   </div>
 </div>
+

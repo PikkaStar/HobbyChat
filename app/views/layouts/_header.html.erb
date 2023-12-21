@@ -15,8 +15,6 @@
       </div>
     </div>
       <%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
-    </div>
-    </div>
   <% elsif user_signed_in? %>
     <div class="ml-auto" style="position: relative; z-index: 1000;">
       <span><%= current_user.name %>でログインしています</span>
@@ -66,10 +64,13 @@
       <% end %>
     </div>
   <% else %>
-    <div class="ml-auto">
-      <%= link_to "トップへ",root_path,class: "btn btn-secondary mr-3" %>
+    <span class="title2">
+      HobbyChat
+    </span>
+    <span class="d-flex justify-content-end">
+      <%= link_to "トップへ",root_path,class: "btn btn-secondary mr-3", data: {"turbolinks" => false} %>
       <%= link_to "新規登録",new_user_registration_path,class: "btn btn-secondary mr-3" %>
       <%= link_to "ログイン",new_user_session_path,class: "btn btn-secondary mr-3" %>
-    </div>
+    </span>
   <% end %>
 </div>
