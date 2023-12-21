@@ -19,12 +19,19 @@
     introduction: "テストユーザー#{n + 1}です"
   )
 
+  tags = %w(スポーツ 音楽 キャンプ 料理 ゲーム)
+
+    tags.each do |tag_name|
+      Tag.find_or_create_by(name: tag_name)
+    end
+
   # ユーザーがランダムな件数のpostを作成し、その中からランダムな件数にfavoriteをつける
   rand(1..3).times do
     post = user.posts.create!(
       title: "テストタイトル#{n + 1}",
       body: "テスト内容#{n + 1}"
     )
+    post.tags = Tag.all.sample(2)
   end
 
   users = User.all
@@ -74,6 +81,13 @@ end
     # rand(1..3).times do |i|
     #   GroupUser.create!(group: group,user: User.find(i + 1))
     #   end
+
+    genres = %w(スポーツ 音楽 キャンプ 料理 ゲーム)
+
+    genres.each do |genre_name|
+      Genre.create!(genre_name: genre_name)
+    end
+
     # グループ作成
   3.times do
     owner = User.find(rand(1..10))
@@ -83,12 +97,13 @@ end
       owner_id: owner.id,
       user: owner
     )
+    group.genres = Genre.all.sample(2)
 
     # グループに加入するユーザーの数をランダムに決定
     num_users_to_join = rand(1..5)
 
     # オーナーをグループに加入
-    GroupUser.create!(group: group, user: owner)
+    GroupUser.find_or_create_by(group: group, user: owner)
 
     # オーナー以外のユーザーをランダムにグループに加入
     (1..num_users_to_join).each do |i|
