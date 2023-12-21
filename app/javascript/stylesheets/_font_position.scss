@@ -4,6 +4,12 @@
   font-size: 30px;
 }
 
+.title2 {
+  margin-left: 600px;
+  font-size: 50px;
+  font-family: 'Prompt', sans-serif;
+}
+
 
 .button01 {
   display: inline-block;
@@ -153,3 +159,13 @@ h2 span i {
   border-left: 15px solid #e0edff;
 }
 
+
+.slick-next {
+    right: 10px !important;
+    z-index: 100;
+ }
+
+.slick-prev {
+    left: 10px !important;
+  z-index: 100;
+ }
