@@ -22,7 +22,7 @@
 
           <%= link_to post_path(post.id),class: "button01" do  %>
           <div class="card-body">
-            <h5 class="card-title"><%= post.title %></h5>
+            <h5 class="card-title"><%= truncate(post.title,length: 5, omission: '') %></h5>
           </div>
            <% end %>
 
