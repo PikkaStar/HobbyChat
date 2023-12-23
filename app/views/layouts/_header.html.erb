@@ -18,13 +18,16 @@
   <% elsif user_signed_in? %>
     <div class="ml-auto" style="position: relative; z-index: 1000;">
       <span><%= current_user.name %>でログインしています</span>
-      <%= link_to notifications_path,class: "btn btn-secondary ml-5 mr-3" do %>
+      <%= link_to notifications_path,class: "ml-5 mr-5",style: "text-decoration: none;" do %>
         <% if current_user.notifications.where(checked: false).exists? %>
-          <i class="fa-sharp fa-solid fa-bell fa-beat" style="color: #f2ee7d;"></i>
+          <i class="fa-solid fa-bell" style="font-size: 24px; color: blue;"></i>
+          <span style="font-size: 18px; color: black;">
+            (<%= current_user.notifications.where(checked: false).count %>)
+          </span>
         <% else %>
-          <i class="fa-sharp fa-solid fa-bell"></i>
+          <i class="fa-solid fa-bell-slash" style="font-size: 24px; color: grey;"></i>
         <% end %>
-          通知
+
       <% end %>
 
       <%= link_to search_path,class: "btn btn-secondary mr-3" do %>
