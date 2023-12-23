@@ -20,6 +20,11 @@ class User::SessionsController < Devise::SessionsController
      redirect_to posts_path
    end
 
+   def destroy
+     reset_guest_data if current_user.email == User::GUEST_USER_EMAIL
+     super
+   end
+
   private
 
   def user_status

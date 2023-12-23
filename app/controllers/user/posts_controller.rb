@@ -1,7 +1,6 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update]
-  before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
 
   def new
     @post = Post.new
@@ -73,7 +72,7 @@ class User::PostsController < ApplicationController
     flash[:notice] = "削除しました"
     redirect_to user_path(current_user)
   end
-  
+
   # 存在するタグを表示し、クリックするとそのタグが付いた投稿一覧が表示される
   def search_tag
     @tag_list = Tag.all
@@ -90,14 +89,6 @@ class User::PostsController < ApplicationController
   def match_user
     post = Post.find(params[:id])
     unless post.user_id == current_user.id
-      redirect_to user_path(current_user)
-    end
-  end
-
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
       redirect_to user_path(current_user)
     end
   end
