@@ -25,9 +25,11 @@ class User::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # Entryテーブルから自分と相手のuser.idを取得
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
+      # 上で取得した要素を1つずつ取り出し、それぞれのarea_idが一致するものが存在するか判定
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.area_id == u.area_id
@@ -36,6 +38,7 @@ class User::UsersController < ApplicationController
           end
         end
       end
+      # それぞれに一致するarea_idが存在しない場合は新規作成
       unless @isArea
         @area = Area.new
         @entry = Entry.new
@@ -63,6 +66,7 @@ class User::UsersController < ApplicationController
     # Favoriteテーブルから特定のユーザーがいいねした投稿データを全て取得
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
     # Post.find(favorites)で取得するデータは配列のためページネーションが使えない
+    # Postからidがfavoretesに含まれる値を取得
     @posts = Post.where(id: favorites).page(params[:page]).per(15)
   end
 

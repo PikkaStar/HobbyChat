@@ -17,6 +17,7 @@
           <% if @isArea == true %>
             <%= link_to "チャットする",area_path(@areaId), class: "dropdown-item" %>
           <% else %>
+          <!--area_idが存在しない場合は新規作成-->
             <%= form_for @area do |f| %>
               <%= fields_for @entry do |e| %>
                 <%= e.hidden_field :user_id, value: @user.id %>

@@ -9,7 +9,7 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    # タグを新規登録
+    # 投稿に紐づくタグ名を入力フォームから取得(','で区切ると複数登録)
     tag_list = params[:post][:name].split(',')
     if @post.save
        @post.save_tags(tag_list)
