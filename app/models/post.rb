@@ -44,9 +44,9 @@ class Post < ApplicationRecord
     # 投稿にタグがすでについているか判定
     # Bookに関連するTagsを取得し、nameを配列として取得する。
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
-    # 元々紐づいていたタグと投稿されたタグの差分を抽出
+    # current_tagsには含まれていてtagsには含まれていない要素
     old_tags = current_tags - tags
-    # 投稿されたタグと元々紐づいていたタグの差分を抽出
+    # tagsには含まれていてcurrent_tagsには含まれていない
     new_tags = tags - current_tags
     # 更新対象にならなかったタグを取り出す
     old_tags.each do |old_name|
