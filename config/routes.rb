@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       end
       resource :relationships, only: [:create, :destroy]
       resources :reports, only: [:new,:create]
+      # 退会
       collection do
         patch :cancellation
       end
@@ -59,16 +60,19 @@ Rails.application.routes.draw do
       resources :messages,only: [:create,:destroy]
       resources :permits,only: [:create,:destroy] do
         collection do
+          # グループ加入真偽の更新
           patch :rejected
         end
       end
     end
+    # グループ参加申請
     get "groups/:id/permits"=>"groups#permits",as: "permits"
     get "members/:id"=>"groups#members",as: "members"
     get "search"=>"searches#search",as: "search"
     get "search_tag"=>"posts#search_tag"
     get "search_genre"=>"groups#search_genre"
     resources :notifications, only: [:index,:destroy]
+    # DM機能
     resources :areas,only: [:create,:show] do
       resources :talks,only: [:create]
     end
