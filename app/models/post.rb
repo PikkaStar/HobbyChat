@@ -6,6 +6,7 @@ class Post < ApplicationRecord
   # ソート
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
+  # includesとはSQLの負担を減らす。1+N問題を解決する記述
   scope :favorite_count, -> {Post.includes(:favorites).sort {|a,b| b.favorites.size <=> a.favorites.size}}
   scope :comment_count, -> {Post.includes(:comments).sort {|a,b| b.comments.size <=> a.comments.size}}
   # そのあとに試したもの
@@ -46,7 +47,7 @@ class Post < ApplicationRecord
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
     # current_tagsには含まれていてtagsには含まれていない要素
     old_tags = current_tags - tags
-    # tagsには含まれていてcurrent_tagsには含まれていない
+    # tagsには含まれていてcurrent_tagsには含まれていない要素
     new_tags = tags - current_tags
     # 更新対象にならなかったタグを取り出す
     old_tags.each do |old_name|
