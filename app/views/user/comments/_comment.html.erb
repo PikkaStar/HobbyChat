@@ -4,8 +4,8 @@
     <tr>
       <td class="custom-width">
         <%= link_to user_path(comment.user_id) do %>
-        <%= image_tag comment.user.get_profile_image(100,100) %><br>
-        <%= comment.user.name %>
+          <%= image_tag comment.user.get_profile_image(100,100) %><br>
+          <%= comment.user.name %>
         <% end %>
       </td>
       <td class="custom-width2">
