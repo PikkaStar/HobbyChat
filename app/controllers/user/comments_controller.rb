@@ -3,6 +3,7 @@ class User::CommentsController < ApplicationController
   before_action :guest_user,only: [:create,:destroy]
 
   def create
+    # 非同期
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
     @comment.post_id = @post.id
@@ -27,8 +28,11 @@ class User::CommentsController < ApplicationController
   end
 
   def destroy
+    # 非同期
     @post = Post.find(params[:post_id])
+    # コメント削除後の表示
     @comments = @post.comments.page(params[:page]).per(10)
+    # 投稿に紐づいたコメントの中から特定のコメントを取得
     @comment = @post.comments.find(params[:id])
     @comment.destroy
   end
