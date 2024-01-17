@@ -12,30 +12,29 @@ class User < ApplicationRecord
      scope :follows_count, -> {User.includes(:following_users).sort {|a,b| b.following_users.size <=> a.following_users.size}}
      scope :follower_count, -> {User.includes(:follower_users).sort {|a,b| b.follower_users.size <=> a.follower_users.size}}
      scope :posts, -> {User.includes(:posts).sort {|a,b| b.posts.size <=> a.posts.size}}
-
+     # 投稿周辺機能
      has_many :posts,dependent: :destroy
      has_many :favorites,dependent: :destroy
      has_many :comments,dependent: :destroy
-
+     # グループ機能
      has_many :group_users,dependent: :destroy
      has_many :permits,dependent: :destroy
      has_many :groups,through: :group_users
-
+     has_many :messages,dependent: :destroy
+     # フォロー機能
      has_many :followers,class_name: "Relationship",foreign_key: "follower_id",dependent: :destroy
      has_many :followeds,class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
      has_many :following_users,through: :followers,source: :followed
      has_many :follower_users,through: :followeds,source: :follower
-
+     # 通知機能
      has_many :reports, class_name: "Report", foreign_key: "reporter_id",dependent: :destroy
      has_many :reverse_of_reports, class_name: "Report", foreign_key: "reported_id",dependent: :destroy
-
+     # DM機能
      has_many :talks,dependent: :destroy
      has_many :entries,dependent: :destroy
-
+     # 通知機能
      has_many :notifications,dependent: :destroy
-
-     has_many :messages,dependent: :destroy
-
+     
      has_one_attached :profile_image
 
      def self.guest
