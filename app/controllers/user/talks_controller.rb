@@ -3,6 +3,7 @@ class User::TalksController < ApplicationController
 
   def create
     @area = Area.find(params[:area_id])
+    # talkエリアが存在するならtalkをcreateできる
     if Entry.where(user_id: current_user.id,area_id: params[:talk][:area_id]).present?
       @message = Talk.create(params.require(:talk).permit(:user_id, :message, :area_id).merge(user_id: current_user.id))
     else
