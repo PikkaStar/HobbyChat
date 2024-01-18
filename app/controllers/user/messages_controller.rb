@@ -2,6 +2,7 @@ class User::MessagesController < ApplicationController
    before_action :authenticate_user!
    before_action :guest_user,only: [:create,:destroy]
 
+  # 非同期
    def create
      @message = current_user.messages.new(message_params)
      @group = Group.find(params[:group_id])
@@ -9,7 +10,8 @@ class User::MessagesController < ApplicationController
      @message.save
      @messages = @group.messages.page(params[:page]).per(20)
    end
-
+  
+  # 非同期
    def destroy
     @message = Message.find(params[:id])
     @message.destroy
