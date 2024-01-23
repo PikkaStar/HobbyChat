@@ -41,3 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 4000); // 3000ミリ秒 = 3秒
   });
 
+$(function() {
+  $(".openbtn1").click(function () {
+    $(this).toggleClass('active');
+    $('.sp1-menu').toggleClass('d-none')
+  });
+});
+
+$(function() {
+  $(".openbtn2").click(function () {
+    $(this).toggleClass('active');
+    $('.sp2-menu').toggleClass('d-none')
+  });
+});

@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-expand-md">
   <% if admin_signed_in? %>
     <div class="ml-auto">
       <%= link_to "検索",admin_search_path,class: "btn btn-secondary mr-3" %>
@@ -16,7 +16,7 @@
     </div>
       <%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
   <% elsif user_signed_in? %>
-    <div class="ml-auto" style="position: relative; z-index: 1000;">
+    <div class="ml-auto d-none d-md-flex " style="position: relative; z-index: 1000;">
       <span><%= current_user.name %>でログインしています</span>
       <%= link_to notifications_path,class: "ml-5 mr-5",style: "text-decoration: none;" do %>
         <% if current_user.notifications.where(checked: false).exists? %>
@@ -27,7 +27,6 @@
         <% else %>
           <i class="fa-solid fa-bell-slash" style="font-size: 24px; color: grey;"></i>
         <% end %>
-
       <% end %>
 
       <%= link_to search_path,class: "btn btn-secondary mr-3" do %>
@@ -66,14 +65,81 @@
         ログアウト
       <% end %>
     </div>
+
+    <div class="openbtn2 d-block d-md-none">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="sp2-menu d-none w-100 h-100">
+      <div class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+        <ul>
+          <li>
+            <%= link_to notifications_path,style: "text-decoration: none;", data: {"turbolinks" => false} do %>
+              <% if current_user.notifications.where(checked: false).exists? %>
+                <i class="fa-solid fa-bell" style="font-size: 24px; color: blue;"></i>
+                <span style="font-size: 18px; color: black;">
+                  (<%= current_user.notifications.where(checked: false).count %>)
+                </span>
+              <% else %>
+                <i class="fa-solid fa-bell-slash" style="font-size: 24px; color: grey;"></i>
+              <% end %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to search_path,class: "my-2 btn btn-secondary", data: {"turbolinks" => false} do %>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              検索
+            <% end %>
+          </li>
+          <li>
+            <%= link_to user_path(current_user),class: "btn btn-secondary", data: {"turbolinks" => false} do %>
+              <i class="fa-solid fa-user"></i>
+              マイページ
+            <% end %>
+          </li>
+          <li><%= link_to "新規投稿",new_post_path, class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "グループ作成",new_group_path, class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "投稿一覧", posts_path, class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "ユーザー一覧", users_path, class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "グループ一覧",groups_path,class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li>
+            <%= link_to destroy_user_session_path,method: :delete,class: "btn btn-secondary", data: {"turbolinks" => false} do %>
+              <i class="fa-solid fa-right-from-bracket"></i>
+              ログアウト
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   <% else %>
-    <span class="title2 mx-auto">
+   <div class="title2 text-center">
       HobbyChat
-    </span>
-    <span class="d-flex justify-content-end">
-      <%= link_to "トップへ",root_path,class: "btn btn-secondary mr-3", data: {"turbolinks" => false} %>
-      <%= link_to "新規登録",new_user_registration_path,class: "btn btn-secondary mr-3" %>
-      <%= link_to "ログイン",new_user_session_path,class: "btn btn-secondary mr-3" %>
-    </span>
+    </div>
+
+    <div class="d-none d-md-flex justify-content-end">
+      <%= link_to "トップへ", root_path, class: "btn btn-secondary mr-3", data: {"turbolinks" => false} %>
+      <%= link_to "新規登録", new_user_registration_path, class: "btn btn-secondary mr-3" %>
+      <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary mr-3" %>
+    </div>
+
+    <div class="openbtn1 d-block d-md-none">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="sp1-menu d-none w-100 h-100">
+      <div class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+        <ul>
+          <li><%= link_to "トップへ", root_path, class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "新規登録", new_user_registration_path, class: "btn btn-secondary my-3", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+        </ul>
+      </div>
+    </div>
+
   <% end %>
 </div>
