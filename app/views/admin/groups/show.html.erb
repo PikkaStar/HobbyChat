@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-5 mx-auto title">
+    <div class="col-md-5 mx-auto title">
       <%= image_tag @group.get_group_image(100,100) %>
       <h3><%= @group.name %></h3>
     </div>
-    <div class="col-5 mt-5">
+    <div class="col-md-5 mt-5">
       <%= link_to "グループチャット",admin_group_rooms_path(@group),class: "btn btn-info" %>
       <%= link_to "削除",admin_group_path(@group),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-md-10 mx-auto">
       <table class="table table-hover">
         <tr>
           <th>マスター</th>
@@ -57,7 +57,7 @@
   </div>
    <h4 class="text-center">グループ紹介文</h4>
   <div class="row">
-    <div class="col-10 mx-auto bg-white">
+    <div class="col-md-10 mx-auto bg-white">
       <%= @group.introduction %>
     </div>
   </div>

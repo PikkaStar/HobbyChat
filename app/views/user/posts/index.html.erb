@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-6 mx-auto">
+    <div class="col-md-6 mx-auto">
 
       <% @tag_list.each do |list|%>
         <% if list.tag_maps.count > 0 %>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <p class="text-center">
         <%= link_to '新しい順', posts_path(latest: "true") %>
        |<%= link_to '古い順', posts_path(old: "true") %>

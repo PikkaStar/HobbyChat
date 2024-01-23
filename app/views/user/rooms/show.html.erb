@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-md-10 mx-auto">
       <%= link_to "戻る",group_path(@group),class: "btn btn-secondary" %>
       <h3><%= @group.name %>のチャットルーム</h3>
 
@@ -12,10 +12,10 @@
     </div>
   </div>
   <div class="d-flex flex-column">
-    
+
       <div id="chat">
         <%= render "user/messages/message",messages: @messages %>
       </div>
-    
+
   </div>
 </div>
