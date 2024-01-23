@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12">
+    <div class="col-md-12">
       <h3 class="text-center"><%= @user.name %>さんの投稿</h3>
 
       <div class="d-flex flex-wrap">
@@ -9,14 +9,14 @@
           <div class="mx-auto">
             <%= image_tag post.get_image(200,200), style: "width: 150px; height: 100px;" %>
           </div>
-          
+
             <%= link_to admin_post_path(post.id),class: "button01" do  %>
             <div class="card-body">
               <h5 class="card-title"><%= truncate(post.title, length: 5, omission: '..') %></h5>
               <p class="card-text"><%= truncate(post.body, length: 7, omission: '...') %></p>
             </div>
             <% end %>
-            
+
           <ul class="list-group list-group-flush">
 
             <div class="list-group-item button01 d-flex align-items-center">
@@ -26,7 +26,7 @@
             <div class="list-group-item button01 d-flex align-items-center">
               コメント<%= post.comments.count %>件
             </div>
-            
+
           </ul>
         </div>
         <% end %>

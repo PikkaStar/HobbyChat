@@ -8,11 +8,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-md-4">
       <%= render "admin/users/info2",user: @user,report_count: @report_count %>
     </div>
 
-    <div class="col-7 offset-1">
+    <div class="col-md-7 offset-1">
       <h3 class="text-center mt-3">
         <%= @post.title %>
             <%= link_to "削除",admin_post_path(@post),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
