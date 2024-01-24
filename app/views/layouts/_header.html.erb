@@ -18,6 +18,7 @@
       </div>
     </div>
 
+      <!--38行目までハンバーガーメニュー-->
       <div class="openbtn3 d-block d-md-none">
         <span></span>
         <span></span>
@@ -88,6 +89,7 @@
       <% end %>
     </div>
 
+    <!--137行目までハンバーガーメニュー-->
     <div class="openbtn2 d-block d-md-none">
       <span></span>
       <span></span>
@@ -137,8 +139,8 @@
     </div>
 
   <% else %>
-   <div class="title2 ml-auto">
-      HobbyChat
+    <div class="title2">
+      H<%= link_to "o",new_admin_session_path, style: "color: black; text-decoration: none;", data: {"turbolinks" => false} %>bbyChat
     </div>
 
     <div class="d-none d-md-flex ml-auto">
@@ -147,6 +149,7 @@
       <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary mr-3" %>
     </div>
 
+    <!--以下ハンバーガーメニュー-->
     <div class="openbtn1 d-block d-md-none">
       <span></span>
       <span></span>
