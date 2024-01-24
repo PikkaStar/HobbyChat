@@ -42,7 +42,8 @@ footer {
 }
 
 .sp1-menu,
-.sp2-menu {
+.sp2-menu,
+.sp3-menu{
     position: fixed;
     top: 0;
     left: 0;
@@ -53,7 +54,8 @@ footer {
   }
 
   .openbtn1,
-  .openbtn2 {
+  .openbtn2,
+  .openbtn3{
     position: fixed;/*ボタン内側の基点となるためrelativeを指定*/
     top: 10px;
     right: 10px;
@@ -67,7 +69,8 @@ footer {
 
   /*ボタン内側*/
   .openbtn1 span,
-  .openbtn2 span {
+  .openbtn2 span,
+  .openbtn3 span{
       display: inline-block;
       transition: all .4s;/*アニメーションの設定*/
       position: absolute;
@@ -79,24 +82,28 @@ footer {
     }
 
   .openbtn1 span:nth-of-type(1),
-  .openbtn2 span:nth-of-type(1){
+  .openbtn2 span:nth-of-type(1),
+  .openbtn3 span:nth-of-type(1){
     top:15px;
   }
 
   .openbtn1 span:nth-of-type(2),
-  .openbtn2 span:nth-of-type(2){
+  .openbtn2 span:nth-of-type(2),
+  .openbtn3 span:nth-of-type(2){
     top:23px;
   }
 
   .openbtn1 span:nth-of-type(3),
-  .openbtn2 span:nth-of-type(3){
+  .openbtn2 span:nth-of-type(3),
+  .openbtn3 span:nth-of-type(3){
     top:31px;
   }
 
   /*activeクラスが付与されると線が回転して×に*/
 
   .openbtn1.active span:nth-of-type(1),
-  .openbtn2.active span:nth-of-type(1){
+  .openbtn2.active span:nth-of-type(1),
+  .openbtn3.active span:nth-of-type(1){
       top: 18px;
       left: 18px;
       transform: translateY(6px) rotate(-45deg);
@@ -104,12 +111,14 @@ footer {
   }
 
   .openbtn1.active span:nth-of-type(2),
-  .openbtn2.active span:nth-of-type(2){
+  .openbtn2.active span:nth-of-type(2),
+  .openbtn3.active span:nth-of-type(2){
     opacity: 0;/*真ん中の線は透過*/
   }
 
   .openbtn1.active span:nth-of-type(3),
-  .openbtn2.active span:nth-of-type(3){
+  .openbtn2.active span:nth-of-type(3),
+  .openbtn3.active span:nth-of-type(3){
       top: 30px;
       left: 18px;
       transform: translateY(-6px) rotate(45deg);
