@@ -1,20 +1,42 @@
 <div class="navbar navbar-expand-md">
   <% if admin_signed_in? %>
-    <div class="ml-auto">
-      <%= link_to "検索",admin_search_path,class: "btn btn-secondary mr-3" %>
-      <%= link_to "通報一覧",admin_reports_path,class: "btn btn-secondary mr-3" %>
-      <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          一覧
-        </button>
-        <div class="dropdown-menu">
-          <%= link_to "投稿一覧", admin_posts_path, class: "dropdown-item" %>
-          <%= link_to "ユーザー一覧", admin_users_path, class: "dropdown-item" %>
-          <%= link_to "グループ一覧",admin_groups_path,class: "dropdown-item" %>
+    <div class="ml-auto d-none d-md-flex " style="position: relative; z-index: 1000;">
+      <div class="ml-auto">
+        <%= link_to "検索",admin_search_path,class: "btn btn-secondary mr-3" %>
+        <%= link_to "通報一覧",admin_reports_path,class: "btn btn-secondary mr-3" %>
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle mr-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            一覧
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to "投稿一覧", admin_posts_path, class: "dropdown-item" %>
+            <%= link_to "ユーザー一覧", admin_users_path, class: "dropdown-item" %>
+            <%= link_to "グループ一覧",admin_groups_path,class: "dropdown-item" %>
+          </div>
         </div>
+        <%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
       </div>
     </div>
-      <%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class: "btn btn-secondary mr-3" %>
+
+      <div class="openbtn3 d-block d-md-none">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="sp3-menu d-none w-100 h-100">
+      <div class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
+        <ul>
+          <li><%= link_to "検索",admin_search_path,class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "通報一覧",admin_reports_path,class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "投稿一覧", admin_posts_path, class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "ユーザー一覧", admin_users_path, class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "グループ一覧",admin_groups_path,class: "btn btn-secondary", data: {"turbolinks" => false} %></li>
+          <li><%= link_to "ログアウト",destroy_admin_session_path,method: :delete,class: "my-2 btn btn-secondary", data: {"turbolinks" => false} %></li>
+        </ul>
+      </div>
+    </div>
+
   <% elsif user_signed_in? %>
     <div class="ml-auto d-none d-md-flex " style="position: relative; z-index: 1000;">
       <span><%= current_user.name %>でログインしています</span>
@@ -115,11 +137,11 @@
     </div>
 
   <% else %>
-   <div class="title2 text-center">
+   <div class="title2 ml-auto">
       HobbyChat
     </div>
 
-    <div class="d-none d-md-flex justify-content-end">
+    <div class="d-none d-md-flex ml-auto">
       <%= link_to "トップへ", root_path, class: "btn btn-secondary mr-3", data: {"turbolinks" => false} %>
       <%= link_to "新規登録", new_user_registration_path, class: "btn btn-secondary mr-3" %>
       <%= link_to "ログイン", new_user_session_path, class: "btn btn-secondary mr-3" %>

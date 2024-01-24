@@ -54,3 +54,10 @@ $(function() {
     $('.sp2-menu').toggleClass('d-none')
   });
 });
+
+$(function() {
+  $(".openbtn3").click(function () {
+    $(this).toggleClass('active');
+    $('.sp3-menu').toggleClass('d-none')
+  });
+});
