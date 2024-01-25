@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+     # ゲストのメールアドレス
      GUEST_USER_EMAIL = "guest@example.com"
 
      validates :name,presence: true,uniqueness: true,length: {in: 2..10}
@@ -34,7 +34,7 @@ class User < ApplicationRecord
      has_many :entries,dependent: :destroy
      # 通知機能
      has_many :notifications,dependent: :destroy
-     
+
      has_one_attached :profile_image
 
      def self.guest
