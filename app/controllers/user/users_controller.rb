@@ -28,7 +28,7 @@ class User::UsersController < ApplicationController
     # Entryテーブルから自分と相手のuser.idを取得
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
-    unless @user.id == current_user.id
+    unless @user.same?(current_user)
       # 上で取得した要素を1つずつ取り出し、それぞれのarea_idが一致するものが存在するか判定
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|

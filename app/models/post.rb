@@ -30,7 +30,7 @@ class Post < ApplicationRecord
   end
 
   def favorited_by?(user)
-    favorites.exists?(user_id: user.id)
+    self.favorites.exists?(user_id: user.id)
   end
 
   def self.looks(search,word)
@@ -61,5 +61,11 @@ class Post < ApplicationRecord
         self.tags << tag
     end
   end
+
+  def written_by?(current_user)
+    user == current_user
+  end
+
+
 
 end
