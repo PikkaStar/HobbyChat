@@ -1,6 +1,7 @@
 class User::CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :guest_user,only: [:create,:destroy]
+  before_action :match_user,only: [:destroy]
 
   def create
     # 非同期
@@ -47,6 +48,13 @@ class User::CommentsController < ApplicationController
     if user.email == "guest@example.com"
       flash[:alert] = "ゲストの方は行えません"
       redirect_to posts_path
+    end
+  end
+
+  def match_user
+    comment = Comment.find(params[:id])
+    unless comment.user_id == current_user.id
+      redirect_to user_path(current_user)
     end
   end
 

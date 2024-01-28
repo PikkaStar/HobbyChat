@@ -72,9 +72,13 @@ class User < ApplicationRecord
         @user = User.all
        end
      end
-     
+
      def same?(current_user)
         self == current_user
+     end
+
+     def active_for_authentication?
+       super && (is_active == 'true')
      end
 
 end

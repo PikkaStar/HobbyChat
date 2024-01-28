@@ -1,6 +1,7 @@
 class User::MessagesController < ApplicationController
    before_action :authenticate_user!
    before_action :guest_user,only: [:create,:destroy]
+   before_action :match_user
 
   # 非同期
    def create
@@ -10,7 +11,7 @@ class User::MessagesController < ApplicationController
      @message.save
      @messages = @group.messages.page(params[:page]).per(20)
    end
-  
+
   # 非同期
    def destroy
     @message = Message.find(params[:id])
@@ -32,6 +33,12 @@ class User::MessagesController < ApplicationController
       flash[:alert] = "ゲストの方は行えません"
       redirect_to user_path(current_user)
     end
+  end
+
+  def match_user
+    message = Message.find(params[:id])
+    message.user_id == current_user.id
+    redirect_to user_path(current_user)
   end
 
 end
