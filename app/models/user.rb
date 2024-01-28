@@ -72,5 +72,9 @@ class User < ApplicationRecord
         @user = User.all
        end
      end
+     
+     def same?(current_user)
+        self == current_user
+     end
 
 end
