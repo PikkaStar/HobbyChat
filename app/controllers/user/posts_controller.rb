@@ -1,6 +1,6 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :match_user,only: [:edit,:update]
+  before_action :match_user,only: [:edit,:update,:destroy]
 
   def new
     @post = Post.new
