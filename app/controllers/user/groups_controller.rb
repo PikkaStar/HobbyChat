@@ -3,6 +3,7 @@ class User::GroupsController < ApplicationController
   before_action :authenticate_user!
   before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
   before_action :owner_user, only: [:edit, :update, :destroy, :permits]
+  include PaginationGroup
 
   def new
     @group = Group.new
@@ -29,16 +30,6 @@ class User::GroupsController < ApplicationController
   end
 
   def index
-    # ソートで表示するための記述
-    if params[:latest]
-      @groups = Group.latest.page(params[:page]).per(15)
-    elsif params[:old]
-      @groups = Group.old.page(params[:page]).per(15)
-    elsif params[:members]
-      @groups = Kaminari.paginate_array(Group.members).page(params[:page]).per(15)
-    else
-      @groups = Group.page(params[:page]).per(15)
-    end
     @genre_list = Genre.all
   end
 

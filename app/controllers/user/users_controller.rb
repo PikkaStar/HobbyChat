@@ -4,7 +4,7 @@ class User::UsersController < ApplicationController
   before_action :guest_user,only: [:edit,:update,:cancellation]
   before_action :my_user, only: [:show,:every,:favorites,:follows,:followers]
 
-  include Pagination
+  include PaginationUser
 
   # ソートで表示するための処理
   def index
