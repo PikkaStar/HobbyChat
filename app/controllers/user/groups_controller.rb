@@ -18,7 +18,7 @@ class User::GroupsController < ApplicationController
     # 配列の末尾に追加
     @group.users << current_user
     # genre名登録
-    genre_list = params[:group][:genre_name].split(',')
+    genre_list = params[:group][:genre_name].split(/[[:blank:]]+/).select(&:present?)
     if @group.save
       @group.save_genres(genre_list)
       flash.now[:notice] = "グループを作成しました"
@@ -47,7 +47,7 @@ class User::GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    group_list = params[:group][:genre_name].split(',')
+    group_list = params[:group][:genre_name].split(/[[:blank:]]+/).select(&:present?)
     if @group.update(group_params)
        @group.save_genres(group_list)
        redirect_to group_path(@group)
