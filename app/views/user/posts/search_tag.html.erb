@@ -14,38 +14,7 @@
         <h4 class="text-center">タグ検索:<%= @tag.name %></h4>
 
       <div class="d-flex flex-wrap mt-5">
-       <% @posts.each do |post| %>
-        <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
-          <div class="mx-auto">
-            <%= image_tag post.get_image(200,200), style: "width: 150px; height: 120px;" %>
-          </div>
-
-          <%= link_to post_path(post.id),class: "button01" do  %>
-          <div class="card-body">
-            <h5 class="card-title"><%= truncate(post.title,length: 5, omission: '') %></h5>
-          </div>
-           <% end %>
-
-          <ul class="list-group list-group-flush">
-            <%= link_to user_path(post.user_id), class: "list-group-item button01" do %>
-              <%= post.user.name %>
-            <% end %>
-
-              <span id="favorite_btn<%= post.id %>">
-              <%= render "user/favorites/favorite",post: post %>
-              </span>
-
-            <div class="list-group-item button01 d-flex align-items-center">
-              コメント<%= post.comments.count %>件
-            </div>
-
-            <div class="list-group-item button01 d-flex align-items-center">
-              投稿日<%= post.created_at.strftime("%Y/%m/%d") %>
-            </div>
-
-          </ul>
-        </div>
-        <% end %>
+       <%= render 'user/posts/index', posts: @posts %>
       </div>
 
     </div>
