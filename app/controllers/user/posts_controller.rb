@@ -2,7 +2,7 @@ class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user, only: [:edit, :update, :destroy]
   before_action :my_post, only: [:show]
-  include PaginationPost
+ # include PaginationPost
 
   def new
     @post = Post.new
@@ -26,6 +26,7 @@ class User::PostsController < ApplicationController
   # ソートでの表示処理
   def index
     @tag_list = Tag.all
+    @posts = paginate_posts
   end
 
 
@@ -82,4 +83,22 @@ class User::PostsController < ApplicationController
     def my_post
       @post = Post.find(params[:id])
     end
-end
+
+
+    def paginate_posts
+      if params[:latest]
+        Post.latest.page(params[:page]).per(10)
+      elsif params[:old]
+        Post.old.page(params[:page]).per(10)
+      elsif params[:favorite_count]
+        # ソートしたデータをpaginateするにはKaminari.paginate_arrayが必要
+        Post.favorite_count(params[:page],10)
+        # Post.favorite_count
+      elsif params[:comment_count]
+        Post.comment_count(params[:page],10)
+      else
+        Post.page(params[:page]).per(10)
+      end
+    end
+
+  end
