@@ -1,6 +1,6 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :match_user,only: [:edit,:update,:destroy]
+  before_action :match_user, only: [:edit, :update, :destroy]
   before_action :my_post, only: [:show]
   include PaginationPost
 
@@ -14,23 +14,23 @@ class User::PostsController < ApplicationController
     # 投稿に紐づくタグ名を入力フォームから取得(空白で区切ると複数登録)
     tag_list = params[:post][:name].split(/[[:blank:]]+/).select(&:present?)
     if @post.save
-       @post.save_tags(tag_list)
-       flash[:notice] = "投稿しました"
-       redirect_to post_path(@post)
+      @post.save_tags(tag_list)
+      flash[:notice] = "投稿しました"
+      redirect_to post_path(@post)
     else
-    flash.now[:alert] = "投稿に失敗しました"
-    render :new
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new
     end
   end
 
   # ソートでの表示処理
   def index
-      @tag_list = Tag.all
+    @tag_list = Tag.all
   end
 
 
   def show
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(",")
     @post_tags = @post.tags
     @user = @post.user
     @comment = Comment.new
@@ -39,18 +39,18 @@ class User::PostsController < ApplicationController
   end
 
   def edit
-    @tag_list = @post.tags.pluck(:name).join(',')
+    @tag_list = @post.tags.pluck(:name).join(",")
   end
 
   def update
     tag_list = params[:post][:name].split(/[[:blank:]]+/).select(&:present?)
     if @post.update(post_params)
-       @post.save_tags(tag_list)
-       flash[:notice] = "更新しました"
-       redirect_to post_path(@post)
+      @post.save_tags(tag_list)
+      flash[:notice] = "更新しました"
+      redirect_to post_path(@post)
     else
-       flash.now[:alert] = "更新に失敗しました"
-       render :edit
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
     end
   end
 
@@ -68,20 +68,18 @@ class User::PostsController < ApplicationController
   end
 
   private
-
-  def post_params
-    params.require(:post).permit(:title,:body,:image)
-  end
-
-  def match_user
-    @post = Post.find(params[:id])
-    unless @post.user_id == current_user.id
-      redirect_to user_path(current_user)
+    def post_params
+      params.require(:post).permit(:title, :body, :image)
     end
-  end
 
-  def my_post
-    @post = Post.find(params[:id])
-  end
+    def match_user
+      @post = Post.find(params[:id])
+      unless @post.user_id == current_user.id
+        redirect_to user_path(current_user)
+      end
+    end
 
+    def my_post
+      @post = Post.find(params[:id])
+    end
 end

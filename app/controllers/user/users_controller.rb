@@ -1,8 +1,8 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :match_user,only: [:edit,:update]
-  before_action :guest_user,only: [:edit,:update,:cancellation]
-  before_action :my_user, only: [:show,:every,:favorites,:follows,:followers]
+  before_action :match_user, only: [:edit, :update]
+  before_action :guest_user, only: [:edit, :update, :cancellation]
+  before_action :my_user, only: [:show, :every, :favorites, :follows, :followers]
 
   include PaginationUser
 
@@ -26,9 +26,9 @@ class User::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-    redirect_to user_path(@user)
+      redirect_to user_path(@user)
     else
-       render :edit
+      render :edit
     end
   end
 
@@ -60,28 +60,26 @@ class User::UsersController < ApplicationController
   end
 
   private
-
-  def user_params
-    params.require(:user).permit(:name,:introduction,:profile_image)
-  end
-
-  def match_user
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
+    def user_params
+      params.require(:user).permit(:name, :introduction, :profile_image)
     end
-  end
 
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
-      redirect_to user_path(current_user)
+    def match_user
+      @user = User.find(params[:id])
+      unless @user == current_user
+        redirect_to user_path(current_user)
+      end
     end
-  end
 
-  def my_user
-    @user = User.find(params[:id])
-  end
+    def guest_user
+      user = current_user
+      if user.email == "guest@example.com"
+        flash[:alert] = "ゲストの方は行えません"
+        redirect_to user_path(current_user)
+      end
+    end
 
+    def my_user
+      @user = User.find(params[:id])
+    end
 end

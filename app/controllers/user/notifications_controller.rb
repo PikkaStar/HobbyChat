@@ -1,5 +1,4 @@
 class User::NotificationsController < ApplicationController
-
   def index
     # ログインユーザーに関連付けられたすべての通知を新しい順で取得
     @notifications = current_user.notifications.order(created_at: :desc).page(params[:page]).per(20)
@@ -15,5 +14,4 @@ class User::NotificationsController < ApplicationController
     @notifications = current_user.notifications.destroy_all
     redirect_to notifications_path
   end
-
 end

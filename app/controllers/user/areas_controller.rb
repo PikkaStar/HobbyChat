@@ -2,7 +2,7 @@ class User::AreasController < ApplicationController
   before_action :authenticate_user!
 
   def create
-     # 自分と相手のユーザー情報を取得
+    # 自分と相手のユーザー情報を取得
     @area = Area.create(user_id: current_user.id)
     @entry1 = Entry.create(area_id: @area.id, user_id: current_user.id)
     # user_idはフォームから取得、area_idには@area.idを代入
@@ -20,5 +20,4 @@ class User::AreasController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-
 end

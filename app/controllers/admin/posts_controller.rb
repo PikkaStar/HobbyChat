@@ -1,5 +1,4 @@
 class Admin::PostsController < ApplicationController
-
   before_action :authenticate_admin!
 
   def index
@@ -8,7 +7,7 @@ class Admin::PostsController < ApplicationController
     elsif params[:old]
       @posts = Post.old.page(params[:page]).per(10)
     elsif params[:favorite_count]
-      @posts = Kaminari.paginate_array(Post.favorite_count).page(params[:page]).per(10) #Post.favorite_count
+      @posts = Kaminari.paginate_array(Post.favorite_count).page(params[:page]).per(10) # Post.favorite_count
     elsif params[:comment_count]
       @posts = Kaminari.paginate_array(Post.comment_count).page(params[:page]).per(10)
     else
@@ -28,5 +27,4 @@ class Admin::PostsController < ApplicationController
     flash[:notice] = "削除しました"
     redirect_to admin_posts_path
   end
-
 end

@@ -1,7 +1,6 @@
 class CreateNotifications < ActiveRecord::Migration[6.1]
   def change
     create_table :notifications do |t|
-
       # ポリモーフィック関連付け
       t.references :subject, polymorphic: true
       t.references :user, foreign_key: true

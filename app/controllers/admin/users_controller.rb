@@ -68,16 +68,14 @@ class Admin::UsersController < ApplicationController
 
 
   private
-
-  def user_params
-    params.require(:user).permit(:name,:introduction,:is_active,:profile_image)
-  end
-
-  def admin_user
-    @admin = current_admin
-    unless @admin.email == "admin@admin.com"
-      flash[:alert] = "権限がありません"
+    def user_params
+      params.require(:user).permit(:name, :introduction, :is_active, :profile_image)
     end
-  end
 
+    def admin_user
+      @admin = current_admin
+      unless @admin.email == "admin@admin.com"
+        flash[:alert] = "権限がありません"
+      end
+    end
 end
