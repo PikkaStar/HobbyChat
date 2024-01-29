@@ -4,40 +4,7 @@
       <h2 class="text-center"><%= @user.name %>さんのフォロワー一覧</h2>
 
       <div class="d-flex flex-wrap">
-       <% @users.each do |user| %>
-        <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
-          <div class="mx-auto">
-           <%= link_to user_path(user.id),class: "button01" do  %>
-            <%= image_tag user.get_profile_image(200,200), style: "width: 150px; height: 120px;" %>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title"><%= truncate(user.name,length: 5, omission: '') %></h5>
-            <p class="card-text"><%= truncate(user.introduction, length: 7, omission: '..') %></p>
-          </div>
-           <% end %>
-          <ul class="list-group list-group-flush">
-
-            <%= link_to every_path(user.id) do %>
-              <li class="list-group-item button01" style="width: 158.4px;">
-                  投稿数<%= user.posts.count %>件
-              </li>
-             <% end %>
-
-            <%= link_to follows_user_path(user) do %>
-              <li class="list-group-item button01" style="width: 158.4px;">
-                フォロー<%= user.followers.count %>人
-              </li>
-            <% end %>
-
-            <%= link_to followers_user_path(user) do %>
-              <li class="list-group-item button01" style="width: 158.4px;">
-                フォロワー<%= user.followeds.count %>人
-              </li>
-            <% end %>
-
-          </ul>
-        </div>
-       <% end %>
+       <%= render 'user/users/index', users: @users %>
       </div>
       <div class="d-flex justify-content-center">
       <%= paginate @users %>

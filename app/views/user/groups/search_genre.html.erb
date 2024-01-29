@@ -13,36 +13,7 @@
         <h4 class="text-center">タグ検索:<%= @genre.genre_name %></h4>
 
       <div class="d-flex flex-wrap mt-5">
-       <% @groups.each do |group| %>
-        <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
-          <div class="mx-auto">
-            <%= image_tag group.get_group_image(200,200), style: "width: 150px; height: 120px;" %>
-          </div>
-
-          <%= link_to group_path(group.id),class: "button01" do  %>
-          <div class="card-body" style="white-space: nowrap; overflow: hidden;">
-            <h5 class="card-title"><%= truncate(group.name,length: 5, omission: '') %></h5>
-          </div>
-           <% end %>
-
-          <ul class="list-group list-group-flush">
-            <%= link_to user_path(group.owner_id), class: "list-group-item button01" do %>
-              <%= group.user.name %>
-            <% end %>
-
-            <%= link_to members_path(group.id) do %>
-            <div class="list-group-item button01 d-flex align-items-center">
-              メンバー<%= group.users.count %>人
-            </div>
-            <% end %>
-
-            <div class="list-group-item button01 d-flex align-items-center">
-              作成日<%= group.created_at.strftime("%Y/%m/%d") %>
-            </div>
-
-          </ul>
-        </div>
-        <% end %>
+       <%= render 'user/groups/index', groups: @groups %>
       </div>
 
     </div>
