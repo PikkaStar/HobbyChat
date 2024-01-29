@@ -7,9 +7,7 @@ class Permit < ApplicationRecord
   after_create_commit :create_notifications
 
   private
-
-  def create_notifications
-    Notification.create(subject: self, user: self.group.user, action_type: :group_to_own_user)
-  end
-
+    def create_notifications
+      Notification.create(subject: self, user: self.group.user, action_type: :group_to_own_user)
+    end
 end

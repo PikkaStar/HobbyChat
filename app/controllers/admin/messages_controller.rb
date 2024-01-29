@@ -7,5 +7,4 @@ class Admin::MessagesController < ApplicationController
     flash[:notice] = "削除に成功しました"
     redirect_to request.referer
   end
-
 end

@@ -20,5 +20,4 @@ module PaginationGroup
       Group.page(params[:page]).per(15)
     end
   end
-
 end

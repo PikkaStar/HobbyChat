@@ -1,6 +1,6 @@
 class Report < ApplicationRecord
-  belongs_to :reporter,class_name: "User"
-  belongs_to :reported,class_name: "User"
+  belongs_to :reporter, class_name: "User"
+  belongs_to :reported, class_name: "User"
 
   # has_one :notification, as: :subject, dependent: :destroy
 
@@ -14,6 +14,4 @@ class Report < ApplicationRecord
   # def create_notifications
   #   Notification.create(subject: self, user: self.reporter, action_type: :report_to_own_user)
   # end
-
-
 end

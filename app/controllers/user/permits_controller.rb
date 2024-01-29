@@ -1,6 +1,6 @@
 class User::PermitsController < ApplicationController
   before_action :authenticate_user!
-  before_action :guest_user,only: [:create,:destroy,:rejected]
+  before_action :guest_user, only: [:create, :destroy, :rejected]
   before_action :match_user, only: [:destroy]
   before_action :owner_user, only: [:rejected]
 
@@ -31,30 +31,28 @@ class User::PermitsController < ApplicationController
   end
 
   private
-
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
-      redirect_to user_path(current_user)
+    def guest_user
+      user = current_user
+      if user.email == "guest@example.com"
+        flash[:alert] = "ゲストの方は行えません"
+        redirect_to user_path(current_user)
+      end
     end
-  end
 
-  def match_user
-    group = Group.find(params[:group_id])
-    permit = Permit.find_by(group_id: group.id)
-    unless permit.user_id == current_user.id
-      flash[:alert] = "不正な操作です"
-      redirect_to user_path(current_user)
+    def match_user
+      group = Group.find(params[:group_id])
+      permit = Permit.find_by(group_id: group.id)
+      unless permit.user_id == current_user.id
+        flash[:alert] = "不正な操作です"
+        redirect_to user_path(current_user)
+      end
     end
-  end
 
-  def owner_user
-    group = Group.find(params[:group_id])
-    unless group.owner_id == current_user.id
-      flash[:alert] = "不正な操作です"
-      redirect_to user_path(current_user)
+    def owner_user
+      group = Group.find(params[:group_id])
+      unless group.owner_id == current_user.id
+        flash[:alert] = "不正な操作です"
+        redirect_to user_path(current_user)
+      end
     end
-  end
-
 end

@@ -1,5 +1,4 @@
 class Admin::ReportsController < ApplicationController
-
   before_action :authenticate_admin!
 
   def index
@@ -19,9 +18,7 @@ class Admin::ReportsController < ApplicationController
   end
 
   private
-
-  def report_params
-    params.require(:report).permit(:status)
-  end
-
+    def report_params
+      params.require(:report).permit(:status)
+    end
 end

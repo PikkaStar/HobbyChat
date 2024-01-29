@@ -13,6 +13,4 @@ class User::FavoritesController < ApplicationController
     @post = Post.find(params[:post_id])
     @favorite = current_user.favorites.find_by(post_id: @post.id).destroy
   end
-
-
 end

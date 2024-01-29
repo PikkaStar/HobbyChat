@@ -1,7 +1,6 @@
 class User::GroupsController < ApplicationController
-
   before_action :authenticate_user!
-  before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
+  before_action :guest_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :owner_user, only: [:edit, :update, :destroy, :permits]
   include PaginationGroup
 
@@ -35,22 +34,22 @@ class User::GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @genre_list = @group.genres.pluck(:genre_name).join(',')
+    @genre_list = @group.genres.pluck(:genre_name).join(",")
     @group_genres = @group.genres
     @pending_permits_count = @group.permits.where(rejected: false).count
   end
 
   def edit
     @group = Group.find(params[:id])
-    @group_genre = @group.genres.pluck(:genre_name).join(',')
+    @group_genre = @group.genres.pluck(:genre_name).join(",")
   end
 
   def update
     @group = Group.find(params[:id])
     group_list = params[:group][:genre_name].split(/[[:blank:]]+/).select(&:present?)
     if @group.update(group_params)
-       @group.save_genres(group_list)
-       redirect_to group_path(@group)
+      @group.save_genres(group_list)
+      redirect_to group_path(@group)
     else
       render :edit
     end
@@ -79,30 +78,28 @@ class User::GroupsController < ApplicationController
   # 承認待ち画面でrefectedの値がfalse(承認待ち)のユーザーを一覧表示
   def permits
     @group = Group.find(params[:id])
-    @users = @group.permited_users.includes(:permits).where(permits: {rejected: false}).page(params[:page])
-   # Post.includes(:user).where(users: {gender: "man"})
+    @users = @group.permited_users.includes(:permits).where(permits: { rejected: false }).page(params[:page])
+    # Post.includes(:user).where(users: {gender: "man"})
   end
 
   private
-
-  def group_params
-    params.require(:group).permit(:name,:introduction,:group_image)
-  end
-
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
-      redirect_to user_path(current_user)
+    def group_params
+      params.require(:group).permit(:name, :introduction, :group_image)
     end
-  end
 
-  def owner_user
-    group = Group.find(params[:id])
-    unless group.owner_id == current_user.id
-      flash[:alert] = "グループマスターのみ編集できます"
-      redirect_to group_path(group)
+    def guest_user
+      user = current_user
+      if user.email == "guest@example.com"
+        flash[:alert] = "ゲストの方は行えません"
+        redirect_to user_path(current_user)
+      end
     end
-  end
 
+    def owner_user
+      group = Group.find(params[:id])
+      unless group.owner_id == current_user.id
+        flash[:alert] = "グループマスターのみ編集できます"
+        redirect_to group_path(group)
+      end
+    end
 end

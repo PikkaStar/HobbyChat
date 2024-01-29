@@ -1,7 +1,7 @@
 class User::CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :guest_user,only: [:create,:destroy]
-  before_action :match_user,only: [:destroy]
+  before_action :guest_user, only: [:create, :destroy]
+  before_action :match_user, only: [:destroy]
 
   def create
     # 非同期
@@ -10,10 +10,10 @@ class User::CommentsController < ApplicationController
     @comment.post_id = @post.id
     if @comment.save
       # コメント送信後、コメントが表示されなくなったので↓の記述を追加
-    @comments = @post.comments.page(params[:page]).per(10)
+      @comments = @post.comments.page(params[:page]).per(10)
     else
-    @user = @post.user
-    flash.now[:alert] = "コメントは1文字以上100文字以下で入力してください"
+      @user = @post.user
+      flash.now[:alert] = "コメントは1文字以上100文字以下で入力してください"
     end
   end
 
@@ -39,23 +39,22 @@ class User::CommentsController < ApplicationController
   end
 
   private
-  def comment_params
-    params.require(:comment).permit(:comment)
-  end
-
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
-      redirect_to posts_path
+    def comment_params
+      params.require(:comment).permit(:comment)
     end
-  end
 
-  def match_user
-    comment = Comment.find(params[:id])
-    unless comment.user_id == current_user.id
-      redirect_to user_path(current_user)
+    def guest_user
+      user = current_user
+      if user.email == "guest@example.com"
+        flash[:alert] = "ゲストの方は行えません"
+        redirect_to posts_path
+      end
     end
-  end
 
+    def match_user
+      comment = Comment.find(params[:id])
+      unless comment.user_id == current_user.id
+        redirect_to user_path(current_user)
+      end
+    end
 end

@@ -9,9 +9,9 @@ class User::GroupUsersController < ApplicationController
     @group = Group.find(params[:group_id])
     @user = User.find(params[:user_id])
     # 参加申請者(Permit)一覧から特定の申請者を削除
-    Permit.find_by(user_id: @user.id,group_id: @group.id).destroy
+    Permit.find_by(user_id: @user.id, group_id: @group.id).destroy
     # グループ所属者(GroupUser)に申請者を追加
-    @group_user = GroupUser.create(user_id: @user.id,group_id: @group.id)
+    @group_user = GroupUser.create(user_id: @user.id, group_id: @group.id)
     flash[:notice] = "申請を許可しました"
     redirect_to request.referer
   end
@@ -24,30 +24,28 @@ class User::GroupUsersController < ApplicationController
   end
 
     private
+      def guest_user
+        user = current_user
+        if user.email == "guest@example.com"
+          flash[:alert] = "ゲストの方は行えません"
+          redirect_to user_path(current_user)
+        end
+      end
 
-  def guest_user
-    user = current_user
-    if user.email == "guest@example.com"
-      flash[:alert] = "ゲストの方は行えません"
-      redirect_to user_path(current_user)
-    end
-  end
+      def owner_user
+        group = Group.find(params[:group_id])
+        unless group.owner_id == current_user.id
+          flash[:alert] = "不正な操作です"
+          user_path(current_user)
+        end
+      end
 
-  def owner_user
-    group = Group.find(params[:group_id])
-    unless group.owner_id == current_user.id
-      flash[:alert] = "不正な操作です"
-      user_path(current_user)
-    end
-  end
-
-  def match_user
-    user = User.find(params[:id])
-    group_user = GroupUser.find_by(user_id: user.id)
-    unless group_user == current_user
-      flash[:alert] = "不正な操作です"
-      user_path(current_user)
-    end
-  end
-
+      def match_user
+        user = User.find(params[:id])
+        group_user = GroupUser.find_by(user_id: user.id)
+        unless group_user == current_user
+          flash[:alert] = "不正な操作です"
+          user_path(current_user)
+        end
+      end
 end

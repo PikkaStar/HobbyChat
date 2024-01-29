@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+  # This file should contain all the record creation needed to seed the database with its default values.
+  # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+  #
+  # Examples:
+  #
+  #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+  #   Character.create(name: 'Luke', movie: movies.first)
 
   Admin.create!(
     email: "admin@admin.com",
@@ -21,9 +21,9 @@
 
   tags = %w(スポーツ 音楽 キャンプ 料理 ゲーム)
 
-    tags.each do |tag_name|
-      Tag.find_or_create_by(name: tag_name)
-    end
+  tags.each do |tag_name|
+    Tag.find_or_create_by(name: tag_name)
+  end
 
   # ユーザーがランダムな件数のpostを作成し、その中からランダムな件数にfavoriteをつける
   rand(1..3).times do
@@ -38,13 +38,13 @@
   posts = Post.all
 
   users.each do |user|
-  favorite_posts = posts.sample(rand(1..5))
-  favorite_posts.each do |post|
-    Favorite.find_or_create_by!(
-      user_id: user.id,
-      post_id: post.id
-    )
-    end
+    favorite_posts = posts.sample(rand(1..5))
+    favorite_posts.each do |post|
+        Favorite.find_or_create_by!(
+          user_id: user.id,
+          post_id: post.id
+        )
+      end
   end
 
   users.each do |user|
@@ -54,41 +54,41 @@
         user_id: user.id,
         post_id: post.id,
         comment: "テストコメント#{n + 1}"
-        )
+      )
     end
   end
 
   users.each do |user|
-  following_users = users - [user]
-  following_users.shuffle.take(rand(1..4)).each do |following_user|
-    Relationship.find_or_create_by!(
-      follower_id: user.id,
-      followed_id: following_user.id
-    )
-    end
+    following_users = users - [user]
+    following_users.shuffle.take(rand(1..4)).each do |following_user|
+        Relationship.find_or_create_by!(
+          follower_id: user.id,
+          followed_id: following_user.id
+        )
+      end
   end
 end
-    # owner = User.find(rand(1..10))
-    # group = Group.create!(
-    # name: "テストグループ",
-    # introduction: "テスト",
-    # owner_id: owner.id,
-    # user: owner
-    # )
-    # # オーナーをグループに入れる
-    # GroupUser.create!(group: group,user: owner)
-    # # オーナー以外をランダムに入れる
-    # rand(1..3).times do |i|
-    #   GroupUser.create!(group: group,user: User.find(i + 1))
-    #   end
+  # owner = User.find(rand(1..10))
+  # group = Group.create!(
+  # name: "テストグループ",
+  # introduction: "テスト",
+  # owner_id: owner.id,
+  # user: owner
+  # )
+  # # オーナーをグループに入れる
+  # GroupUser.create!(group: group,user: owner)
+  # # オーナー以外をランダムに入れる
+  # rand(1..3).times do |i|
+  #   GroupUser.create!(group: group,user: User.find(i + 1))
+  #   end
 
-    genres = %w(スポーツ 音楽 キャンプ 料理 ゲーム)
+  genres = %w(スポーツ 音楽 キャンプ 料理 ゲーム)
 
-    genres.each do |genre_name|
-      Genre.create!(genre_name: genre_name)
-    end
+  genres.each do |genre_name|
+    Genre.create!(genre_name: genre_name)
+  end
 
-    # グループ作成
+  # グループ作成
   3.times do
     owner = User.find(rand(1..10))
     group = Group.create!(
@@ -110,5 +110,3 @@ end
       GroupUser.create!(group: group, user: User.find(i + 1))
     end
   end
-
-

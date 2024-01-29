@@ -1,6 +1,5 @@
 class Admin::CommentsController < ApplicationController
-
-    before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   def index
     @post = Post.find(params[:post_id])
@@ -15,5 +14,4 @@ class Admin::CommentsController < ApplicationController
     @comment.destroy
     redirect_to request.referer
   end
-
 end

@@ -1,25 +1,25 @@
 class Group < ApplicationRecord
-  has_many :group_users,dependent: :destroy
-  has_many :users,through: :group_users,source: :user
+  has_many :group_users, dependent: :destroy
+  has_many :users, through: :group_users, source: :user
 
-  has_many :permits,dependent: :destroy
+  has_many :permits, dependent: :destroy
   has_many :permited_users, through: :permits, source: :user
 
-  has_many :group_genres,dependent: :destroy
-  has_many :genres,through: :group_genres
-  has_many :messages,dependent: :destroy
+  has_many :group_genres, dependent: :destroy
+  has_many :genres, through: :group_genres
+  has_many :messages, dependent: :destroy
   has_one :room
   belongs_to :user
 
   has_one_attached :group_image
 
   # ソート
-  scope :latest, -> {order(created_at: :desc)}
-  scope :old, -> {order(created_at: :asc)}
-  scope :members, -> {Group.includes(:users).sort {|a,b| b.users.size <=> a.users.size}}
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
+  scope :members, -> { Group.includes(:users).sort { |a, b| b.users.size <=> a.users.size } }
 
-  validates :name,presence: true,length: {maximum: 15}
-  validates :introduction,presence: true,length: {maximum: 100}
+  validates :name, presence: true, length: { maximum: 15 }
+  validates :introduction, presence: true, length: { maximum: 100 }
 
   def get_group_image(width, height)
     if group_image.attached?
@@ -33,11 +33,11 @@ class Group < ApplicationRecord
     group_users.exists?(user_id: user.id)
   end
 
-  def self.looks(search,word)
+  def self.looks(search, word)
     if search == "partial_match"
-     @group = Group.where("name LIKE?","%#{word}%")
+      @group = Group.where("name LIKE?", "%#{word}%")
     else
-     @group = Group.all
+      @group = Group.all
     end
   end
 
@@ -60,7 +60,6 @@ class Group < ApplicationRecord
       self.genres << genre
     end
   end
-
 end
 
 # create_table :messages do |t|
@@ -81,10 +80,10 @@ end
 
 # Room
 
-#belongs_to :group
+# belongs_to :group
 
 # Group
-#has_one :room
+# has_one :room
 
 # roomコントローラーでindexアクションを作って必要な情報
 # index.html.erbに記述

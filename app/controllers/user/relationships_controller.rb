@@ -1,6 +1,5 @@
 class User::RelationshipsController < ApplicationController
-
-  before_action :guest_user,only: [:create,:destroy]
+  before_action :guest_user, only: [:create, :destroy]
 
   def create
     current_user.follow(params[:user_id])
@@ -11,9 +10,8 @@ class User::RelationshipsController < ApplicationController
     current_user.unfollow(params[:user_id])
     redirect_to request.referer
   end
-  
-private
 
+private
   def guest_user
     user = current_user
     if user.email == "guest@example.com"
@@ -21,5 +19,4 @@ private
       redirect_to posts_path
     end
   end
-
 end
