@@ -1,17 +1,9 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   before_action :admin_user
+  include PaginationUser
 
   def index
-    if params[:follows_count]
-      @users = Kaminari.paginate_array(User.follows_count).page(params[:page]).per(10)
-    elsif params[:follower_count]
-      @users = Kaminari.paginate_array(User.follower_count).page(params[:page]).per(10)
-    elsif params[:posts]
-      @users = Kaminari.paginate_array(User.posts).page(params[:page]).per(10)
-    else
-      @users = User.page(params[:page]).per(10)
-    end
   end
 
   def show
