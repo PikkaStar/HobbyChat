@@ -11,8 +11,8 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    # 投稿に紐づくタグ名を入力フォームから取得(','で区切ると複数登録)
-    tag_list = params[:post][:name].split(',')
+    # 投稿に紐づくタグ名を入力フォームから取得(空白で区切ると複数登録)
+    tag_list = params[:post][:name].split(/[[:blank:]]+/).select(&:present?)
     if @post.save
        @post.save_tags(tag_list)
        flash[:notice] = "投稿しました"
@@ -43,7 +43,7 @@ class User::PostsController < ApplicationController
   end
 
   def update
-    tag_list = params[:post][:name].split(',')
+    tag_list = params[:post][:name].split(/[[:blank:]]+/).select(&:present?)
     if @post.update(post_params)
        @post.save_tags(tag_list)
        flash[:notice] = "更新しました"

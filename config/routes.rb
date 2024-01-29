@@ -68,9 +68,12 @@ Rails.application.routes.draw do
     # グループ参加申請
     get "groups/:id/permits"=>"groups#permits",as: "permits"
     get "members/:id"=>"groups#members",as: "members"
+    # 検索
     get "search"=>"searches#search",as: "search"
+    # タグやジャンル
     get "search_tag"=>"posts#search_tag"
     get "search_genre"=>"groups#search_genre"
+    # 通知
     resources :notifications, only: [:index,:destroy]
     # DM機能
     resources :areas,only: [:create,:show] do
