@@ -2,58 +2,29 @@ class User::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update]
   before_action :guest_user,only: [:edit,:update,:cancellation]
+  before_action :my_user, only: [:show,:every,:favorites,:follows,:followers]
+
+  include Pagination
 
   # ソートで表示するための処理
   def index
     @user = current_user
-    if params[:follows_count]
-      @users = Kaminari.paginate_array(User.follows_count).page(params[:page]).per(10)
-    elsif params[:follower_count]
-      @users = Kaminari.paginate_array(User.follower_count).page(params[:page]).per(10)
-    elsif params[:posts]
-      @users = Kaminari.paginate_array(User.posts).page(params[:page]).per(10)
-    else
-      @users = User.page(params[:page]).per(10)
-    end
   end
 
   # ユーザーが投稿した一覧
   def every
-    @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(10)
   end
 
   def show
-    @user = User.find(params[:id])
-    # Entryテーブルから自分と相手のuser.idを取得
-    @currentUserEntry = Entry.where(user_id: current_user.id)
-    @userEntry = Entry.where(user_id: @user.id)
-    unless @user.same?(current_user)
-      # 上で取得した要素を1つずつ取り出し、それぞれのarea_idが一致するものが存在するか判定
-      @currentUserEntry.each do |cu|
-        @userEntry.each do |u|
-          if cu.area_id == u.area_id
-            @isArea = true
-            @areaId = cu.area_id
-          end
-        end
-      end
-      # それぞれに一致するarea_idが存在しない場合は新規作成
-      unless @isArea
-        @area = Area.new
-        @entry = Entry.new
-      end
-    end
     @posts = @user.posts.page(params[:page]).per(10)
     @groups = @user.groups
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
     redirect_to user_path(@user)
     else
@@ -62,7 +33,6 @@ class User::UsersController < ApplicationController
   end
 
   def favorites
-    @user = User.find(params[:id])
     # Favoriteテーブルから特定のユーザーがいいねした投稿データを全て取得
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
     # Post.find(favorites)で取得するデータは配列のためページネーションが使えない
@@ -81,13 +51,11 @@ class User::UsersController < ApplicationController
 
   # フォロー一覧
   def follows
-    @user = User.find(params[:id])
     @users = @user.following_users.page(params[:page]).per(5)
   end
 
   # フォロワー一覧
   def followers
-    @user = User.find(params[:id])
     @users = @user.follower_users.page(params[:page]).per(5)
   end
 
@@ -98,8 +66,8 @@ class User::UsersController < ApplicationController
   end
 
   def match_user
-    user = User.find(params[:id])
-    unless user == current_user
+    @user = User.find(params[:id])
+    unless @user == current_user
       redirect_to user_path(current_user)
     end
   end
@@ -110,6 +78,10 @@ class User::UsersController < ApplicationController
       flash[:alert] = "ゲストの方は行えません"
       redirect_to user_path(current_user)
     end
+  end
+
+  def my_user
+    @user = User.find(params[:id])
   end
 
 end
