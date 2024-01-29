@@ -1,6 +1,8 @@
 class User::GroupUsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :guest_user,only: [:create,:destroy]
+  before_action :guest_user
+  before_action :match_user, only: [:destroy]
+  before_action :owner_user, only: [:create]
 
   # グループ加入申請を許可する処理
   def create
@@ -13,21 +15,38 @@ class User::GroupUsersController < ApplicationController
     flash[:notice] = "申請を許可しました"
     redirect_to request.referer
   end
-  
+
   # グループから脱退する処理
   def destroy
     @group_user = current_user.group_users.find_by(group_id: params[:group_id])
     @group_user.destroy
     redirect_to request.referer
   end
-  
+
     private
-  
+
   def guest_user
     user = current_user
     if user.email == "guest@example.com"
       flash[:alert] = "ゲストの方は行えません"
       redirect_to user_path(current_user)
+    end
+  end
+
+  def owner_user
+    group = Group.find(params[:group_id])
+    unless group.owner_id == current_user.id
+      flash[:alert] = "不正な操作です"
+      user_path(current_user)
+    end
+  end
+
+  def match_user
+    user = User.find(params[:id])
+    group_user = GroupUser.find_by(user_id: user.id)
+    unless group_user == current_user
+      flash[:alert] = "不正な操作です"
+      user_path(current_user)
     end
   end
 

@@ -1,6 +1,5 @@
 class User::FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :match_user
 
   def create
     # 非同期
@@ -14,10 +13,6 @@ class User::FavoritesController < ApplicationController
     @post = Post.find(params[:post_id])
     @favorite = current_user.favorites.find_by(post_id: @post.id).destroy
   end
-  
-  private
-  def match_user
-    
-  end
+
 
 end

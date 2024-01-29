@@ -2,7 +2,7 @@ class User::GroupsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :guest_user,only: [:new,:create,:edit,:update,:destroy]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :permits]
+  before_action :owner_user, only: [:edit, :update, :destroy, :permits]
 
   def new
     @group = Group.new
@@ -106,7 +106,7 @@ class User::GroupsController < ApplicationController
     end
   end
 
-  def ensure_correct_user
+  def owner_user
     group = Group.find(params[:id])
     unless group.owner_id == current_user.id
       flash[:alert] = "グループマスターのみ編集できます"

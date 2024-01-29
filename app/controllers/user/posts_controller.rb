@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :match_user,only: [:edit,:update,:destroy]
+  before_action :my_post, only: [:show]
 
   def new
     @post = Post.new
@@ -40,7 +41,6 @@ class User::PostsController < ApplicationController
 
 
   def show
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
     @post_tags = @post.tags
     @user = @post.user
@@ -50,12 +50,10 @@ class User::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @tag_list = @post.tags.pluck(:name).join(',')
   end
 
   def update
-    @post = Post.find(params[:id])
     tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
        @post.save_tags(tag_list)
@@ -68,7 +66,6 @@ class User::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     flash[:notice] = "削除しました"
     redirect_to user_path(current_user)
@@ -88,10 +85,14 @@ class User::PostsController < ApplicationController
   end
 
   def match_user
-    post = Post.find(params[:id])
-    unless post.user_id == current_user.id
+    @post = Post.find(params[:id])
+    unless @post.user_id == current_user.id
       redirect_to user_path(current_user)
     end
+  end
+
+  def my_post
+    @post = Post.find(params[:id])
   end
 
 end
