@@ -35,7 +35,6 @@ class User::GroupUsersController < ApplicationController
       def owner_user
         group = Group.find(params[:group_id])
         unless group.owner_id == current_user.id
-          flash[:alert] = "不正な操作です"
           user_path(current_user)
         end
       end
@@ -44,7 +43,6 @@ class User::GroupUsersController < ApplicationController
         user = User.find(params[:id])
         group_user = GroupUser.find_by(user_id: user.id)
         unless group_user == current_user
-          flash[:alert] = "不正な操作です"
           user_path(current_user)
         end
       end

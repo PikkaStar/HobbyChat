@@ -9,9 +9,9 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { in: 2..10 }
   validates :introduction, length: { maximum: 200 }
   # ソート
-  scope :follows_count, -> { User.includes(:following_users).sort { |a, b| b.following_users.size <=> a.following_users.size } }
-  scope :follower_count, -> { User.includes(:follower_users).sort { |a, b| b.follower_users.size <=> a.follower_users.size } }
-  scope :posts, -> { User.includes(:posts).sort { |a, b| b.posts.size <=> a.posts.size } }
+ # scope :follows_count, -> { User.includes(:following_users).sort { |a, b| b.following_users.size <=> a.following_users.size } }
+  #scope :follower_count, -> { User.includes(:follower_users).sort { |a, b| b.follower_users.size <=> a.follower_users.size } }
+ # scope :posts, -> { User.includes(:posts).sort { |a, b| b.posts.size <=> a.posts.size } }
   # 投稿周辺機能
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -34,8 +34,26 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   # 通知機能
   has_many :notifications, dependent: :destroy
+  include Paginatable
 
   has_one_attached :profile_image
+
+  def self.follows_count(page, per)
+    users = User.includes(:following_users).sort { |a, b| b.following_users.size <=> a.following_users.size}
+    User.paginate_items(users, page, per)
+  end
+
+  def self.follower_count(page, per)
+    users = User.includes(:follower_users).sort { |a, b| b.follower_users.size <=> a.follower_users.size }
+    User.paginate_items(users, page, per)
+  end
+
+  def self.posts(page, per)
+    users = User.includes(:posts).sort { |a, b| b.posts.size <=> a.posts.size }
+     User.paginate_items(users, page, per)
+  end
+
+
 
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|

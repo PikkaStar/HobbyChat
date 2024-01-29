@@ -7,8 +7,8 @@ class Post < ApplicationRecord
   scope :latest, -> { order(created_at: :desc) }
   scope :old, -> { order(created_at: :asc) }
   # includesとはSQLの負担を減らす。1+N問題を解決する記述
-  scope :favorite_count, -> { Post.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size } }
-  scope :comment_count, -> { Post.includes(:comments).sort { |a, b| b.comments.size <=> a.comments.size } }
+ # scope :favorite_count, -> { Post.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size } }
+  # scope :comment_count, -> { Post.includes(:comments).sort { |a, b| b.comments.size <=> a.comments.size } }
   # そのあとに試したもの
   # scope :favorite_count, -> { Post.includes(:favorites).order(favorite_count: :desc) }
   # scope :comment_count, -> { Post.includes(:comments).order(comment_count: :desc)}
@@ -20,6 +20,17 @@ class Post < ApplicationRecord
   has_many :tags, through: :tag_maps
   # subject(ポリモーフィック)と1対1の関係を示す
   has_one :notification, as: :subject, dependent: :destroy
+  include Paginatable
+
+  def self.favorite_count(page, per)
+    posts = Post.includes(:favorites).sort { |a, b| b.favorites.size <=> a.favorites.size }
+    Post.paginate_items(posts, page, per)
+  end
+
+  def self.comment_count(page, per)
+    posts = Post.includes(:comments).sort { |a, b| b.comments.size <=> a.comments.size }
+    Post.paginate_items(posts, page, per)
+  end
 
   def get_image(width, height)
     if image.attached?
