@@ -73,7 +73,7 @@ class User::GroupsController < ApplicationController
   # グループに所属してるユーザー一覧
   def members
     @group = Group.find(params[:id])
-    @members = @group.users.page(params[:page]).per(15)
+    @users = @group.users.page(params[:page]).per(15)
   end
 
   # 承認待ち画面でrefectedの値がfalse(承認待ち)のユーザーを一覧表示
@@ -103,7 +103,7 @@ class User::GroupsController < ApplicationController
         redirect_to group_path(group)
       end
     end
-    
+
     def paginate_groups
       if params[:latest]
         Group.latest.page(params[:page]).per(15)
@@ -115,5 +115,5 @@ class User::GroupsController < ApplicationController
         Group.page(params[:page]).per(15)
       end
     end
-    
+
 end
