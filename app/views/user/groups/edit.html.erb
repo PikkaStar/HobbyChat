@@ -9,12 +9,12 @@
       <div class="title">グループ作成</div>
 
       <% if @group.errors.any? %>
-      <%= @group.errors.count %>件のエラーが発生しました
-      <% @group.errors.full_messages.each do |message| %>
-      <li>
-        <%= message %>
-      </li>
-       <% end %>
+        <%= @group.errors.count %>件のエラーが発生しました
+        <% @group.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+        <% end %>
       <% end %>
 
       <%= form_with model: @group do |f| %>
