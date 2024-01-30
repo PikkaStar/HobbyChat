@@ -1,8 +1,9 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
-  include PaginationPost
+  # include PaginationPost
 
   def index
+    @posts = paginate_posts
   end
 
   def show
@@ -17,4 +18,16 @@ class Admin::PostsController < ApplicationController
     flash[:notice] = "削除しました"
     redirect_to admin_posts_path
   end
+
+  private
+  def paginate_posts
+    if params[:favorite_count]
+      Post.favorite_count(params[:page], 10)
+    elsif params[:comment_count]
+      Post.comment_count(params[:page], 10)
+    else
+      Post.page(params[:page]).per(10)
+    end
+  end
+
 end

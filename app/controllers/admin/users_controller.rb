@@ -1,9 +1,10 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
   before_action :admin_user
-  include PaginationUser
+  # include PaginationUser
 
   def index
+    @users = paginate_users
   end
 
   def show
@@ -70,4 +71,17 @@ class Admin::UsersController < ApplicationController
         flash[:alert] = "権限がありません"
       end
     end
+
+    def paginate_users
+      if params[:follows_count]
+        User.follows_count(params[:page], 10)
+      elsif params[:follower_count]
+        User.follower_count(params[:page], 10)
+      elsif params[:posts]
+        User.posts(params[:page], 10)
+      else
+        User.page(params[:page]).per(10)
+      end
+    end
+
 end

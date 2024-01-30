@@ -5,27 +5,27 @@
       <div class="title">編集画面<%= link_to "退会",check_path,class: "btn btn-danger float-right",data: {"turbolinks" => false} %></div>
 
       <% if @user.errors.any? %>
-      <%= @user.errors.count %>件のエラーが発生しました
-      <% @user.errors.full_messages.each do |message| %>
-      <li>
-        <%= message %>
-      </li>
+        <%= @user.errors.count %>件のエラーが発生しました
+        <% @user.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
        <% end %>
       <% end %>
 
       <%= form_with model: @user do |f| %>
-      <p>プロフィール画像</p>
-      <%= f.file_field :profile_image %><br>
-
-      <%= f.label :name,"名前" %>
-      <%= f.text_field :name,class: "form-control" %>
-
-      <%= f.label :introduction,"自己紹介" %>
-      <%= f.text_area :introduction,row: "5",class: "form-control" %>
-
-      <div class="text-center">
-      <%= f.submit "更新",class: "btn btn-success mt-3 form-control" %>
-      </div>
+        <p>プロフィール画像</p>
+        <%= f.file_field :profile_image %><br>
+  
+        <%= f.label :name,"名前" %>
+        <%= f.text_field :name,class: "form-control" %>
+  
+        <%= f.label :introduction,"自己紹介" %>
+        <%= f.text_area :introduction,row: "5",class: "form-control" %>
+  
+        <div class="text-center">
+        <%= f.submit "更新",class: "btn btn-success mt-3 form-control" %>
+        </div>
       <% end %>
     </div>
   </div>

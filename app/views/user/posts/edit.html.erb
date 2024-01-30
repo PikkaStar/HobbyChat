@@ -8,7 +8,7 @@
       <div class="title">編集画面</div>
 
       <% if @post.errors.any? %>
-      <%= @post.errors.count %>件のエラーが発生しました
+        <%= @post.errors.count %>件のエラーが発生しました
       <% @post.errors.full_messages.each do |message| %>
       <li>
         <%= message %>
