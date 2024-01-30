@@ -14,6 +14,7 @@ class User::CommentsController < ApplicationController
     else
       @user = @post.user
       flash.now[:alert] = "コメントは1文字以上100文字以下で入力してください"
+      @comments = @post.comments.page(params[:page]).per(10)
     end
   end
 

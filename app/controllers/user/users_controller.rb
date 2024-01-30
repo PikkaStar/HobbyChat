@@ -9,7 +9,6 @@ class User::UsersController < ApplicationController
 
   # ソートで表示するための処理
   def index
-    @user = current_user
     @users = paginate_users
   end
 
@@ -105,11 +104,11 @@ class User::UsersController < ApplicationController
       # 自分と相手の共通するarea_idが存在するか判定
       	@current_entry.each  do  |c|
       		＠partner_entry.each  do  |p|
-      		if  c.area_id  ==  p.area_id
-      			@isArea  =  true
-      			@room  =  c.area_id
-      			end
-      		end
+        		if  c.area_id  ==  p.area_id
+        			@isArea  =  true
+        			@room  =  c.area_id
+        		end
+        	end
       	end
       	unless  @isArea
       		@area  =  Area.new
