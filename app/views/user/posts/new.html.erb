@@ -1,17 +1,10 @@
 <div class="container">
   <div class="row mx-auto">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-8 mx-auto">
 
       <div class="title">新規投稿</div>
 
-      <% if @post.errors.any? %>
-        <%= @post.errors.count %>件のエラーが発生しました
-        <% @post.errors.full_messages.each do |message| %>
-        <li>
-          <%= message %>
-        </li>
-        <% end %>
-      <% end %>
+      <%= render 'user/shared/error_messages', resource: @post %>
 
       <%= form_with model: @post do |f| %>
       <p>プロフィール画像</p>

@@ -1,20 +1,10 @@
 <div class="container">
-  <div class="flash-alert">
-    <%= flash[:alert] %>
-  </div>
   <div class="row mx-auto">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-8 mx-auto">
 
       <div class="title">編集画面</div>
 
-      <% if @post.errors.any? %>
-        <%= @post.errors.count %>件のエラーが発生しました
-      <% @post.errors.full_messages.each do |message| %>
-      <li>
-        <%= message %>
-      </li>
-       <% end %>
-      <% end %>
+      <%= render 'user/shared/error_messages', resource: @post %>
 
       <%= form_with model: @post do |f| %>
       <p>画像</p>
@@ -26,7 +16,7 @@
       <%= f.label :body,"本文" %>
       <%= f.text_area :body,row: "5",class: "form-control" %>
 
-      <label>タグ(,　で区切ると複数登録できます)</label>
+      <label>タグ(スペースで区切ると複数登録できます)</label>
       <%= f.text_field :name,value: @tag_list,class: "form-control" %>
 
       <%= f.submit "更新",class: "btn btn-success" %>

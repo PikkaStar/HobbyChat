@@ -8,14 +8,12 @@
         <span class="message-container hukidashi1">
             <%= message.message %>
         </span>
-        <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
-        <% if message.user_id == current_user.id %>
-          <%= link_to "削除",group_message_path(@group,message),remote: true,method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
-        <% end %>
+        <%= strftime_sec(message.created_at) %>
+        <%= link_to "削除",group_message_path(@group,message),remote: true,method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>
       </div>
     <% else %>
       <div class="col-md-10 text-right mt-3" style="border-bottom: 1px solid #000000;">
-        <%= message.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+        <%= strftime_sec(message.created_at) %>
         <span class="message-container hukidashi2">
             <%= message.message %>
         </span>

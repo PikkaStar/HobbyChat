@@ -2,19 +2,12 @@
   <div class="row">
     <div class="col-md-12 mx-auto">
 
+      <%= render 'post_tag', tag_list: @tag_list %>
 
-        <% @tag_list.each do |list|%>
-          <% if list.tag_maps.count > 0 %>
-            <i class="fa-sharp fa-solid fa-tag"></i>
-            <%=link_to list.name,search_tag_path(tag_id: list.id) %>
-            (<%= list.tag_maps.count %>)
-          <% end %>
-        <% end %>
-
-        <h4 class="text-center">タグ検索:<%= @tag.name %></h4>
+      <h4 class="text-center">タグ検索:<%= @tag.name %></h4>
 
       <div class="d-flex flex-wrap mt-5">
-       <%= render 'user/posts/index', posts: @posts %>
+        <%= render 'user/posts/index', posts: @posts %>
       </div>
 
     </div>

@@ -2,15 +2,9 @@
   <div class="row">
     <div class="col-md-12 mx-auto">
 
-      <% @genre_list.each do |genre|%>
-        <% if genre.group_genres.count > 0 %>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-          <%=link_to genre.genre_name,search_genre_path(genre_id: genre.id) %>
-          (<%= genre.group_genres.count %>)
-        <% end %>
-      <% end %>
+      <%= render 'group_genre', genre_list: @genre_list %>
 
-        <h4 class="text-center">タグ検索:<%= @genre.genre_name %></h4>
+      <h4 class="text-center">タグ検索:<%= @genre.genre_name %></h4>
 
       <div class="d-flex flex-wrap mt-5">
        <%= render 'user/groups/index', groups: @groups %>

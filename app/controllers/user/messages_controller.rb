@@ -1,7 +1,6 @@
 class User::MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :guest_user, only: [:create, :destroy]
-  before_action :match_user
 
   # 非同期
   def create
@@ -34,9 +33,4 @@ class User::MessagesController < ApplicationController
       end
     end
 
-    def match_user
-      message = Message.find(params[:id])
-      message.user_id == current_user.id
-      redirect_to user_path(current_user)
-    end
 end
