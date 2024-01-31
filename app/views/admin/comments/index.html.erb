@@ -20,7 +20,7 @@
               <%= comment.comment %>
             </td>
             <td>
-              <%= comment.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+              <%= strftime_sec(comment.created_at) %>
             </td>
               <td>
                 <%= link_to "削除",admin_post_comment_path(@post,comment),method: :delete,"data-confirm"=>"本当に削除しますか？",class: "btn btn-danger" %>

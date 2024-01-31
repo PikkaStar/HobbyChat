@@ -1,15 +1,8 @@
 <div class="container">
   <div class="row mx-auto">
-    <div class="col-md-4 mx-auto">
+    <div class="col-md-8 mx-auto">
 
-      <% if @user.errors.any? %>
-      <%= @user.errors.count %>件のエラーが発生しました
-      <% @user.errors.full_messages.each do |message| %>
-      <li>
-        <%= message %>
-      </li>
-       <% end %>
-      <% end %>
+      <%= render 'admin/shared/error_messages', resource: @user %>
 
       <%= form_with model: @user,url: admin_user_path,method: :patch do |f| %>
       <p>プロフィール画像</p>
