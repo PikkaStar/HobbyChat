@@ -1,5 +1,5 @@
 <% users.each do |user| %>
-  <% unless user.email == "guest@example.com" %>
+  <% unless guest_user?(user) %>
     <div class="card mb-4 ml-5" style="width: 10rem; background-color: #f7f6f5;">
       <div class="mx-auto">
         <%= image_tag user.get_profile_image(200,200), style: "width: 150px; height: 120px;" %>

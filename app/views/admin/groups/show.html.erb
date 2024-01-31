@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th colspan="2">作成日</th>
-          <td><%= @group.created_at.in_time_zone("Asia/Tokyo").strftime("%Y/%m/%d") %></td>
+          <td><%= strftime(@group.created_at) %></td>
           <td></td>
         </tr>
       </table>

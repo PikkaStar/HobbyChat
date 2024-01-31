@@ -2,13 +2,10 @@
   <tr>
     <td><%= image_tag user.get_profile_image(100,100) %></td>
     <td>
-       <% unless user.email == "guest@example.com" %>
-          <%= link_to "編集",edit_admin_user_path(user),class: "btn btn-primary" %><br>
-          <% unless user.is_active == true %>
-            <button type="button" class="btn btn-outline-danger mt-3" disabled>退会済みユーザー</button>
-          <% end %>
-        <% else %>
-       <% end %>
+      <%= link_to "編集",edit_admin_user_path(user),class: "btn btn-primary" %><br>
+      <% unless user.is_active == true %>
+        <button type="button" class="btn btn-outline-danger mt-3" disabled>退会済みユーザー</button>
+      <% end %>
     </td>
   </tr>
   <tr>
