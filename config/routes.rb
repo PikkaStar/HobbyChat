@@ -30,6 +30,8 @@ Rails.application.routes.draw do
       get "members/:id" => "groups#members", as: "members"
       get "every/:id" => "users#every", as: "every"
       get "search" => "searches#search", as: "search"
+      get "search_tag" => "posts#search_tag"
+      get "search_genre" => "groups#search_genre"
     end
 
     scope module: :user do

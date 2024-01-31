@@ -1,8 +1,18 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h2>グループ一覧</h2>
+    <div class="col-md-6 mx-auto">
+      <%= render 'group_genre', genre_list: @genre_list %>
 
+      <h2>
+        <i class="fa-solid fa-users"></i>
+        グループ一覧
+        <i class="fa-solid fa-users"></i>
+      </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
       <p class="text-center">
         <%= link_to '新しい順', admin_groups_path(latest: "true") %>
        |<%= link_to '古い順', admin_groups_path(old: "true") %>

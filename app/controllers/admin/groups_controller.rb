@@ -3,6 +3,7 @@ class Admin::GroupsController < ApplicationController
   # include PaginationGroup
 
   def index
+    @genre_list = Genre.all
     @groups = paginate_groups
   end
 
@@ -23,6 +24,12 @@ class Admin::GroupsController < ApplicationController
   def members
     @group = Group.find(params[:id])
     @members = @group.users.page(params[:page]).per(15)
+  end
+
+  def search_genre
+    @genre_list = Genre.all
+    @genre = Genre.find(params[:genre_id])
+    @groups = @genre.groups
   end
 
   private

@@ -17,10 +17,12 @@
       <%= f.text_area :body,row: "5",class: "form-control" %>
 
       <label>タグ(スペースで区切ると複数登録できます)</label>
-      <%= f.text_field :name,value: @tag_list,class: "form-control" %>
+      <%= f.text_field :name,placeholder: "タグを入力してください", class: "form-control" %>
 
       <%= f.submit "更新",class: "btn btn-success" %>
       <% end %>
     </div>
   </div>
 </div>
+
+

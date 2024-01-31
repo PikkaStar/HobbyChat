@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <%= render 'post_tag', tag_list: @tag_list %>
+
+      <h4 class="text-center">タグ検索:<%= @tag.name %></h4>
+
+      <div class="d-flex flex-wrap mt-5">
+        <%= render 'admin/posts/index', posts: @posts %>
+      </div>
+
+    </div>
+  </div>
+</div>
