@@ -6,11 +6,11 @@
       <span class="message-container hukidashi1">
           <%= talk.message %>
       </span>
-      <%= talk.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+      <%= strftime_sec(talk.created_at) %>
     </div>
   <% else %>
     <div class="col-md-10 text-right mt-3" style="border-bottom: 1px solid #000000;">
-      <%= talk.created_at.strftime("%Y/%d/%m %H:%M:%S") %>
+      <%= strftime_sec(talk.created_at) %>
       <span class="message-container hukidashi2">
           <%= talk.message %>
       </span>

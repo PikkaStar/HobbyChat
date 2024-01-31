@@ -2,14 +2,8 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
 
-      <% @genre_list.each do |genre| %>
-        <% if genre.group_genres.count > 0 %>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-          <%= link_to genre.genre_name,search_genre_path(genre_id: genre.id) %>
-          (<%= genre.group_genres.count %>)
-        <% end %>
-      <% end %>
-
+      <%= render 'group_genre', genre_list: @genre_list %>
+      
       <h2>
         <i class="fa-solid fa-users"></i>
         グループ一覧

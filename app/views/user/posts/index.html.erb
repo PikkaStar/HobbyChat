@@ -2,13 +2,7 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
 
-      <% @tag_list.each do |list|%>
-        <% if list.tag_maps.count > 0 %>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-          <%=link_to list.name,search_tag_path(tag_id: list.id) %>
-          (<%= list.tag_maps.count %>)
-        <% end %>
-      <% end %>
+      <%= render 'post_tag', tag_list: @tag_list %>
 
       <h2>
         <i class="fa-solid fa-book-open"></i>

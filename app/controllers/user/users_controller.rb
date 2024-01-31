@@ -99,11 +99,11 @@ class User::UsersController < ApplicationController
     def area_check
       # 自分と相手のuser_id取得
       @current_entry = Entry.where(user_id:  current_user.id)
-      ＠partner_entry = Entry.where(user_id:  @user.id )
+      @partner_entry = Entry.where(user_id:  @user.id )
       unless  @user  ==  current_user
       # 自分と相手の共通するarea_idが存在するか判定
       	@current_entry.each  do  |c|
-      		＠partner_entry.each  do  |p|
+      		@partner_entry.each  do  |p|
         		if  c.area_id  ==  p.area_id
         			@isArea  =  true
         			@room  =  c.area_id
