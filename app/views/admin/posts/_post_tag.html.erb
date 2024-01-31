@@ -1,0 +1,7 @@
+<% tag_list.each do |list|%>
+  <% if list.tag_maps.count > 0 %>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+    <%=link_to list.name,admin_search_tag_path(tag_id: list.id) %>
+    (<%= list.tag_maps.count %>)
+  <% end %>
+<% end %>

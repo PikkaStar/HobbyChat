@@ -42,7 +42,7 @@ class User::GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-    @group_genre = @group.genres.pluck(:genre_name).join(",")
+    @group_genre = @group.genres.pluck(:genre_name).join("")
   end
 
   def update

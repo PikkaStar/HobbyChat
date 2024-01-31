@@ -1,0 +1,7 @@
+<% genre_list.each do |genre| %>
+  <% if genre.group_genres.count > 0 %>
+    <i class="fa-sharp fa-solid fa-tag"></i>
+    <%= link_to genre.genre_name,admin_search_genre_path(genre_id: genre.id) %>
+    (<%= genre.group_genres.count %>)
+  <% end %>
+<% end %>

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <%= render 'group_genre', genre_list: @genre_list %>
+
+      <h4 class="text-center">タグ検索:<%= @genre.genre_name %></h4>
+
+      <div class="d-flex flex-wrap mt-5">
+       <%= render 'admin/groups/index', groups: @groups %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,8 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h2>ユーザー一覧</h2>
+    <div class="col-md-6 mx-auto">
+      <h2>
+        <i class="fa-solid fa-user"></i>
+          ユーザー一覧
+        <i class="fa-solid fa-user"></i>
+      </h2>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-12">
       <p class="text-center">
         <%= link_to "投稿数順",admin_users_path(posts: true) %>
        |<%= link_to "フォロー多い順",admin_users_path(follows_count: true) %>

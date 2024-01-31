@@ -40,7 +40,7 @@ class User::PostsController < ApplicationController
   end
 
   def edit
-    @tag_list = @post.tags.pluck(:name).join(",")
+    @tag_list = @post.tags.pluck(:name).join("")
   end
 
   def update
@@ -101,4 +101,4 @@ class User::PostsController < ApplicationController
       end
     end
 
-  end
+end
